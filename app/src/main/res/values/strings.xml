@@ -1,13 +1,37 @@
 <resources>
     <string name="app_name">RestFood-Shop</string>
-    <string name="button_label_enabled">Done</string>
-    <string name="button1">Done</string>
-    <string name="button_cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="button1">AddFood</string>
+    <string name="button_cancel">Home</string>
     <string name="enter_number">Enter phone number</string>
     <string name="switch_text">Yes</string>
     <string name="demo_card_text">Sooooooo SAD</string>
+
+
     <string name="title_activity_main_bottom_navigation">main_bottom_navigation</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">Menu</string>
+    <string name="title_dashboard">Order</string>
+    <string name="title_notifications">About</string>
+
+    <string name="food_title">Pizza</string>
+    <string name="food_name">Food Name</string>
+    <string name="food_price">Price</string>
+    <string name="hint">This is hint</string>
+    <string name="requierd">Requierd</string>
+    <string name="min_time">Min Time</string>
+    <string name="max_time">Max Time</string>
+    <string name="duration">Duration</string>
+    <string name="to">to</string>
+    <string name="food_type">Food Type</string>
+    <string name="radio_veg">Veg</string>
+    <string name="radio_non_veg">Non-Veg</string>
+    <string name="shop_name">Burger King</string>
+    <string name="edit_profile">Edit Profile</string>
+
+
+    <!--    string for fragment notification-->
+    <string name="view_food">View Food List</string>
+    <string name="add_food">Add Food</string>
+    <string name="summery">Summery</string>
+
 </resources>
