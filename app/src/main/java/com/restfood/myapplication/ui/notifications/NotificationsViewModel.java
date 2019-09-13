@@ -13,6 +13,8 @@ public class NotificationsViewModel extends ViewModel {
         mText.setValue("Burger King");
     }
 
+
+
     public LiveData<String> getText() {
         return mText;
     }
