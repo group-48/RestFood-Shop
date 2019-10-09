@@ -6,4 +6,5 @@
     <dimen name="image_max">100dp</dimen>
     <dimen name="padding5">5dp</dimen>
     <dimen name="padding30">30dp</dimen>
+    <dimen name="textfieldhight">55dp</dimen>
 </resources>

@@ -1,12 +1,12 @@
 package com.restfood.myapplication;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -63,6 +63,7 @@ public class Add_FoodItem extends AppCompatActivity {
 
 
         //this call when food field change
+        //for every change
         food_name_edit_text.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -169,28 +170,31 @@ public class Add_FoodItem extends AppCompatActivity {
 
 
 
-
+    //this work for button click
     public void onSubmit(View v)
     {
-
         if(checkFoodName() & checkPrice() & checkDuration())
         {
             //Toast.makeText(getApplicationContext(),"No error Done", Toast.LENGTH_SHORT).show();
 
-            // Create a new user with a first and last name
-            Map<String, Object> user = new HashMap<>();
-            user.put("first", "Ada");
-            user.put("last", "Lovelace");
-            user.put("born", 1815);
+            // Create a new food item object  with a first and last name
+            Map<String, Object> fooditem = new HashMap<>();
+            fooditem.put("food_name", food_name_edit_text.getText().toString());
+            fooditem.put("price", food_price_edit_text.getText().toString());
+            fooditem.put("min_duration",min_duration_text.getText().toString());
+            fooditem.put("max_duration",max_duration_text.getText().toString());
 
             // Add a new document with a generated ID
-            db.collection("users")
-                    .add(user)
+            db.collection("food_list")
+                    .add(fooditem)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                             Toast.makeText(getApplicationContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+
+
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -204,6 +208,7 @@ public class Add_FoodItem extends AppCompatActivity {
         }
 
     }
+
 
 
     //coped from android studio doc have to change
@@ -223,6 +228,15 @@ public class Add_FoodItem extends AppCompatActivity {
                     // Ninjas rule
                     break;
         }
+    }
+
+
+    //this method creates dialog box
+    //to conform message after sucess full add
+    //need to complete this
+    public void openDialog() {
+        AddFoodDialog addfoodDialog = new AddFoodDialog();
+        addfoodDialog.show(getSupportFragmentManager(), "example dialog");
     }
 
 

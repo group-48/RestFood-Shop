@@ -2,7 +2,7 @@
     <string name="app_name">RestFood-Shop</string>
     <string name="done">Done</string>
     <string name="button1">AddFood</string>
-    <string name="button_cancel">Home</string>
+    <string name="button_cancel">Cancel</string>
     <string name="enter_number">Enter phone number</string>
     <string name="switch_text">Yes</string>
     <string name="demo_card_text">Sooooooo SAD</string>
