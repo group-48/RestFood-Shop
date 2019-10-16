@@ -27,6 +27,7 @@
     <string name="radio_non_veg">Non-Veg</string>
     <string name="shop_name">Burger King</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="food_cat">Category</string>
 
 
     <!--    string for fragment notification-->

@@ -7,23 +7,34 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class Add_FoodItem extends AppCompatActivity {
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseFirestore db=FirebaseFirestore.getInstance();
+    FirebaseAuth fbauth= FirebaseAuth.getInstance();
+
+
     //creating variables
     //this is for food
     private TextInputEditText food_name_edit_text;
@@ -39,6 +50,17 @@ public class Add_FoodItem extends AppCompatActivity {
     private TextInputEditText max_duration_text;
     //private TextInputLayout max_duration_layout;
 
+    private TextInputEditText cat_text;
+
+
+
+
+
+    ///this data for firestore
+    String shop_doc_id;
+    String uid;     //this is given by firestore & shop_id
+
+
 
 
 
@@ -46,6 +68,8 @@ public class Add_FoodItem extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add__food_item);
+
+        getShopData();
 
         //assigning xml component to that
         food_name_edit_text=findViewById(R.id.food_name_text);
@@ -58,6 +82,8 @@ public class Add_FoodItem extends AppCompatActivity {
         min_duration_layout=findViewById(R.id.min_pre_time_layout);
         max_duration_text=findViewById(R.id.max_pre_time_text);
         //max_duration_layout=findViewById(R.id.max_pre_time_layout);
+
+        cat_text=findViewById(R.id.food_cat_text);
 
 
 
@@ -81,6 +107,36 @@ public class Add_FoodItem extends AppCompatActivity {
                 //not doing now
             }
         });
+    }
+
+
+    public void getShopData()
+    {
+        ///this part is to get user id of the shop
+        uid=fbauth.getCurrentUser().getUid();
+
+
+        //this part is to get shop's document id
+        db.collection("shop")
+                .whereEqualTo("shop_id", uid)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d("this_id", document.getId() + " => " + document.getData());
+                                Toast.makeText(getApplicationContext(),document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
+                                shop_doc_id=document.getId();
+                            }
+                        } else {
+//                            Log.d(TAG, "Error getting documents: ", task.getException());
+                                Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
     }
 
     //this is validation for both
@@ -171,6 +227,7 @@ public class Add_FoodItem extends AppCompatActivity {
 
 
     //this work for button click
+    //this add data to database
     public void onSubmit(View v)
     {
         if(checkFoodName() & checkPrice() & checkDuration())
@@ -180,19 +237,21 @@ public class Add_FoodItem extends AppCompatActivity {
             // Create a new food item object  with a first and last name
             Map<String, Object> fooditem = new HashMap<>();
             fooditem.put("food_name", food_name_edit_text.getText().toString());
-            fooditem.put("price", food_price_edit_text.getText().toString());
+            fooditem.put("price", food_price_edit_text.getText().toString() );
             fooditem.put("min_duration",min_duration_text.getText().toString());
             fooditem.put("max_duration",max_duration_text.getText().toString());
+            fooditem.put("category",cat_text.getText().toString());
 
             // Add a new document with a generated ID
-            db.collection("food_list")
+            db.collection("shop")
+                    .document(shop_doc_id)
+                    .collection(cat_text.getText().toString())
                     .add(fooditem)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                             Toast.makeText(getApplicationContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
-
 
 
                         }

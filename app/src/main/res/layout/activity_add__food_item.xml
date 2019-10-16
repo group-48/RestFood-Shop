@@ -56,6 +56,23 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
+        <com.google.android.material.textfield.TextInputLayout
+
+            android:id="@+id/food_price_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/food_cat"
+            app:boxBackgroundMode="outline"
+            android:layout_marginBottom="@dimen/padding5"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/food_cat_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
         <TextView
             android:id="@+id/textView_duration"
             android:layout_width="match_parent"

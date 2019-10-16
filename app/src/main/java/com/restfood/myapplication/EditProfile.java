@@ -4,17 +4,24 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +34,13 @@ public class EditProfile extends AppCompatActivity {
 
 
     public TextInputEditText shop_name_text;
+
+    //to show phone number from firestore
     private TextView text_phone_number;
+
+
+    public String uid;
+
 
     FirebaseFirestore db=FirebaseFirestore.getInstance();
     FirebaseAuth fbauth= FirebaseAuth.getInstance();
@@ -47,7 +60,50 @@ public class EditProfile extends AppCompatActivity {
         phone_number=fbauth.getCurrentUser().getPhoneNumber();
         text_phone_number.setText(phone_number);
 
+        getShopData();
 
+
+
+
+
+    }
+
+
+    public void getShopData()
+    {
+        uid=fbauth.getCurrentUser().getUid();
+
+        CollectionReference shop_col_ref=db.collection("shop");
+        Query query1=shop_col_ref.whereEqualTo("shop_id",uid);
+
+        db.collection("shop")
+                .whereEqualTo("shop_id", uid)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                               Log.d("this_id", document.getId() + " => " + document.getData());
+
+                                Toast.makeText(getApplicationContext(),document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
+
+                                String doc_id=document.getId();
+                                Map<String,Object> shopprofile=new HashMap<>();
+                                shopprofile=document.getData();
+
+                                text_phone_number.setText(shopprofile.toString());
+
+
+
+                            }
+                        } else {
+//                            Log.d(TAG, "Error getting documents: ", task.getException());
+                            Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
 
     }
 
@@ -56,12 +112,14 @@ public class EditProfile extends AppCompatActivity {
     {
         //genarate data to save in database
         String shopname=shop_name_text.getText().toString();
-//        String uid=fbauth.getCurrentUser().getUid();
+
+
+
 
         //create map object to set in firebase
         Map<String,Object> shopprofile=new HashMap<>();
-        shopprofile.put("shop_name",shop_name_text.getText().toString());
-       shopprofile.put("shop_id",fbauth.getCurrentUser().getUid());
+        shopprofile.put("shop_name",shopname);
+        shopprofile.put("shop_id",uid);
 
 
         //conect with firebase
@@ -71,7 +129,7 @@ public class EditProfile extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                        Toast.makeText(getApplicationContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_LONG).show();
 
 
 
