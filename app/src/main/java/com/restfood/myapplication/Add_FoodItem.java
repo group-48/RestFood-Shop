@@ -350,7 +350,7 @@ public class Add_FoodItem extends AppCompatActivity {
         // Add a new document with a generated ID
         db.collection("shop")
                 .document(shop_doc_id)
-                .collection(cat_text.getText().toString())
+                .collection("FoodList")
                 .add(food)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override

@@ -47,20 +47,64 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
-
-
-        <Button
-            android:id="@+id/edit_profile_done"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/shopaddress_text_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/buttonstyle1"
-            android:text="@string/done"
-            android:onClick="onDone"
-
+            app:boxBackgroundMode="outline"
+            app:counterEnabled="true"
+            android:layout_marginBottom="@dimen/padding5"
             >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/shopaddress_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/textfieldhight"
+                android:hint="@string/address"
+                android:layout_marginBottom="@dimen/padding5"
+                >
 
-        </Button>
+            </com.google.android.material.textfield.TextInputEditText>
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/edit_profile_done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttonstyle1"
+                android:text="@string/done"
+                android:onClick="onDone"
+
+                >
+            </Button>
+
+                <Button
+                    android:id="@+id/edit_profile_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/buttonstyle2"
+                    android:text="@string/button_cancel"
+                    android:onClick="onDone"
+
+                    >
+
+
+
+            </Button>
+
+
+        </LinearLayout>
 
 
 
