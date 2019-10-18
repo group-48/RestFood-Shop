@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-public class    AddCategoryList extends AppCompatActivity {
+public class AddCategoryList extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdepter;

@@ -40,6 +40,7 @@ public class EditProfile extends AppCompatActivity {
 
 
     public String uid;
+    private String doc_id;
 
 
     FirebaseFirestore db=FirebaseFirestore.getInstance();
@@ -89,7 +90,7 @@ public class EditProfile extends AppCompatActivity {
 
                                 Toast.makeText(getApplicationContext(),document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
 
-                                String doc_id=document.getId();
+                                doc_id=document.getId();
                                 Map<String,Object> shopprofile=new HashMap<>();
                                 shopprofile=document.getData();
 
@@ -123,23 +124,20 @@ public class EditProfile extends AppCompatActivity {
 
 
         //conect with firebase
+        //and here updating theprofile
         db.collection("shop")
-                .add(shopprofile)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                .document(doc_id)
+                .set(shopprofile)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                        Toast.makeText(getApplicationContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_LONG).show();
-
-
-
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getApplicationContext(),"Updated",Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        //Log.w(TAG, "Error adding document", e);
-                        Toast.makeText(getApplicationContext(),"Error adding doc", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();;
                     }
                 });
 

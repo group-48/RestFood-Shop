@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddCategoryList"></activity>
+        <activity android:name=".EditFoodList"></activity>
+        <activity android:name=".AddCategoryList" />
         <activity android:name=".AddCategory" />
         <activity android:name=".EditProfile" />
         <activity android:name=".VerifyPhone" />

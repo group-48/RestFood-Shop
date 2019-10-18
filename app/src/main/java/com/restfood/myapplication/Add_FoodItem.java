@@ -21,6 +21,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -59,6 +60,7 @@ public class Add_FoodItem extends AppCompatActivity {
     ///this data for firestore
     String shop_doc_id;
     String uid;     //this is given by firestore & shop_id
+    String cat_doc_id;      //use this when call adding function
 
 
 
@@ -109,11 +111,14 @@ public class Add_FoodItem extends AppCompatActivity {
         });
     }
 
-
+    ///1.getting user id
+    ///2.get id of document
     public void getShopData()
     {
+
         ///this part is to get user id of the shop
         uid=fbauth.getCurrentUser().getUid();
+
 
 
         //this part is to get shop's document id
@@ -136,8 +141,11 @@ public class Add_FoodItem extends AppCompatActivity {
                         }
                     }
                 });
-
     }
+
+
+
+
 
     //this is validation for both
     //max and min
@@ -225,6 +233,18 @@ public class Add_FoodItem extends AppCompatActivity {
     }
 
 
+    private int convertToInt(String num)
+    {
+        if(num==null)
+        {
+            return 0;
+        }
+        else
+        {
+            return Integer.parseInt(num);
+        }
+    }
+
 
     //this work for button click
     //this add data to database
@@ -235,36 +255,119 @@ public class Add_FoodItem extends AppCompatActivity {
             //Toast.makeText(getApplicationContext(),"No error Done", Toast.LENGTH_SHORT).show();
 
             // Create a new food item object  with a first and last name
-            Map<String, Object> fooditem = new HashMap<>();
-            fooditem.put("food_name", food_name_edit_text.getText().toString());
-            fooditem.put("price", food_price_edit_text.getText().toString() );
-            fooditem.put("min_duration",min_duration_text.getText().toString());
-            fooditem.put("max_duration",max_duration_text.getText().toString());
-            fooditem.put("category",cat_text.getText().toString());
-
-            // Add a new document with a generated ID
-            db.collection("shop")
-                    .document(shop_doc_id)
-                    .collection(cat_text.getText().toString())
-                    .add(fooditem)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                            Toast.makeText(getApplicationContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+//            Map<String, Object> fooditem = new HashMap<>();
+//            fooditem.put("food_name", food_name_edit_text.getText().toString());
+//            fooditem.put("price", food_price_edit_text.getText().toString() );
+//            fooditem.put("min_duration",min_duration_text.getText().toString());
+//            fooditem.put("max_duration",max_duration_text.getText().toString());
+//            fooditem.put("category",cat_text.getText().toString());
+            addFood();
 
 
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            //Log.w(TAG, "Error adding document", e);
-                            Toast.makeText(getApplicationContext(),"Erroe adding doc", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+
 
         }
+
+    }
+
+
+    //this return if there is a cat like that before
+//    private boolean checkCategory()
+//    {
+//        //this is for perticuler category's i
+//        String doc_id;
+//
+//        db.collection("shop")
+//                .document(shop_doc_id)
+//                .collection("Category")
+//                .whereEqualTo("name",cat_text.getText().toString())
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            DocumentSnapshot document = task.getResult();
+//                            if (document.exists()) {
+//
+//                                Log.d, "DocumentSnapshot data: " + document.getData());
+//                            } else {
+//                                //Log.d(TAG, "No such document");
+//                                cat_doc_id=null;
+//                            }
+//                        } else {
+//                            cat_doc_id=null;
+//                            Toast.makeText(getApplicationContext(),"Unable to get Category",Toast.LENGTH_LONG).show();
+//                        }
+//                    }
+//                });
+//
+//        if(cat_doc_id==null)
+//        {
+//            return false;
+//        }
+//        else
+//        {
+//            return true;
+//        }
+//
+//    }
+
+    //this create a new doc for a cat
+    private void addCat(String name)
+    {
+        Map<String,Object> cat=new HashMap<>();
+        cat.put("categoryName",name);
+
+        db.collection("shop")
+                .document(shop_doc_id)
+                .collection("Category")
+                .add(cat)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Toast.makeText(getApplicationContext(),"New Category added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                //Log.w(TAG, "Error adding document", e);
+                                Toast.makeText(getApplicationContext(),"Error adding doc", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+    }
+
+
+    private void addFood()
+    {
+        FoodData food=new FoodData(food_name_edit_text.getText().toString(),cat_text.getText().toString(),convertToInt(food_price_edit_text.getText().toString()),convertToInt(min_duration_text.getText().toString()),convertToInt(max_duration_text.getText().toString()));
+
+
+        // Add a new document with a generated ID
+        db.collection("shop")
+                .document(shop_doc_id)
+                .collection(cat_text.getText().toString())
+                .add(food)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Toast.makeText(getApplicationContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //Log.w(TAG, "Error adding document", e);
+                        Toast.makeText(getApplicationContext(),"Erroe adding doc", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
     }
 

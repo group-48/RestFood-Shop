@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.restfood.myapplication.Add_FoodItem;
+import com.restfood.myapplication.EditFoodList;
 import com.restfood.myapplication.EditProfile;
 import com.restfood.myapplication.MainActivity;
 import com.restfood.myapplication.R;
@@ -25,6 +26,8 @@ public class NotificationsFragment extends Fragment {
 
     private Button button_add_food;
     private TextView edit_profile;
+
+    private Button buttonViewFood;
 
 
 
@@ -49,6 +52,7 @@ public class NotificationsFragment extends Fragment {
         //here initializing variable
         button_add_food=root.findViewById(R.id.button_add_food);
         edit_profile=root.findViewById(R.id.edit_profile);
+        buttonViewFood=root.findViewById(R.id.button_view_food);
 
         button_add_food.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +66,16 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 editProfile();
+            }
+        });
+
+
+
+        buttonViewFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), EditFoodList.class);
+                startActivity(intent);
             }
         });
 
