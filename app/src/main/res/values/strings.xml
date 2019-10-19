@@ -38,4 +38,11 @@
 
     <string name="address">Address</string>
 
+
+
+
+
+    <string name="fire_base_shop">shop</string>
+    <string name="fire_base_shop_list">ShopList</string>
+
 </resources>

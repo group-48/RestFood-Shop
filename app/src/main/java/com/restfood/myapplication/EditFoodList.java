@@ -23,8 +23,9 @@ public class EditFoodList extends AppCompatActivity {
     private RecyclerView.Adapter rAdapter;
     private RecyclerView.LayoutManager rLayoutManager;
 
-    private ArrayList<FoodData> foodList=new ArrayList<>();
-    private String shopDocId;
+    public ArrayList<FoodData> foodList=new ArrayList<>();
+    private String uId;
+    FoodData dat;
 
 
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
@@ -36,12 +37,13 @@ public class EditFoodList extends AppCompatActivity {
 
 
 
-
-
         foodList.add(new FoodData("Cheese Pizza","Pizza",250,10,20));
         foodList.add(new FoodData("Sausage Pizza","Pizza",500,2,30));
 
+        onbegi();
         getFoodList();
+
+
 
 
 
@@ -58,22 +60,18 @@ public class EditFoodList extends AppCompatActivity {
 
     }
 
+    private void onbegi()
+    {
+        Auth auth=new Auth();
+        uId=auth.getUId();
+    }
+
     //this function is to get food list form firestore
     private void getFoodList()
     {
-        //used own auth class to get details about firestore
-        Auth authobj=new Auth();
-        shopDocId=authobj.getUId();
-
-
-        Log.d("Check uid",shopDocId);
-
-
-        Toast.makeText(getApplicationContext(),shopDocId,Toast.LENGTH_LONG).show();
-
         db.collection("shop")
-//                .document(shopDocId)
-//                .collection("ShopList")
+                .document(uId)
+                .collection("FoodList")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -81,8 +79,15 @@ public class EditFoodList extends AppCompatActivity {
 
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                    //Log.d("this_id", document.getId() + " => " + document.getData());
-                                    //foodList.add(document.toObject(FoodData.class));
+                                    Log.d("this_id", document.getId() + " => " + document.getData());
+                                    dat=document.toObject(FoodData.class);
+
+                                    Log.d("test this", dat.getFoodName());
+                                    Log.d("test this", dat.getCategory());
+
+//                                    foodList.add(dat);
+                                    foodList.add(new FoodData("Sausage Pizza","Pizza",500,2,30));
+
 
                                 }
                             } else {
@@ -91,6 +96,13 @@ public class EditFoodList extends AppCompatActivity {
                             }
                         }
                     });
+
+        int num=foodList.size();
+        foodList.add(new FoodData("Sausage Pizza","Pizza",500,2,30));
+        Log.d("number",String.valueOf(num));
+        Toast.makeText(getApplicationContext(),String.valueOf(num),Toast.LENGTH_LONG).show();
+
+
 
     }
 
