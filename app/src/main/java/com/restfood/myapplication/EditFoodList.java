@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,6 +24,7 @@ public class EditFoodList extends AppCompatActivity {
     private RecyclerView.LayoutManager rLayoutManager;
 
     private ArrayList<FoodData> foodList=new ArrayList<>();
+    private String shopDocId;
 
 
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
@@ -59,11 +62,18 @@ public class EditFoodList extends AppCompatActivity {
     private void getFoodList()
     {
         //used own auth class to get details about firestore
-        String shopDocId=new Auth().getShopDocId();
+        Auth authobj=new Auth();
+        shopDocId=authobj.getUId();
+
+
+        Log.d("Check uid",shopDocId);
+
+
+        Toast.makeText(getApplicationContext(),shopDocId,Toast.LENGTH_LONG).show();
 
         db.collection("shop")
-                .document(shopDocId)
-                .collection("ShopList")
+//                .document(shopDocId)
+//                .collection("ShopList")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override

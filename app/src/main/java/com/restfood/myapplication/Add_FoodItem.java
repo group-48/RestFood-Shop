@@ -69,9 +69,11 @@ public class Add_FoodItem extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add__food_item);
 
+        setContentView(R.layout.activity_add__food_item);
         getShopData();
+
+
 
         //assigning xml component to that
         food_name_edit_text=findViewById(R.id.food_name_text);
@@ -132,8 +134,9 @@ public class Add_FoodItem extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 //Log.d("this_id", document.getId() + " => " + document.getData());
-                                Toast.makeText(getApplicationContext(),document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(),document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
                                 shop_doc_id=document.getId();
+                                Toast.makeText(getApplicationContext(),shop_doc_id,Toast.LENGTH_SHORT).show();
                             }
                         } else {
 //                            Log.d(TAG, "Error getting documents: ", task.getException());
@@ -141,6 +144,9 @@ public class Add_FoodItem extends AppCompatActivity {
                         }
                     }
                 });
+
+
+
     }
 
 
@@ -347,27 +353,26 @@ public class Add_FoodItem extends AppCompatActivity {
         FoodData food=new FoodData(food_name_edit_text.getText().toString(),cat_text.getText().toString(),convertToInt(food_price_edit_text.getText().toString()),convertToInt(min_duration_text.getText().toString()),convertToInt(max_duration_text.getText().toString()));
 
 
-        // Add a new document with a generated ID
         db.collection("shop")
-                .document(shop_doc_id)
+                .document(uid)
                 .collection("FoodList")
                 .add(food)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
+        @Override
+        public void onSuccess(DocumentReference documentReference) {
                         //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                         Toast.makeText(getApplicationContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
 
 
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        //Log.w(TAG, "Error adding document", e);
-                        Toast.makeText(getApplicationContext(),"Erroe adding doc", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                //Log.w(TAG, "Error adding document", e);
+                                Toast.makeText(getApplicationContext(),"Erroe adding doc", Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
     }
 
