@@ -7,25 +7,22 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
+
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
+
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,8 +30,6 @@ import java.util.Map;
 
 public class Add_FoodItem extends AppCompatActivity {
     FirebaseFirestore db=FirebaseFirestore.getInstance();
-    FirebaseAuth fbauth= FirebaseAuth.getInstance();
-
 
     //creating variables
     //this is for food
@@ -53,14 +48,11 @@ public class Add_FoodItem extends AppCompatActivity {
 
     private TextInputEditText cat_text;
 
-
-
-
-
     ///this data for firestore
-    String shop_doc_id;
     String uid;     //this is given by firestore & shop_id
-    String cat_doc_id;      //use this when call adding function
+
+    //this is for check veg or non veg
+    boolean isVeg;
 
 
 
@@ -71,8 +63,9 @@ public class Add_FoodItem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_add__food_item);
-        getShopData();
 
+        //getting user id using auth class
+        uid=new Auth().getUId();
 
 
         //assigning xml component to that
@@ -112,44 +105,6 @@ public class Add_FoodItem extends AppCompatActivity {
             }
         });
     }
-
-    ///1.getting user id
-    ///2.get id of document
-    public void getShopData()
-    {
-
-        ///this part is to get user id of the shop
-        uid=fbauth.getCurrentUser().getUid();
-
-
-
-        //this part is to get shop's document id
-        db.collection("shop")
-                .whereEqualTo("shop_id", uid)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                //Log.d("this_id", document.getId() + " => " + document.getData());
-                                //Toast.makeText(getApplicationContext(),document.getId() + " => " + document.getData(),Toast.LENGTH_SHORT).show();
-                                shop_doc_id=document.getId();
-                                Toast.makeText(getApplicationContext(),shop_doc_id,Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-//                            Log.d(TAG, "Error getting documents: ", task.getException());
-                                Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-
-
-
-    }
-
-
 
 
 
@@ -258,63 +213,39 @@ public class Add_FoodItem extends AppCompatActivity {
     {
         if(checkFoodName() & checkPrice() & checkDuration())
         {
-            //Toast.makeText(getApplicationContext(),"No error Done", Toast.LENGTH_SHORT).show();
-
-            // Create a new food item object  with a first and last name
-//            Map<String, Object> fooditem = new HashMap<>();
-//            fooditem.put("food_name", food_name_edit_text.getText().toString());
-//            fooditem.put("price", food_price_edit_text.getText().toString() );
-//            fooditem.put("min_duration",min_duration_text.getText().toString());
-//            fooditem.put("max_duration",max_duration_text.getText().toString());
-//            fooditem.put("category",cat_text.getText().toString());
             addFood();
-
-
-
-
         }
 
     }
 
 
     //this return if there is a cat like that before
+    //if there is cat already it return true
 //    private boolean checkCategory()
 //    {
-//        //this is for perticuler category's i
-//        String doc_id;
 //
 //        db.collection("shop")
-//                .document(shop_doc_id)
+//                .document(uid)
 //                .collection("Category")
 //                .whereEqualTo("name",cat_text.getText().toString())
 //                .get()
-//                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            DocumentSnapshot document = task.getResult();
-//                            if (document.exists()) {
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 //
-//                                Log.d, "DocumentSnapshot data: " + document.getData());
-//                            } else {
-//                                //Log.d(TAG, "No such document");
-//                                cat_doc_id=null;
-//                            }
-//                        } else {
-//                            cat_doc_id=null;
-//                            Toast.makeText(getApplicationContext(),"Unable to get Category",Toast.LENGTH_LONG).show();
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            cat_bol= task.getResult().isEmpty();
 //                        }
+//                        else
+//                        {
+//                            cat_bol=true;
+//
+//                        }
+//
 //                    }
 //                });
-//
-//        if(cat_doc_id==null)
-//        {
-//            return false;
-//        }
-//        else
-//        {
-//            return true;
-//        }
+//        Toast.makeText(getApplicationContext(), String.valueOf(cat_bol),Toast.LENGTH_LONG).show();
+//        return cat_bol;
 //
 //    }
 
@@ -322,10 +253,10 @@ public class Add_FoodItem extends AppCompatActivity {
     private void addCat(String name)
     {
         Map<String,Object> cat=new HashMap<>();
-        cat.put("categoryName",name);
+        cat.put("name",name);
 
         db.collection("shop")
-                .document(shop_doc_id)
+                .document(this.uid)
                 .collection("Category")
                 .add(cat)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -350,8 +281,7 @@ public class Add_FoodItem extends AppCompatActivity {
 
     private void addFood()
     {
-        FoodData food=new FoodData(food_name_edit_text.getText().toString(),cat_text.getText().toString(),convertToInt(food_price_edit_text.getText().toString()),convertToInt(min_duration_text.getText().toString()),convertToInt(max_duration_text.getText().toString()));
-
+        FoodData food=new FoodData(food_name_edit_text.getText().toString(),cat_text.getText().toString(),convertToInt(food_price_edit_text.getText().toString()),convertToInt(min_duration_text.getText().toString()),convertToInt(max_duration_text.getText().toString()),isVeg   );
 
         db.collection("shop")
                 .document(uid)
@@ -361,7 +291,7 @@ public class Add_FoodItem extends AppCompatActivity {
         @Override
         public void onSuccess(DocumentReference documentReference) {
                         //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                        Toast.makeText(getApplicationContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
 
 
                     }
@@ -384,17 +314,26 @@ public class Add_FoodItem extends AppCompatActivity {
         // Is the button now checked?
         boolean checked = ((RadioButton) view).isChecked();
 
+
+        //Toast.makeText(getApplicationContext(),String.valueOf(checked), Toast.LENGTH_SHORT).show();
+
         // Check which radio button was clicked
         switch(view.getId()) {
             case R.id.radioButton_veg:
+
                 if (checked)
                     // Pirates are the best
+                    this.isVeg=true;
                     break;
             case R.id.radioButton_non_veg:
                 if (checked)
                     // Ninjas rule
+                    this.isVeg=false;
                     break;
         }
+
+        //Toast.makeText(getApplicationContext(),String.valueOf(isVeg), Toast.LENGTH_SHORT).show();
+
     }
 
 

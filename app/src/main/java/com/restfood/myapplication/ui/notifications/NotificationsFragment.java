@@ -29,8 +29,6 @@ public class NotificationsFragment extends Fragment {
 
     private Button buttonViewFood;
 
-
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         notificationsViewModel =
@@ -69,8 +67,6 @@ public class NotificationsFragment extends Fragment {
             }
         });
 
-
-
         buttonViewFood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,10 +74,6 @@ public class NotificationsFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-
-
-
 
         return root;
     }

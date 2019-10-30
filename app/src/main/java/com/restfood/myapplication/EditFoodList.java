@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import android.os.Parcelable;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -14,9 +16,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,29 +28,30 @@ import java.util.List;
 
 public class EditFoodList extends AppCompatActivity {
     private RecyclerView rView;
-    private RecyclerView.Adapter rAdapter;
+    private FoodListEditAdapter rAdapter;
     private RecyclerView.LayoutManager rLayoutManager;
 
     ArrayList<FoodData> foodList=new ArrayList<>();
     private String uId;
-    FoodData dat;
+    Intent inta;
 
-    String demo="this is not good";
+    //variable to test
+//    FoodData dat;
+//    String demo="this is not good";
 
 
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
-    private CollectionReference foodColRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_food_list);
 
-
+        //this set to next activity
+        inta=new Intent(this,EditFood.class);
 
         this.foodList.add(new FoodData("Cheese Pizza","Pizza",250,10,20));
         this.foodList.add(new FoodData("Sausage Pizza","Pizza",500,2,30));
-
 
         onbegi();
 
@@ -55,12 +60,9 @@ public class EditFoodList extends AppCompatActivity {
         rView.setHasFixedSize(true);
         rLayoutManager=new LinearLayoutManager(this);
 
+
         postsetUi();
-
         getFoodList();
-
-
-
     }
 
     private void onbegi()
@@ -74,9 +76,19 @@ public class EditFoodList extends AppCompatActivity {
     {
         //assigning list to adepter
         rAdapter=new FoodListEditAdapter(foodList);
-
         rView.setLayoutManager(rLayoutManager);
         rView.setAdapter(rAdapter);
+
+        rAdapter.setOnItemClickListener(new FoodListEditAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                FoodData obj=foodList.get(position);
+                inta.putExtra("Demo",obj.getFoodName());
+                //inta.putExtra("Class", (Parcelable) obj);
+                startActivity(inta);
+
+            }
+        });
 
 
     }
@@ -84,10 +96,10 @@ public class EditFoodList extends AppCompatActivity {
     //this function is to get food list form firestore
     private void getFoodList()
     {
-
         db.collection("shop")
                 .document(uId)
                 .collection("FoodList")
+                .orderBy("category", Query.Direction.ASCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -104,10 +116,6 @@ public class EditFoodList extends AppCompatActivity {
                                     foodList.add(new FoodData("Sausage Pizza","Pizza",500,2,30));
 //                                    int num=foodList.size();
 //                                    Log.d("number",String.valueOf(num));
-
-
-
-
                                 }
 //                                Toast.makeText(getApplicationContext(),demo,Toast.LENGTH_LONG).show();
 //                                Log.d("firestorelist", list.toString());
@@ -122,15 +130,5 @@ public class EditFoodList extends AppCompatActivity {
                             }
                         }
                     });
-
-
-
-
-
-
-
     }
-
-
-
 }

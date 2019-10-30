@@ -14,9 +14,6 @@
         tools:layout_editor_absoluteX="327dp"
         tools:layout_editor_absoluteY="302dp">
 
-
-
-
         <ImageView
             android:id="@+id/profile_pic"
             android:layout_gravity="center"
@@ -67,9 +64,6 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:text="@string/summery" />
-
-
-
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

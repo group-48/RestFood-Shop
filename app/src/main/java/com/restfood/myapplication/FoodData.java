@@ -6,6 +6,7 @@ public class FoodData {
     private int price;
     private int minDuration;
     private int maxDuration;
+    private boolean isVeg;
 
 
 
@@ -26,6 +27,16 @@ public class FoodData {
         price=pri;
         minDuration=min;
         maxDuration=max;
+    }
+
+    public FoodData(String foodname,String cat,int pri,int min,int max,boolean bol)
+    {
+        foodName=foodname;
+        category=cat;
+        price=pri;
+        minDuration=min;
+        maxDuration=max;
+        this.isVeg=bol;
     }
 
     //setter
@@ -80,6 +91,10 @@ public class FoodData {
     public int getMaxDuration()
     {
         return maxDuration;
+    }
+    public boolean getIsVeg()
+    {
+        return isVeg;
     }
 
 
