@@ -1,6 +1,5 @@
 package com.restfood.myapplication;
 
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +16,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.FirebaseAuth;
 
 import com.google.firebase.firestore.DocumentReference;
 
@@ -30,6 +28,7 @@ import java.util.Map;
 
 public class Add_FoodItem extends AppCompatActivity {
     FirebaseFirestore db=FirebaseFirestore.getInstance();
+    private int price;      //this is to use for database
 
     //creating variables
     //this is for food
@@ -38,13 +37,10 @@ public class Add_FoodItem extends AppCompatActivity {
 
     private TextInputEditText food_price_edit_text;
     private TextInputLayout food_price_layout;
-    private int price;      //this is to use for database
 
     private TextInputEditText min_duration_text;
     private TextInputLayout min_duration_layout;
-
     private TextInputEditText max_duration_text;
-    //private TextInputLayout max_duration_layout;
 
     private TextInputEditText cat_text;
 
@@ -81,9 +77,6 @@ public class Add_FoodItem extends AppCompatActivity {
         //max_duration_layout=findViewById(R.id.max_pre_time_layout);
 
         cat_text=findViewById(R.id.food_cat_text);
-
-
-
 
         //this call when food field change
         //for every change
@@ -193,7 +186,7 @@ public class Add_FoodItem extends AppCompatActivity {
         }
     }
 
-
+    //this is to convert string from textfield to int
     private int convertToInt(String num)
     {
         if(num==null)
@@ -274,8 +267,6 @@ public class Add_FoodItem extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),"Error adding doc", Toast.LENGTH_SHORT).show();
                             }
                         });
-
-
     }
 
 
@@ -308,33 +299,37 @@ public class Add_FoodItem extends AppCompatActivity {
 
 
 
-    //coped from android studio doc have to change
-    //just for desiging
-    public void onRadioButtonClicked(View view) {
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
+        //coped from android studio doc have to change
+        //just for desiging
+        public void onRadioButtonClicked(View view) {
+            // Is the button now checked?
+            boolean checked = ((RadioButton) view).isChecked();
 
+            //Toast.makeText(getApplicationContext(),String.valueOf(checked), Toast.LENGTH_SHORT).show();
 
-        //Toast.makeText(getApplicationContext(),String.valueOf(checked), Toast.LENGTH_SHORT).show();
+            // Check which radio button was clicked
+            switch(view.getId()) {
+                case R.id.radioButton_veg:
 
-        // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.radioButton_veg:
+                    if (checked)
+                        // Pirates are the best
+                        this.isVeg=true;
+                        break;
+                case R.id.radioButton_non_veg:
+                    if (checked)
+                        // Ninjas rule
+                        this.isVeg=false;
+                        break;
+            }
 
-                if (checked)
-                    // Pirates are the best
-                    this.isVeg=true;
-                    break;
-            case R.id.radioButton_non_veg:
-                if (checked)
-                    // Ninjas rule
-                    this.isVeg=false;
-                    break;
+            //Toast.makeText(getApplicationContext(),String.valueOf(isVeg), Toast.LENGTH_SHORT).show();
+
         }
 
-        //Toast.makeText(getApplicationContext(),String.valueOf(isVeg), Toast.LENGTH_SHORT).show();
-
-    }
+        public void onCancel(View view)
+        {
+            finish();
+        }
 
 
     //this method creates dialog box
