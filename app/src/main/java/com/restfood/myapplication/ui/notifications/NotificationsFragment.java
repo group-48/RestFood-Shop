@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ public class NotificationsFragment extends Fragment {
 
     private Button button_add_food;
     private TextView edit_profile;
+    private Button buttonSummery;
 
     private Button buttonViewFood;
 
@@ -35,7 +37,7 @@ public class NotificationsFragment extends Fragment {
                 ViewModelProviders.of(this).get(NotificationsViewModel.class);
 
         //here root
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
+        final View root = inflater.inflate(R.layout.fragment_notifications, container, false);
 
         final TextView textView = root.findViewById(R.id.shop_name);
 
@@ -72,6 +74,14 @@ public class NotificationsFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent=new Intent(getActivity(), EditFoodList.class);
                 startActivity(intent);
+            }
+        });
+
+        buttonSummery=root.findViewById(R.id.button_summery);
+        buttonSummery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"This is not developed yet",Toast.LENGTH_LONG).show();
             }
         });
 

@@ -42,4 +42,9 @@
     <string name="fire_base_shop">shop</string>
     <string name="fire_base_shop_list">ShopList</string>
 
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+
 </resources>

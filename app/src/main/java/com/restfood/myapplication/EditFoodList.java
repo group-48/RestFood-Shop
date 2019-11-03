@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import android.os.Parcelable;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,12 +33,9 @@ public class EditFoodList extends AppCompatActivity {
     private RecyclerView.LayoutManager rLayoutManager;
 
     ArrayList<FoodData> foodList=new ArrayList<>();
-    private String uId;
-    Intent inta;
+    ArrayList<String> docIdList=new ArrayList<>();
 
-    //variable to test
-//    FoodData dat;
-//    String demo="this is not good";
+    private String uId;
 
 
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
@@ -48,10 +46,10 @@ public class EditFoodList extends AppCompatActivity {
         setContentView(R.layout.activity_edit_food_list);
 
         //this set to next activity
-        inta=new Intent(this,EditFood.class);
 
-        this.foodList.add(new FoodData("Cheese Pizza","Pizza",250,10,20));
-        this.foodList.add(new FoodData("Sausage Pizza","Pizza",500,2,30));
+
+//        this.foodList.add(new FoodData("Cheese Pizza","Pizza",250,10,20));
+//        this.foodList.add(new FoodData("Sausage Pizza","Pizza",500,2,30));
 
         onbegi();
 
@@ -83,10 +81,12 @@ public class EditFoodList extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 FoodData obj=foodList.get(position);
-                inta.putExtra("Demo",obj.getFoodName());
-                //inta.putExtra("Class", (Parcelable) obj);
-                startActivity(inta);
 
+               Intent inta=new Intent(EditFoodList.this,EditFood.class);
+//                //inta.putExtra("Demo",obj.getFoodName());
+                inta.putExtra("DocId",docIdList.get(position));
+                startActivity(inta);
+                //Toast.makeText(getApplicationContext(),docIdList.get(position),Toast.LENGTH_LONG).show();
             }
         });
 
@@ -110,6 +110,8 @@ public class EditFoodList extends AppCompatActivity {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     //Log.d("this_id", document.getId() + " => " + document.getData());
 
+                                    docIdList.add(document.getId());
+                                    Log.d("Doc Id Are:",document.getId());
                                     FoodData taskItem = document.toObject(FoodData.class);
                                     list.add(taskItem);
 

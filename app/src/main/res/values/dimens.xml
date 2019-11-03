@@ -6,6 +6,7 @@
     <dimen name="image_max">100dp</dimen>
     <dimen name="padding5">5dp</dimen>
     <dimen name="padding30">30dp</dimen>
+    <dimen name="padding15">15dp</dimen>
     <dimen name="textfieldhight">55dp</dimen>
     <dimen name="car_radius5">5dp</dimen>
 </resources>

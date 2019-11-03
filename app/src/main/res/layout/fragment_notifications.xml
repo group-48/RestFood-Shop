@@ -6,64 +6,78 @@
     android:layout_height="match_parent">
 
 
-    <LinearLayout
-        android:id="@+id/line1"
+
+    <com.google.android.material.card.MaterialCardView
+        app:cardBackgroundColor="@color/button_blue"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="327dp"
-        tools:layout_editor_absoluteY="302dp">
+        android:layout_margin="@dimen/padding15"
+        app:cardCornerRadius="@dimen/padding15">
 
-        <ImageView
-            android:id="@+id/profile_pic"
-            android:layout_gravity="center"
-            android:layout_width="@dimen/image_max"
-            android:layout_height="@dimen/image_max"
-            android:contentDescription="@string/shop_name"
-            app:srcCompat="@drawable/ic_home_black_24dp" />
 
-        <TextView
-            android:id="@+id/shop_name"
+        <LinearLayout
+            android:id="@+id/line1"
             android:layout_width="match_parent"
-            android:layout_height="39dp"
-            android:gravity="center"
-            android:text="@string/shop_name"
-            android:textSize="@dimen/large_text" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="327dp"
+            tools:layout_editor_absoluteY="302dp">
 
-        <TextView
-            android:id="@+id/edit_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/edit_profile"
-            android:textColor="@color/button_blue" />
+            <ImageView
+                android:id="@+id/profile_pic"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/image_max"
+                android:layout_height="@dimen/image_max"
+                android:contentDescription="@string/shop_name"
+                app:srcCompat="@drawable/ic_home_black_24dp" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/padding30" />
+            <TextView
+                android:id="@+id/shop_name"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:gravity="center"
+                android:text="@string/shop_name"
+                android:textSize="@dimen/large_text" />
+
+            <TextView
+                android:id="@+id/edit_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/edit_profile"
+                android:textColor="@color/white" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/padding30" />
 
 
 
-        <Button
-            android:id="@+id/button_view_food"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:text="@string/view_food" />
+            <Button
+                android:id="@+id/button_view_food"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="@string/view_food" />
 
-        <Button
-            android:id="@+id/button_add_food"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:text="@string/add_food" />
+            <Button
+                android:id="@+id/button_add_food"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="@string/add_food" />
 
-        <Button
-            android:id="@+id/button_summery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:text="@string/summery" />
+            <Button
+                android:id="@+id/button_summery"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:text="@string/summery" />
 
-    </LinearLayout>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
