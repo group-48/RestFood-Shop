@@ -1,5 +1,6 @@
 package com.restfood.myapplication.ui.home;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,6 +106,11 @@ public class FoodAvailableAdapter extends RecyclerView.Adapter<com.restfood.myap
         FoodData currentdata=foodListX.get(position);
 
         holder.nameTextView.setText(currentdata.getFoodName());
+
+
+//        holder.switchAvailable.setChecked(currentdata.getAvailable());
+
+        Log.d("Available check",String.valueOf(currentdata.getAvailable()));
         //holder.priceTextView.setText(currentdata.getPrice());
         //holder.catTextView.setText(currentdata.getCategory());
     }

@@ -7,7 +7,9 @@ public class FoodData {
     private int minDuration;
     private int maxDuration;
     private boolean isVeg;
-    private boolean isAvailable;
+
+    //this true for test
+    private boolean isAvailable=true;
 
 
 
@@ -37,6 +39,18 @@ public class FoodData {
         maxDuration=max;
         this.isVeg=bol;
     }
+
+    public FoodData(String foodname,String cat,int pri,int min,int max,boolean bol,boolean avail)
+    {
+        foodName=foodname;
+        category=cat;
+        price=pri;
+        minDuration=min;
+        maxDuration=max;
+        this.isVeg=bol;
+        this.isAvailable=avail;
+    }
+
 
     //setter
     public void setFoodName(String name)

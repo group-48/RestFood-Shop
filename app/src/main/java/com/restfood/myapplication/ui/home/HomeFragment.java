@@ -35,6 +35,7 @@ import com.restfood.myapplication.R;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class HomeFragment extends Fragment {
 
@@ -150,6 +151,7 @@ public class HomeFragment extends Fragment {
                                 docIdList.add(document.getId());
                                 Log.d("Doc Id Are:",document.getId());
                                 FoodData taskItem = document.toObject(FoodData.class);
+
                                 list.add(taskItem);
 
                                 foodList.add(new FoodData("Sausage Pizza","Pizza",500,2,30));
