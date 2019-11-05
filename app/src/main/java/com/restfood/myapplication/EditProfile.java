@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -32,6 +33,8 @@ public class EditProfile extends AppCompatActivity {
     private TextInputEditText shop_address_text;
     private TextInputEditText shop_type_text;
     private TextInputEditText shop_email_text;
+
+    private TextInputLayout shop_email_layout;
 
     //to show phone number from firestore
     private TextView text_phone_number;
@@ -59,6 +62,8 @@ public class EditProfile extends AppCompatActivity {
         shop_type_text=findViewById(R.id.type_of_shop_edit_text);
         shop_email_text=findViewById(R.id.email_edit_text);
 
+        shop_email_layout=findViewById(R.id.email_text_layout);
+
 
         onBegi();
         getShopData();
@@ -81,7 +86,7 @@ public class EditProfile extends AppCompatActivity {
     private void getShopData()
     {
         db.collection("shop")
-                .document(uid)
+                .document(new Auth().getUId())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -120,10 +125,48 @@ public class EditProfile extends AppCompatActivity {
     }
 
 
+    private boolean valEmail()
+    {
+        String email=shop_email_text.getText().toString();
 
+        if(email==null)
+        {
+            return true;
+        }
+        else
+        {
+            boolean check=false;
+            for(int i=0;i<email.length();i++)
+            {
+                if(email.charAt(i)=='@')
+                {
+                    check=true;
+                }
+            }
 
+            if(check==true)
+            {
+                return true;
+            }
+            else
+            {
+                shop_email_layout.setError("No @ in your email");
+                return false;
+            }
+        }
+    }
 
     public void onDone(View v)
+    {
+        if(valEmail() )
+        {
+            submit();
+        }
+
+    }
+
+
+    private void submit()
     {
         //genarate data to save in database
         String shop_name=shop_name_text.getText().toString();
@@ -174,7 +217,13 @@ public class EditProfile extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_LONG).show();;
                     }
                 });
+
     }
+
+
+
+
+
 
 
 
