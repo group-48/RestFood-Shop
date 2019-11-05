@@ -41,7 +41,7 @@ public class EditProfile extends AppCompatActivity {
 
 
     public String uid;
-    private Shop shopObj;
+    public Shop shopObj;
 
     //this is to get auth data
     private Auth auth=new Auth();
@@ -94,7 +94,10 @@ public class EditProfile extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
-                                shopObj=document.toObject(Shop.class);
+                                //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                                Toast.makeText(getApplicationContext(),document.getData().toString(),Toast.LENGTH_LONG).show();
+                                //shopObj=document.toObject(Shop.class);
+
                             } else {
 
                             }
@@ -106,21 +109,21 @@ public class EditProfile extends AppCompatActivity {
 
 
         //assigning values to ui
-        if(shopObj.getShopName()!=null)
-        {
-            shop_name_text.setText(shopObj.getShopName());
-        }
-        if(shopObj.getShop_type()!=null)
-        {
-            shop_type_text.setText(shopObj.getShop_type());
-        }
-        if(shopObj.getShopemail() !=null){
-            shop_email_text.setText(shopObj.getShopemail());
-        }
-        if(shopObj.getShopAddress()!=null)
-        {
-            shop_address_text.setText(shopObj.getShopAddress());
-        }
+//        if(shopObj.getShopName()!=null)
+//        {
+//            shop_name_text.setText(shopObj.getShopName());
+//        }
+//        if(shopObj.getShop_type()!=null)
+//        {
+//            shop_type_text.setText(shopObj.getShop_type());
+//        }
+//        if(shopObj.getShopemail() !=null){
+//            shop_email_text.setText(shopObj.getShopemail());
+//        }
+//        if(shopObj.getShopAddress()!=null)
+//        {
+//            shop_address_text.setText(shopObj.getShopAddress());
+//        }
 
     }
 
@@ -181,22 +184,19 @@ public class EditProfile extends AppCompatActivity {
 
         if(shop_name!=null)
         {
-            shopprofile.put("shop_name",shop_name);
+            shopprofile.put("shopName",shop_name);
         }
 
         if(shop_address!=null)
         {
-            shopprofile.put("shop_name",shop_address);
+            shopprofile.put("shopAddress",shop_address);
         }
         if(shop_email !=null){
-            shopprofile.put("shop_email",shop_email);
+            shopprofile.put("shopEmail",shop_email);
         }
-        if(shop_address!=null){
-            shopprofile.put("shop_address",shop_address);
 
-        }
         if(shop_type !=null){
-            shopprofile.put( "shop_type",shop_type);
+            shopprofile.put( "shopType",shop_type);
         }
 
 

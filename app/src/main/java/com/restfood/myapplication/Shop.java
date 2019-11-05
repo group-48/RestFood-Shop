@@ -1,47 +1,72 @@
 package com.restfood.myapplication;
 
 public class Shop {
-    private  String shop_name ;
-    private  String shop_id;
-    private  String shop_type;
-    private  String shop_address;
-    private String  shop_email;
+    private  String shopName ;
+    private  String shopId;
+    private  String shopType;
+    private  String shopAddress;
+    private String  shopEmail;
+
+
+    public Shop()
+    {
+
+    }
+
+    public Shop(String id)
+    {
+        shopId=id;
+    }
+
+    public Shop(String name,String id,String type,String address,String email)
+    {
+        shopAddress=address;
+        shopId=id;
+        shopName=name;
+        shopEmail=email;
+        shopType=type;
+    }
 
 
 public void setShopName(String name)
 {
-    shop_name=name ;
+    shopName=name ;
 }
 
 public String getShopName()
 {
-    return shop_name;
+    return shopName;
 }
 
-public void  setshop_id(String Id) {
-    shop_id = Id;
+public void  setShopId(String Id) {
+    shopId = Id;
 }
 
 
-public void setShop_type(String type){
-    shop_type =type;
+public void setShopType(String type){
+    shopType =type;
   }
- public String getShop_type(){
-    return shop_type;
+ public String getShopType(){
+    return shopType;
  }
  public String getShopId()
  {
-     return shop_id;
+     return shopId;
+ }
+
+ public void setAddress(String add)
+ {
+     shopAddress=add;
  }
 
  public String getShopAddress()
  {
-     return shop_address;
+     return shopAddress;
  }
  public void setShopEmail(String email){
-    shop_email =email;
+    shopEmail =email;
     }
     public String getShopemail(){
-    return shop_email;
+    return shopEmail;
     }
 }
