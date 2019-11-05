@@ -10,9 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
@@ -35,6 +38,7 @@ public class EditProfile extends AppCompatActivity {
 
 
     public String uid;
+    private Shop shopObj;
 
     //this is to get auth data
     private Auth auth=new Auth();
@@ -57,6 +61,7 @@ public class EditProfile extends AppCompatActivity {
 
 
         onBegi();
+        getShopData();
 
 
         //getting phone number and display in phone
@@ -73,13 +78,55 @@ public class EditProfile extends AppCompatActivity {
     }
 
 
+    private void getShopData()
+    {
+        db.collection("shop")
+                .document(uid)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                shopObj=document.toObject(Shop.class);
+                            } else {
+
+                            }
+                        } else {
+
+                        }
+                    }
+                });
+
+
+        //assigning values to ui
+        if(shopObj.getShopName()!=null)
+        {
+            shop_name_text.setText(shopObj.getShopName());
+        }
+        if(shopObj.getShop_type()!=null)
+        {
+            shop_type_text.setText(shopObj.getShop_type());
+        }
+        if(shopObj.getShopemail() !=null){
+            shop_email_text.setText(shopObj.getShopemail());
+        }
+        if(shopObj.getShopAddress()!=null)
+        {
+            shop_address_text.setText(shopObj.getShopAddress());
+        }
+
+    }
+
+
 
 
 
     public void onDone(View v)
     {
         //genarate data to save in database
-        String shopname=shop_name_text.getText().toString();
+        String shop_name=shop_name_text.getText().toString();
         String shop_email=shop_email_text.getText().toString();
         String shop_address=shop_address_text.getText().toString();
         String shop_type=shop_type_text.getText().toString();
@@ -87,11 +134,27 @@ public class EditProfile extends AppCompatActivity {
 
         //create map object to set in firebase
         Map<String,Object> shopprofile=new HashMap<>();
-        shopprofile.put("shop_name",shopname);
         shopprofile.put("shop_id",uid);
-        shopprofile.put("shop_email",shop_email);
-        shopprofile.put("shop_address",shop_address);
-        shopprofile.put("shop_type",shop_type);
+
+        if(shop_name!=null)
+        {
+            shopprofile.put("shop_name",shop_name);
+        }
+
+        if(shop_address!=null)
+        {
+            shopprofile.put("shop_name",shop_address);
+        }
+        if(shop_email !=null){
+            shopprofile.put("shop_email",shop_email);
+        }
+        if(shop_address!=null){
+            shopprofile.put("shop_address",shop_address);
+
+        }
+        if(shop_type !=null){
+            shopprofile.put( "shop_type",shop_type);
+        }
 
 
         //conect with firebase
