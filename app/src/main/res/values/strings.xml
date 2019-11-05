@@ -26,7 +26,6 @@
     <string name="food_type">Food Type</string>
     <string name="radio_veg">Veg</string>
     <string name="radio_non_veg">Non-Veg</string>
-    <string name="shop_name">Burger King</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="food_cat">Category</string>
 
@@ -37,6 +36,10 @@
     <string name="summery">Summery</string>
 
     <string name="address">Address</string>
+    <string name="type_of_shop">Type of Shop</string>
+    <string name="phone_no">Phone No</string>
+    <string name="email">Email</string>
+    <string name="shop_name">Shop Name</string>
 
 
     <string name="fire_base_shop">shop</string>

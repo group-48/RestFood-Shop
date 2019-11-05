@@ -26,6 +26,9 @@ public class EditProfile extends AppCompatActivity {
 
 
     public TextInputEditText shop_name_text;
+    private TextInputEditText shop_address_text;
+    private TextInputEditText shop_type_text;
+    private TextInputEditText shop_email_text;
 
     //to show phone number from firestore
     private TextView text_phone_number;
@@ -48,6 +51,10 @@ public class EditProfile extends AppCompatActivity {
         //initial all objects
         shop_name_text= findViewById(R.id.shopname_edit_text);
         text_phone_number=findViewById(R.id.edit_profile_phone_number_text);
+        shop_address_text=findViewById(R.id.shopaddress_edit_text);
+        shop_type_text=findViewById(R.id.type_of_shop_edit_text);
+        shop_email_text=findViewById(R.id.email_edit_text);
+
 
         onBegi();
 
@@ -73,12 +80,18 @@ public class EditProfile extends AppCompatActivity {
     {
         //genarate data to save in database
         String shopname=shop_name_text.getText().toString();
+        String shop_email=shop_email_text.getText().toString();
+        String shop_address=shop_address_text.getText().toString();
+        String shop_type=shop_type_text.getText().toString();
 
 
         //create map object to set in firebase
         Map<String,Object> shopprofile=new HashMap<>();
         shopprofile.put("shop_name",shopname);
         shopprofile.put("shop_id",uid);
+        shopprofile.put("shop_email",shop_email);
+        shopprofile.put("shop_address",shop_address);
+        shopprofile.put("shop_type",shop_type);
 
 
         //conect with firebase
