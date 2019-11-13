@@ -35,6 +35,10 @@ public class EditProfile extends AppCompatActivity {
     private TextInputEditText shop_email_text;
 
     private TextInputLayout shop_email_layout;
+    private TextInputLayout shop_name_layout;
+    private TextInputLayout shop_address_layout;
+    private TextInputLayout shop_type_layout;
+
 
     //to show phone number from firestore
     private TextView text_phone_number;
@@ -159,9 +163,49 @@ public class EditProfile extends AppCompatActivity {
         }
     }
 
+    private boolean valShoptype()
+    {
+        String shopType=shop_type_text.getText().toString();
+
+        if(shopType==null)
+        {
+            shop_type_layout.setError("Shop type empty");
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
+
+    private boolean valShopName()
+    {
+        String name=shop_name_text.getText().toString();
+
+        if(name==null)
+        {
+            shop_name_layout.setError("Name is empty");
+            return false;
+        }
+        else
+        {
+            if(name.length()<3)
+            {
+                shop_name_layout.setError("Very Short name");
+                return false;
+            }
+            else
+            {
+                return true;
+
+            }
+        }
+    }
+
     public void onDone(View v)
     {
-        if(valEmail() )
+        if(valEmail() || valShoptype() || valShopName() )
         {
             submit();
         }
