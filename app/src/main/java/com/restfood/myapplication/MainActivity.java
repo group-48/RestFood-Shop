@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
                     String mobile = editTextMobile.getText().toString().trim();
 
-                    if(mobile.isEmpty() || mobile.length() < 10){
+                    if(mobile.isEmpty() || mobile.length() < 9){
                         editTextMobile.setError("Enter a valid mobile");
                         editTextMobile.requestFocus();
                         return;
