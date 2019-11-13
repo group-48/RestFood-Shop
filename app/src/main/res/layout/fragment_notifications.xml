@@ -29,7 +29,9 @@
                 android:layout_width="@dimen/image_max"
                 android:layout_height="@dimen/image_max"
                 android:contentDescription="@string/shop_name"
+                android:background="@drawable/circle"
                 app:srcCompat="@drawable/ic_home_black_24dp" />
+
 
             <TextView
                 android:id="@+id/shop_name"
