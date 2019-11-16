@@ -17,13 +17,12 @@
             android:id="@+id/foodNameTextViewAvail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_alignParentTop="true"
             android:layout_marginTop="-1dp"
             android:text="@string/dummy"
             android:textColor="@android:color/black"
             android:textSize="20sp"
-            android:textStyle="bold" />
+             />
 
 
 

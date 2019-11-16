@@ -79,7 +79,7 @@ public class EditFood extends AppCompatActivity {
         String x;
         if(foodObj.getFoodName()!=null)
         {
-            //food_name_edit_text.setText(foodObj.getFoodName());
+            food_name_edit_text.setText(foodObj.getFoodName());
 
         }
 
@@ -114,9 +114,7 @@ public class EditFood extends AppCompatActivity {
                         //assign value to foodData object
                         foodObj=documentSnapshot.toObject(FoodData.class);
                         assignValue();
-                        food_name_edit_text.setText(documentSnapshot.toString() );
-                        Toast.makeText(getApplicationContext(),"Available test"+documentSnapshot.toString(),Toast.LENGTH_LONG).show();
-                        //Toast.makeText(getApplicationContext(),"current data updated",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"current data updated",Toast.LENGTH_LONG).show();
                         //Log.d("This is test of int:",String.valueOf(foodObj));
                     }
 

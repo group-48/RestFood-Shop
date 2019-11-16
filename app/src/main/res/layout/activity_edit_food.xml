@@ -188,7 +188,7 @@
         android:layout_alignParentBottom="true"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
-        android:padding="@dimen/padding5"
+        android:padding="@dimen/padding15"
         app:layout_constraintBottom_toBottomOf="@+id/linearLayout">
 
         <Button
@@ -199,6 +199,7 @@
             android:layout_weight="1"
             android:textColor="@color/white"
             android:onClick="onSubmit"
+            android:layout_margin="@dimen/padding5"
             android:text="@string/update" />
 
         <Button
@@ -209,6 +210,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/button_blue"
             android:onClick="deleteFood"
+            android:layout_margin="@dimen/padding5"
             android:text="@string/delete" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
