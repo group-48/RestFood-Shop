@@ -91,7 +91,7 @@ public class HomeFragment extends Fragment {
 ////                //inta.putExtra("Demo",obj.getFoodName());
 //                inta.putExtra("DocId",docIdList.get(position));
 //                startActivity(inta);
-                //Toast.makeText(getApplicationContext(),docIdList.get(position),Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(),foodList.get(position).getFoodName(),Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -120,6 +120,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("This done", "DocumentSnapshot successfully updated!");
+                        Toast.makeText(getActivity().getApplicationContext(),"Updated",Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

@@ -106,13 +106,13 @@ public class FoodAvailableAdapter extends RecyclerView.Adapter<com.restfood.myap
         FoodData currentdata=foodListX.get(position);
 
         holder.nameTextView.setText(currentdata.getFoodName());
+        String tom="true";
 
 
-//        holder.switchAvailable.setChecked(currentdata.getAvailable());
+        holder.switchAvailable.setChecked(currentdata.getIsAvailable());
 
-        Log.d("Available check",String.valueOf(currentdata.getAvailable()));
-        //holder.priceTextView.setText(currentdata.getPrice());
-        //holder.catTextView.setText(currentdata.getCategory());
+        Log.d("Available check",String.valueOf(currentdata.getIsAvailable()));
+
     }
 
 
