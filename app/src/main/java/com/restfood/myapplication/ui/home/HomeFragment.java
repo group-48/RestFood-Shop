@@ -87,11 +87,11 @@ public class HomeFragment extends Fragment {
             public void onItemClick(int position) {
                 FoodData obj=foodList.get(position);
 
-//                Intent inta=new Intent(EditFoodList.this, EditFood.class);
+//                Intent inta=new Intent(EditFoupodList.this, EditFood.class);
 ////                //inta.putExtra("Demo",obj.getFoodName());
 //                inta.putExtra("DocId",docIdList.get(position));
 //                startActivity(inta);
-                Toast.makeText(getActivity().getApplicationContext(),foodList.get(position).getFoodName(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity().getApplicationContext(),foodList.get(position).getFoodName(),Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -106,7 +106,7 @@ public class HomeFragment extends Fragment {
     }
 
 
-    private void updateAvailable(int position,boolean click)
+    private void updateAvailable(final int position, final boolean click)
     {
         //to use in query
         String docId=docIdList.get(position);
@@ -120,13 +120,15 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("This done", "DocumentSnapshot successfully updated!");
-                        Toast.makeText(getActivity().getApplicationContext(),"Updated",Toast.LENGTH_LONG).show();
+                        foodList.get(position).setIsAvailable(click);
+                        //Toast.makeText(getActivity().getApplicationContext(),foodList.get(position).getFoodName()+":Updated",Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w("This error", "Error updating document", e);
+                        Toast.makeText(getActivity().getApplicationContext(),foodList.get(position).getFoodName()+":Fail Update",Toast.LENGTH_LONG).show();
                     }
                 });
 
