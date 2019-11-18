@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.restfood.myapplication.Add_FoodItem;
 import com.restfood.myapplication.EditFoodList;
 import com.restfood.myapplication.EditProfile;
@@ -28,6 +29,7 @@ public class NotificationsFragment extends Fragment {
     private Button button_add_food;
     private TextView edit_profile;
     private Button buttonSummery;
+    private Button buttonSignout;
 
     private Button buttonViewFood;
 
@@ -84,6 +86,15 @@ public class NotificationsFragment extends Fragment {
                 Toast.makeText(getActivity(),"This is not developed yet",Toast.LENGTH_LONG).show();
             }
         });
+
+        buttonSignout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+            }
+        });
+
+
 
         return root;
     }
