@@ -55,6 +55,7 @@ public class NotificationsFragment extends Fragment {
         button_add_food=root.findViewById(R.id.button_add_food);
         edit_profile=root.findViewById(R.id.edit_profile);
         buttonViewFood=root.findViewById(R.id.button_view_food);
+        buttonSignout=root.findViewById(R.id.button_signout);
 
         button_add_food.setOnClickListener(new View.OnClickListener() {
             @Override
