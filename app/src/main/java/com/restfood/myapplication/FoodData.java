@@ -9,7 +9,7 @@ public class FoodData {
     private boolean isVeg;
 
     //this true for test
-    private boolean isAvailable=true;
+    private boolean isAvailable;
 
 
 
@@ -78,7 +78,7 @@ public class FoodData {
         maxDuration=max;
     }
 
-    public void setAvailable(boolean click)
+    public void setIsAvailable(boolean click)
     {
         isAvailable=click;
     }
@@ -115,7 +115,7 @@ public class FoodData {
         return isVeg;
     }
 
-    public boolean getAvailable()
+    public boolean getIsAvailable()
     {
         return isAvailable;
     }

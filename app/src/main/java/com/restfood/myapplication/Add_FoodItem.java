@@ -1,6 +1,7 @@
 package com.restfood.myapplication;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -9,6 +10,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -60,6 +62,17 @@ public class Add_FoodItem extends AppCompatActivity {
 
         setContentView(R.layout.activity_add__food_item);
 
+//        try
+//        {
+//            getActionBar().setTitle("Add Food");
+//            setActionBar("");
+//
+//        }
+//        catch (Exception e)
+//        {
+//            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+//        }
+
         //getting user id using auth class
         uid=new Auth().getUId();
 
@@ -98,6 +111,8 @@ public class Add_FoodItem extends AppCompatActivity {
             }
         });
     }
+
+
 
 
 
@@ -272,7 +287,7 @@ public class Add_FoodItem extends AppCompatActivity {
 
     private void addFood()
     {
-        FoodData food=new FoodData(food_name_edit_text.getText().toString(),cat_text.getText().toString(),convertToInt(food_price_edit_text.getText().toString()),convertToInt(min_duration_text.getText().toString()),convertToInt(max_duration_text.getText().toString()),isVeg   );
+        FoodData food=new FoodData(food_name_edit_text.getText().toString(),cat_text.getText().toString(),convertToInt(food_price_edit_text.getText().toString()),convertToInt(min_duration_text.getText().toString()),convertToInt(max_duration_text.getText().toString()),isVeg,false  );
 
         db.collection("shop")
                 .document(uid)
@@ -282,7 +297,7 @@ public class Add_FoodItem extends AppCompatActivity {
         @Override
         public void onSuccess(DocumentReference documentReference) {
                         //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                        //Toast.makeText(getApplicationContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
 
 
                     }

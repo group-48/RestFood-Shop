@@ -34,6 +34,7 @@
     <string name="view_food">View Food List</string>
     <string name="add_food">Add Food</string>
     <string name="summery">Summery</string>
+    <string name="signout">Sign-Out</string>
 
     <string name="address">Address</string>
     <string name="type_of_shop">Type of Shop</string>
