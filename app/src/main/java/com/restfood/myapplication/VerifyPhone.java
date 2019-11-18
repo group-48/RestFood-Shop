@@ -80,6 +80,7 @@ public class VerifyPhone extends AppCompatActivity {
     //the country id is concatenated
     //you can take the country id as user input as well
     private void sendVerificationCode(String mobile) {
+        Toast.makeText(getApplicationContext(),mobile,Toast.LENGTH_LONG).show();
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 "+94" + mobile,
                 60,

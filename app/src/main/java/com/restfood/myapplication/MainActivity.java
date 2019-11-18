@@ -40,32 +40,31 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        if(myuser==null)
-        {
-            findViewById(R.id.buttonContinue).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    String mobile = editTextMobile.getText().toString().trim();
-
-                    if(mobile.isEmpty() || mobile.length() < 9){
-                        editTextMobile.setError("Enter a valid mobile");
-                        editTextMobile.requestFocus();
-                        return;
-                    }
-
-                    Intent intent = new Intent(MainActivity.this, VerifyPhone.class);
-                    intent.putExtra("mobile", mobile);
-                    startActivity(intent);
-                }
-            });
-
-        }
-        else
+        if(myuser!=null)
         {
             Intent intent2 = new Intent(MainActivity.this, main_bottom_navigation.class);
             startActivity(intent2);
         }
+
+        findViewById(R.id.buttonContinue).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String mobile = editTextMobile.getText().toString().trim();
+
+                if(mobile.isEmpty() || mobile.length() < 9){
+                    editTextMobile.setError("Enter a valid mobile");
+                    editTextMobile.requestFocus();
+                    return;
+                }
+
+                Intent intent = new Intent(MainActivity.this, VerifyPhone.class);
+                intent.putExtra("mobile", mobile);
+                startActivity(intent);
+            }
+        });
+
+
 
 
 
