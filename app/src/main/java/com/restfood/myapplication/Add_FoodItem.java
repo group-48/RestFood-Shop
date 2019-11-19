@@ -46,6 +46,9 @@ public class Add_FoodItem extends AppCompatActivity {
 
     private TextInputEditText cat_text;
 
+    private TextInputEditText des_text;
+    private TextInputLayout des_layout;
+
     ///this data for firestore
     String uid;     //this is given by firestore & shop_id
 
@@ -90,6 +93,10 @@ public class Add_FoodItem extends AppCompatActivity {
         //max_duration_layout=findViewById(R.id.max_pre_time_layout);
 
         cat_text=findViewById(R.id.food_cat_text);
+
+
+        des_text=findViewById(R.id.food_des_text);
+        des_layout=findViewById(R.id.food_des_layout);
 
         //this call when food field change
         //for every change
@@ -201,6 +208,21 @@ public class Add_FoodItem extends AppCompatActivity {
         }
     }
 
+
+    private boolean checkDescription()
+    {
+        String data=des_text.getText().toString();
+        if(data==null)
+        {
+            des_layout.setError("Empty");
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
     //this is to convert string from textfield to int
     private int convertToInt(String num)
     {
@@ -219,7 +241,7 @@ public class Add_FoodItem extends AppCompatActivity {
     //this add data to database
     public void onSubmit(View v)
     {
-        if(checkFoodName() & checkPrice() & checkDuration())
+        if(checkFoodName() & checkPrice() & checkDuration() & checkDescription())
         {
             addFood();
         }
@@ -287,7 +309,7 @@ public class Add_FoodItem extends AppCompatActivity {
 
     private void addFood()
     {
-        FoodData food=new FoodData(food_name_edit_text.getText().toString(),cat_text.getText().toString(),convertToInt(food_price_edit_text.getText().toString()),convertToInt(min_duration_text.getText().toString()),convertToInt(max_duration_text.getText().toString()),isVeg,false  );
+        FoodData food=new FoodData(food_name_edit_text.getText().toString(),cat_text.getText().toString(),convertToInt(food_price_edit_text.getText().toString()),convertToInt(min_duration_text.getText().toString()),convertToInt(max_duration_text.getText().toString()),isVeg,false,des_text.getText().toString()  );
 
         db.collection("shop")
                 .document(uid)

@@ -159,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/buttonstyle2"
                     android:text="@string/button_cancel"
-                    android:onClick="onDone"                    >
+                    android:onClick="onCancel"                    >
 
 
 

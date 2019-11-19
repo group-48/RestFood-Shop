@@ -46,6 +46,7 @@ public class EditProfile extends AppCompatActivity {
 
     public String uid;
     public Shop shopObj;
+    Map<String,Object> shopProfile=new HashMap<>();
 
     //this is to get auth data
     private Auth auth=new Auth();
@@ -99,8 +100,11 @@ public class EditProfile extends AppCompatActivity {
                             DocumentSnapshot document = task.getResult();
                             if (document.exists()) {
                                 //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                                Toast.makeText(getApplicationContext(),document.getData().toString(),Toast.LENGTH_LONG).show();
-                                //shopObj=document.toObject(Shop.class);
+
+                                shopProfile=document.getData();
+                                //shop_name_text.setText(shopProfile.get("shopName").toString());
+                                Toast.makeText(getApplicationContext(),shopProfile.get("shopName").toString(),Toast.LENGTH_LONG).show();
+                                assignVal();
 
                             } else {
 
@@ -115,7 +119,7 @@ public class EditProfile extends AppCompatActivity {
         //assigning values to ui
 //        if(shopObj.getShopName()!=null)
 //        {
-//            shop_name_text.setText(shopObj.getShopName());
+           // shop_name_text.setText(shopProfile.get("shopName").toString());
 //        }
 //        if(shopObj.getShop_type()!=null)
 //        {
@@ -129,6 +133,15 @@ public class EditProfile extends AppCompatActivity {
 //            shop_address_text.setText(shopObj.getShopAddress());
 //        }
 
+    }
+
+
+    private void assignVal()
+    {
+        shop_name_text.setText(shopProfile.get("shopName").toString());
+        shop_address_text.setText(shopProfile.get("shopAddress").toString());
+        shop_email_text.setText(shopProfile.get("shopEmail").toString());
+        shop_type_text.setText(shopProfile.get("shopType").toString());
     }
 
 
@@ -210,6 +223,11 @@ public class EditProfile extends AppCompatActivity {
             submit();
         }
 
+    }
+
+    public void onCancel(View v)
+    {
+        finish();
     }
 
 

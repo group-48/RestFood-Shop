@@ -88,12 +88,12 @@ public class NotificationsFragment extends Fragment {
             }
         });
 
-        buttonSignout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-            }
-        });
+//        buttonSignout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                FirebaseAuth.getInstance().signOut();
+//            }
+//        });
 
 
 

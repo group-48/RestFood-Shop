@@ -40,6 +40,11 @@ public class EditFood extends AppCompatActivity {
 
     private TextInputEditText cat_text;
 
+
+
+    private TextInputLayout des_layout;
+    private TextInputEditText des_text;
+
     private Button cancelButton;
 
     @Override
@@ -71,6 +76,10 @@ public class EditFood extends AppCompatActivity {
         max_duration_text=findViewById(R.id.max_pre_time_text);
         cat_text=findViewById(R.id.food_cat_text);
 
+
+        des_text=findViewById(R.id.food_des_text);
+        des_layout=findViewById(R.id.food_des_layout);
+
         cancelButton=findViewById(R.id.button_delete);
     }
 
@@ -86,6 +95,11 @@ public class EditFood extends AppCompatActivity {
         food_price_edit_text.setText(String.valueOf(foodObj.getPrice()));
         min_duration_text.setText(String.valueOf(foodObj.getMinDuration()));
         max_duration_text.setText(String.valueOf(foodObj.getMaxDuration()));
+
+        if(foodObj.getDescription()!=null)
+        {
+            des_text.setText(foodObj.getDescription());
+        }
 
         if(foodObj.getCategory()!=null)
         {

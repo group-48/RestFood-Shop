@@ -7,6 +7,7 @@ public class FoodData {
     private int minDuration;
     private int maxDuration;
     private boolean isVeg;
+    private String description;
 
     //this true for test
     private boolean isAvailable;
@@ -38,6 +39,18 @@ public class FoodData {
         minDuration=min;
         maxDuration=max;
         this.isVeg=bol;
+    }
+
+    public FoodData(String foodname,String cat,int pri,int min,int max,boolean bol,boolean avail,String d)
+    {
+        foodName=foodname;
+        category=cat;
+        price=pri;
+        minDuration=min;
+        maxDuration=max;
+        this.isVeg=bol;
+        this.isAvailable=avail;
+        this.description=d;
     }
 
     public FoodData(String foodname,String cat,int pri,int min,int max,boolean bol,boolean avail)
@@ -83,6 +96,11 @@ public class FoodData {
         isAvailable=click;
     }
 
+    public void setDescription(String dis)
+    {
+        this.description=dis;
+    }
+
 
 
 
@@ -118,6 +136,11 @@ public class FoodData {
     public boolean getIsAvailable()
     {
         return isAvailable;
+    }
+
+    public String getDescription()
+    {
+        return description;
     }
 
 

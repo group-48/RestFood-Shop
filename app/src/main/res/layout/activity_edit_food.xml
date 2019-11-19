@@ -76,6 +76,25 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+
+            android:id="@+id/food_des_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/padding5"
+            android:hint="Description"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="@dimen/car_radius5"
+            app:boxCornerRadiusBottomStart="@dimen/car_radius5"
+            app:boxCornerRadiusTopEnd="@dimen/car_radius5"
+            app:boxCornerRadiusTopStart="@dimen/car_radius5">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/food_des_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <TextView
             android:id="@+id/textView_duration"
