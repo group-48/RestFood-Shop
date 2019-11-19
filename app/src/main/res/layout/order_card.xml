@@ -3,12 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:padding="@dimen/padding5"
     app:cardCornerRadius="@dimen/padding15"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:padding="@dimen/padding5"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -16,40 +18,78 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/button_blue"
             android:gravity="center"
-            android:text="TextView"
+            android:text="OrderNo:1203"
+            android:textSize="@dimen/padding30"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
+            android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
 
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/textView2">
 
             <TextView
-                android:text="@string/email"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/padding5"
-                android:layout_height="wrap_content">
+                android:text="2x Pizza">
 
-            </TextView>
-            <TextView
-                android:text="@string/email"
-                android:layout_marginVertical="@dimen/padding5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
             </TextView>
 
             <TextView
-                android:textColor="@color/button_blue"
-                android:text="@string/email"
-                android:layout_marginVertical="@dimen/padding5"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/padding5"
+                android:text="1x Fries">
+
             </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/padding5"
+                android:text="Status:Paid"
+                android:textColor="@color/button_blue">
+
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding15"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Prepare">
+
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ready">
+
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+
+                android:text="Done">
+
+            </TextView>
+
         </LinearLayout>
 
 
