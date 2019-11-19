@@ -15,12 +15,20 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.restfood.myapplication.Add_FoodItem;
+import com.restfood.myapplication.Auth;
 import com.restfood.myapplication.EditFoodList;
 import com.restfood.myapplication.EditProfile;
 import com.restfood.myapplication.MainActivity;
 import com.restfood.myapplication.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class NotificationsFragment extends Fragment {
 
@@ -32,6 +40,10 @@ public class NotificationsFragment extends Fragment {
     private Button buttonSignout;
 
     private Button buttonViewFood;
+    public TextView textview;
+
+    Map<String,Object> shopProfile=new HashMap<>();
+    FirebaseFirestore db= FirebaseFirestore.getInstance();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,14 +53,15 @@ public class NotificationsFragment extends Fragment {
         //here root
         final View root = inflater.inflate(R.layout.fragment_notifications, container, false);
 
-        final TextView textView = root.findViewById(R.id.shop_name);
+        textview = root.findViewById(R.id.shop_name);
+        getShopData();
 
-        notificationsViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+//        notificationsViewModel.getText().observe(this, new Observer<String>() {
+//            @Override
+//            public void onChanged(@Nullable String s) {
+//                textView.setText(s);
+//            }
+//        });
 
 
         //here initializing variable
@@ -99,6 +112,42 @@ public class NotificationsFragment extends Fragment {
 
         return root;
     }
+
+    private void getShopData()
+    {
+        ///this is
+        db.collection("shop")
+                .document(new Auth().getUId())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+
+                                shopProfile=document.getData();
+                                //shop_name_text.setText(shopProfile.get("shopName").toString());
+                                Toast.makeText(getActivity().getApplicationContext(),shopProfile.get("shopName").toString(),Toast.LENGTH_LONG).show();
+                                assignVal();
+
+                            } else {
+
+                            }
+                        } else {
+
+                        }
+                    }
+                });
+
+    }
+
+    private void assignVal()
+    {
+        textview.setText(shopProfile.get("shopName").toString());
+    }
+
 
 
     private void editProfile()
