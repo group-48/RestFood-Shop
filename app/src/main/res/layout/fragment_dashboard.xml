@@ -182,7 +182,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/padding5"
-                        android:text="Status:Paid"
+                        android:text="Status:Ready"
                         android:textColor="@color/button_blue">
 
                     </TextView>

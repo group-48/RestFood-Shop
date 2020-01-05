@@ -25,6 +25,7 @@ import com.restfood.myapplication.Auth;
 import com.restfood.myapplication.EditFoodList;
 import com.restfood.myapplication.EditProfile;
 import com.restfood.myapplication.MainActivity;
+import com.restfood.myapplication.Qr;
 import com.restfood.myapplication.R;
 
 import java.util.HashMap;
@@ -38,6 +39,7 @@ public class NotificationsFragment extends Fragment {
     private TextView edit_profile;
     private Button buttonSummery;
     private Button buttonSignout;
+    private Button buttonQr;
 
     private Button buttonViewFood;
     public TextView textview;
@@ -69,6 +71,7 @@ public class NotificationsFragment extends Fragment {
         edit_profile=root.findViewById(R.id.edit_profile);
         buttonViewFood=root.findViewById(R.id.button_view_food);
         buttonSignout=root.findViewById(R.id.button_signout);
+        buttonQr=root.findViewById(R.id.button_qr);
 
         button_add_food.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,6 +101,15 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(),"This is not developed yet",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        buttonQr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent3=new Intent(getActivity(),Qr.class);
+                startActivity(intent3);
+
             }
         });
 
