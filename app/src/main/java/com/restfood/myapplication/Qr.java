@@ -34,8 +34,6 @@ public class Qr extends AppCompatActivity {
         qrImage=findViewById(R.id.qr_image);
 
         shopId=new Auth().getUId();
-
-
         createQr();
 
     }

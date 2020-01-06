@@ -40,14 +40,14 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
     public static class OrderViewHolder extends RecyclerView.ViewHolder
     {
         ///create view for single unit
-        public TextView nameTextView;
+        public TextView foodnameTextView;
         //public TextView priceTextView;
-        public Switch switchAvailable;
+
 
         public OrderViewHolder(@NonNull View itemView,final com.restfood.myapplication.ui.dashboard.OrderAdapter.OnItemClickListener listener) {
             super(itemView);
-            nameTextView=itemView.findViewById(R.id.foodNameTextViewAvail);
-            switchAvailable=itemView.findViewById(R.id.switch_available);
+            foodnameTextView=itemView.findViewById(R.id.foodNameTextViewAvail);
+
             //catTextView=itemView.findViewById(R.id.catTextView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -65,20 +65,7 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
                 }
             });
 
-            switchAvailable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if(listener!=null)
-                    {
-                        int position=getAdapterPosition();
-                        if(position!=RecyclerView.NO_POSITION)
-                        {
-                            listener.onSwitchClick(position,b);
-                        }
-                    }
 
-                }
-            });
         }
     }
 
@@ -94,7 +81,7 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
     @Override
     public com.restfood.myapplication.ui.dashboard.OrderAdapter.OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_list_card, parent, false);
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.foodavailablecard, parent, false);
+        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.order_card, parent, false);
         com.restfood.myapplication.ui.dashboard.OrderAdapter.OrderViewHolder vi = new com.restfood.myapplication.ui.dashboard.OrderAdapter.OrderViewHolder(v,mListener);
         return vi;
     }
@@ -105,8 +92,8 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
     public void onBindViewHolder(@NonNull com.restfood.myapplication.ui.dashboard.OrderAdapter.OrderViewHolder holder, int position) {
         FoodData currentdata=foodListX.get(position);
 
-        holder.nameTextView.setText(currentdata.getFoodName());
-        holder.switchAvailable.setChecked(currentdata.getIsAvailable());
+        holder.foodnameTextView.setText(currentdata.getFoodName());
+
 
         Log.d("Available check",String.valueOf(currentdata.getIsAvailable()));
 

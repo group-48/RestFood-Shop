@@ -34,13 +34,6 @@
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/padding5"
-                android:text="2x Pizza">
-
-            </TextView>
 
             <TextView
                 android:layout_width="wrap_content"
