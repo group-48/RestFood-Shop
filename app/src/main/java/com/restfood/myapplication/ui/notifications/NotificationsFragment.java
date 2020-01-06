@@ -24,6 +24,7 @@ import com.restfood.myapplication.Add_FoodItem;
 import com.restfood.myapplication.Auth;
 import com.restfood.myapplication.EditFoodList;
 import com.restfood.myapplication.EditProfile;
+import com.restfood.myapplication.Inventry;
 import com.restfood.myapplication.MainActivity;
 import com.restfood.myapplication.Qr;
 import com.restfood.myapplication.R;
@@ -40,6 +41,7 @@ public class NotificationsFragment extends Fragment {
     private Button buttonSummery;
     private Button buttonSignout;
     private Button buttonQr;
+    private Button buttonInventry;
 
     private Button buttonViewFood;
     public TextView textview;
@@ -72,6 +74,7 @@ public class NotificationsFragment extends Fragment {
         buttonViewFood=root.findViewById(R.id.button_view_food);
         buttonSignout=root.findViewById(R.id.button_signout);
         buttonQr=root.findViewById(R.id.button_qr);
+        buttonInventry=root.findViewById(R.id.button_invent);
 
         button_add_food.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +111,15 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent3=new Intent(getActivity(),Qr.class);
+                startActivity(intent3);
+
+            }
+        });
+
+        buttonInventry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent3=new Intent(getActivity(), Inventry.class);
                 startActivity(intent3);
 
             }
