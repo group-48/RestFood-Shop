@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.restfood.myapplication.FoodData;
+import com.restfood.myapplication.OrderData;
 import com.restfood.myapplication.R;
 
 import java.util.ArrayList;
@@ -20,7 +20,8 @@ import java.util.ArrayList;
 public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplication.ui.dashboard.OrderAdapter.OrderViewHolder> {
 
     ///use this list to show in list view
-    private ArrayList<FoodData> foodListX;
+
+    private ArrayList<OrderData> orderListX;
 
     //private OnItemClickListener mListener;
     private com.restfood.myapplication.ui.dashboard.OrderAdapter.OnItemClickListener mListener;
@@ -46,7 +47,7 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
 
         public OrderViewHolder(@NonNull View itemView,final com.restfood.myapplication.ui.dashboard.OrderAdapter.OnItemClickListener listener) {
             super(itemView);
-            foodnameTextView=itemView.findViewById(R.id.foodNameTextViewAvail);
+            foodnameTextView=itemView.findViewById(R.id.order_food_item);
 
             //catTextView=itemView.findViewById(R.id.catTextView);
 
@@ -70,9 +71,9 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
     }
 
     //constructor for this class
-    public OrderAdapter(ArrayList<FoodData> list)
+    public OrderAdapter(ArrayList<OrderData> list)
     {
-        foodListX=list;
+        orderListX=list;
     }
 
 
@@ -80,7 +81,7 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
     @NonNull
     @Override
     public com.restfood.myapplication.ui.dashboard.OrderAdapter.OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_list_card, parent, false);
+
         View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.order_card, parent, false);
         com.restfood.myapplication.ui.dashboard.OrderAdapter.OrderViewHolder vi = new com.restfood.myapplication.ui.dashboard.OrderAdapter.OrderViewHolder(v,mListener);
         return vi;
@@ -90,12 +91,12 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
     //getting position of list and setting all values to that
     @Override
     public void onBindViewHolder(@NonNull com.restfood.myapplication.ui.dashboard.OrderAdapter.OrderViewHolder holder, int position) {
-        FoodData currentdata=foodListX.get(position);
+        OrderData currentdata=orderListX.get(position);
 
-        holder.foodnameTextView.setText(currentdata.getFoodName());
+        holder.foodnameTextView.setText(currentdata.getShop());
 
 
-        Log.d("Available check",String.valueOf(currentdata.getIsAvailable()));
+        //Log.d("Available check",String.valueOf(currentdata.getIsAvailable()));
 
     }
 
@@ -103,7 +104,7 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
     //this returnig number of elements in this list
     @Override
     public int getItemCount() {
-        return foodListX.size();
+        return orderListX.size();
     }
 
 
