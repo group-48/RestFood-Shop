@@ -7,6 +7,14 @@ public class OrderData {
     int Total;
     String User;      //id of user
 
+    public OrderData(boolean done, String shop, String status, int total, String user) {
+        Done = done;
+        Shop = shop;
+        Status = status;
+        Total = total;
+        User = user;
+    }
+
     public boolean isDone() {
         return Done;
     }
