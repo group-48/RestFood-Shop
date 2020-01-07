@@ -29,25 +29,6 @@ public class OrderData {
         this.Qty_List = quanList;
     }
 
-
-
-    public List<String> getFoodList()
-    {
-        return Food_Names;
-    }
-
-    public void setFoodList(List<String> foodList) {
-        this.Food_Names = foodList;
-    }
-
-    public List<String> getQuanList() {
-        return Qty_List;
-    }
-
-    public void setQuanList(List<String> quanList) {
-        this.Qty_List = quanList;
-    }
-
     public boolean isDone() {
         return Done;
     }
@@ -86,5 +67,21 @@ public class OrderData {
 
     public void setUser(String user) {
         User = user;
+    }
+
+    public List<String> getFood_Names() {
+        return Food_Names;
+    }
+
+    public void setFood_Names(List<String> food_Names) {
+        Food_Names = food_Names;
+    }
+
+    public List<String> getQty_List() {
+        return Qty_List;
+    }
+
+    public void setQty_List(List<String> qty_List) {
+        Qty_List = qty_List;
     }
 }

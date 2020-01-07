@@ -12,6 +12,7 @@ import com.restfood.myapplication.OrderData;
 import com.restfood.myapplication.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 ///this class is to assign value and create a componentx
@@ -26,6 +27,7 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
 
     public interface OnItemClickListener {
         void onItemClick(int position);
+        void onDone(int position);
 
         void onSwitchClick(int position,boolean click);
     }
@@ -40,12 +42,17 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
     {
         ///create view for single unit
         public TextView foodnameTextView;
+        public TextView totalTextView;
+        public TextView doneTextView;
         //public TextView priceTextView;
 
 
         public OrderViewHolder(@NonNull View itemView,final com.restfood.myapplication.ui.dashboard.OrderAdapter.OnItemClickListener listener) {
             super(itemView);
             foodnameTextView=itemView.findViewById(R.id.order_food_item);
+            totalTextView=itemView.findViewById(R.id.total);
+            doneTextView=itemView.findViewById(R.id.done);
+
 
             //catTextView=itemView.findViewById(R.id.catTextView);
 
@@ -58,6 +65,21 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
                         if(position!=RecyclerView.NO_POSITION)
                         {
                             listener.onItemClick(position);
+                        }
+                    }
+
+                }
+            });
+
+            doneTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener!=null)
+                    {
+                        int position=getAdapterPosition();
+                        if(position!=RecyclerView.NO_POSITION)
+                        {
+                            listener.onDone(position);
                         }
                     }
 
@@ -91,11 +113,33 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
     public void onBindViewHolder(@NonNull com.restfood.myapplication.ui.dashboard.OrderAdapter.OrderViewHolder holder, int position) {
         OrderData currentdata=orderListX.get(position);
 
+        //holder.foodnameTextView.setText(getFood(currentdata.getFoodList(),currentdata.getQuanList()));
         holder.foodnameTextView.setText(currentdata.getShop());
+
+        String tot="Price:"+currentdata.getTotal();
+        holder.totalTextView.setText(tot);
 
 
         //Log.d("Available check",String.valueOf(currentdata.getIsAvailable()));
 
+    }
+
+    private String getFood(List<String> name,List<String> qty)
+    {
+
+        String va="Hi";
+        va =name.get(0);
+        if(name.size()>1)
+        {
+            int i;
+            for(i=1;i<name.size();i++)
+            {
+                //va=va+name.get(i)+qty.get(i);
+
+            }
+        }
+
+        return va;
     }
 
 

@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -40,6 +42,7 @@ public class DashboardFragment extends Fragment {
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
 
     ArrayList<OrderData> orderList=new ArrayList<>();
+    ArrayList<String> docIdList=new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -72,7 +75,48 @@ public class DashboardFragment extends Fragment {
         rView.setLayoutManager(rLayoutManager);
         rView.setAdapter(rAdapter);
 
+        //this part for real time update
+        rAdapter.setOnItemClickListener(new OrderAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+
+            @Override
+            public void onDone(int position) {
+                updateDone(position);
+            }
+
+            @Override
+            public void onSwitchClick(int position, boolean click) {
+
+            }
+        });
+
         Toast.makeText(getContext(),"Updated", Toast.LENGTH_LONG).show();
+    }
+
+
+    private void updateDone(int pos)
+    {
+        db.collection("orders")
+                .document(docIdList.get(pos))
+                .update("Done",true)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("This done", "DocumentSnapshot successfully updated!");
+                        //Toast.makeText(getActivity().getApplicationContext(),foodList.get(position).getFoodName()+":Updated",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(),"Done",Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("This error", "Error updating document", e);
+                        Toast.makeText(getActivity().getApplicationContext(),"Server issue",Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
 
@@ -95,7 +139,9 @@ public class DashboardFragment extends Fragment {
                                 OrderData taskItem=new OrderData(Boolean.valueOf(document.getData().get("Done").toString()),document.getData().get("Shop").toString(),document.getData().get("Status").toString(),Integer.valueOf(document.getData().get("Total").toString()),document.getData().get("User").toString(),(List<String>)document.getData().get("Food_Name"),(List<String>)document.getData().get("Qty_List"));
                                 //
                                 orderList.add(taskItem);
-                                Toast.makeText(getContext(),document.getData().toString(),Toast.LENGTH_LONG).show();
+                                docIdList.add(document.getId());
+
+                                //Toast.makeText(getContext(),taskItem.getFoodList().get(0),Toast.LENGTH_LONG).show();
                             }
 
                             //Collections.copy(orderList,list);
