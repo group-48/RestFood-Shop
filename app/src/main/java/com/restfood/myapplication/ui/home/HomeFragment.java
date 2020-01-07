@@ -158,11 +158,8 @@ public class HomeFragment extends Fragment {
                                 list.add(taskItem);
 
                                 foodList.add(new FoodData("Sausage Pizza","Pizza",500,2,30));
-//                                    int num=foodList.size();
-//                                    Log.d("number",String.valueOf(num));
+
                             }
-//                                Toast.makeText(getApplicationContext(),demo,Toast.LENGTH_LONG).show();
-//                                Log.d("firestorelist", list.toString());
                             Collections.copy(foodList,list);
                             postsetUi();
 
