@@ -59,4 +59,8 @@
     <string name="increace">+</string>
     <string name="reduse">-</string>
 
+    <string name="prepare">Prepare</string>
+    <string name="Ready">Ready</string>
+    <string name="Done">Done</string>
+
 </resources>

@@ -8,8 +8,16 @@ public class OrderData {
     String Status;
     int Total;
     String User;      //id of user
-    List<String> foodList;
-    List<String> quanList;
+    List<String> Food_Names;
+    List<String> Qty_List;
+
+    public OrderData(boolean done, String shop, String status, int total, String user) {
+        Done = done;
+        Shop = shop;
+        Status = status;
+        Total = total;
+        User = user;
+    }
 
     public OrderData(boolean done, String shop, String status, int total, String user, List<String> foodList, List<String> quanList) {
         Done = done;
@@ -17,24 +25,27 @@ public class OrderData {
         Status = status;
         Total = total;
         User = user;
-        this.foodList = foodList;
-        this.quanList = quanList;
+        this.Food_Names = foodList;
+        this.Qty_List = quanList;
     }
 
-    public List<String> getFoodList() {
-        return foodList;
+
+
+    public List<String> getFoodList()
+    {
+        return Food_Names;
     }
 
     public void setFoodList(List<String> foodList) {
-        this.foodList = foodList;
+        this.Food_Names = foodList;
     }
 
     public List<String> getQuanList() {
-        return quanList;
+        return Qty_List;
     }
 
     public void setQuanList(List<String> quanList) {
-        this.quanList = quanList;
+        this.Qty_List = quanList;
     }
 
     public boolean isDone() {

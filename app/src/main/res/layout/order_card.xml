@@ -45,6 +45,7 @@
             </TextView>
 
             <TextView
+                android:id="@+id/is_paid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/padding5"
@@ -65,6 +66,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="Prepare">
 
             </TextView>
@@ -72,6 +75,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="Ready">
 
             </TextView>
@@ -79,7 +84,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-
+                android:clickable="true"
+                android:focusable="true"
                 android:text="Done">
 
             </TextView>
