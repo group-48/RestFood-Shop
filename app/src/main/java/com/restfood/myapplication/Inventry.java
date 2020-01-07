@@ -25,4 +25,10 @@ public class Inventry extends AppCompatActivity {
             }
         });
     }
+
+    private void add()
+    {
+        InventryBottomSheetDialog bottomsheet=new InventryBottomSheetDialog();
+        bottomsheet.show(getSupportFragmentManager(),"Hi this is ");
+    }
 }
