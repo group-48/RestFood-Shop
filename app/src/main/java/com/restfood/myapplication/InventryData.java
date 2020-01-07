@@ -5,6 +5,7 @@ public class InventryData {
     float quantity;
 
     public String getName() {
+
         return name;
     }
 
