@@ -51,9 +51,16 @@ public class DashboardFragment extends Fragment {
         rView = root.findViewById(R.id.order_recycler_view);
         rView.setHasFixedSize(true);
         rLayoutManager=new LinearLayoutManager(getActivity());
+
         //getOrder();
+
+        orderList.add(new OrderData(true,"Pizza","AA",100,"BB"));
+        orderList.add(new OrderData(true,"Pizza","AA",100,"BB"));
+        orderList.add(new OrderData(true,"Pizza","AA",100,"BB"));
         getOrder();
+
         postsetUi();
+
 
         return root;
     }
@@ -79,24 +86,25 @@ public class DashboardFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             //this is temp list to get from database
-                            List<OrderData> list = new ArrayList<>();
+                            orderList.clear();
+                            ArrayList<OrderData> list = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                //Logtd("this_id", document.getId() + " => " + document.getData());
 
                                 Log.d("Doc Id Are:",document.getId());
-                                //OrderData taskItem = new OrderData((Boolean)document.getData().get("Done"),String.valueOf(document.getData().get("Shop")),String.valueOf(document.getData().get("Status")),Integer.parseInt(String.valueOf(document.getData().get("Total"))),String.valueOf(document.getData().get("User")));
 
-                                //OrderData taskItem=document.toObject(OrderData.class);
                                 OrderData taskItem=new OrderData(Boolean.valueOf(document.getData().get("Done").toString()),document.getData().get("Shop").toString(),document.getData().get("Status").toString(),Integer.valueOf(document.getData().get("Total").toString()),document.getData().get("User").toString(),(List<String>)document.getData().get("Food_Name"),(List<String>)document.getData().get("Qty_List"));
-                                list.add(taskItem);
+                                //
+                                orderList.add(taskItem);
                                 Toast.makeText(getContext(),document.getData().toString(),Toast.LENGTH_LONG).show();
-
                             }
-                            Collections.copy(orderList,list);
+
+                            //Collections.copy(orderList,list);
                             postsetUi();
 
                         } else {
                             postsetUi();
+                            //  Toast.makeText(getApplicationContext(),"No Foods",Toast.LENGTH_LONG).show();
+                            //                            Log.d(TAG, "Error getting documents: ", task.getException());
 
                         }
                     }

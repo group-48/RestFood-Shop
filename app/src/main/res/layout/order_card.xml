@@ -63,30 +63,33 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
             <TextView
+                android:id="@+id/prepare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="Prepare">
+                android:text="@string/prepare">
 
             </TextView>
             <TextView
+                android:id="@+id/ready"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="Ready">
+                android:text="@string/Ready">
 
             </TextView>
             <TextView
+                android:id="@+id/done"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="Done">
+                android:text="@string/done">
 
             </TextView>
 
