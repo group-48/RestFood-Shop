@@ -41,7 +41,7 @@
         android:orientation="horizontal">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/min_pre_time_layout"
+            android:id="@+id/item_text_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -55,7 +55,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/min_pre_time_text"
+                android:id="@+id/item_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number" />
@@ -71,7 +71,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/max_pre_time_layout"
+            android:id="@+id/qty_text_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="3"
@@ -83,7 +83,7 @@
             app:boxCornerRadiusTopStart="@dimen/car_radius5">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/max_pre_time_text"
+                android:id="@+id/qty_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number" />
