@@ -101,7 +101,7 @@ public class DashboardFragment extends Fragment {
     {
         db.collection("orders")
                 .document(docIdList.get(pos))
-                .update("Done",true)
+                .update("Status","Done")
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
