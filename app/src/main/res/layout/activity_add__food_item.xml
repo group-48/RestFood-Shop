@@ -197,8 +197,28 @@
                 android:onClick="onRadioButtonClicked"
                 android:text="@string/radio_non_veg" />
 
-
         </RadioGroup>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:elevation="@dimen/padding15"
+            android:padding="@dimen/padding5"
+            android:layout_margin="@dimen/padding15"
+            app:cardCornerRadius="@dimen/padding15">
+
+            <ImageView
+                android:id="@+id/food_image"
+                android:scaleType="fitXY"
+                android:clickable="true"
+                android:onClick="openFileChooser"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ImageView>
+
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 

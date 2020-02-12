@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Source;
 import com.restfood.myapplication.Add_FoodItem;
 import com.restfood.myapplication.Auth;
 import com.restfood.myapplication.EditFoodList;
@@ -139,10 +140,11 @@ public class NotificationsFragment extends Fragment {
 
     private void getShopData()
     {
+        Source source=Source.CACHE;
         ///this is
         db.collection("shop")
                 .document(new Auth().getUId())
-                .get()
+                .get(source)
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -153,7 +155,7 @@ public class NotificationsFragment extends Fragment {
 
                                 shopProfile=document.getData();
                                 //shop_name_text.setText(shopProfile.get("shopName").toString());
-                                Toast.makeText(getActivity().getApplicationContext(),shopProfile.get("shopName").toString(),Toast.LENGTH_LONG).show();
+                               // Toast.makeText(getActivity().getApplicationContext(),shopProfile.get("shopName").toString(),Toast.LENGTH_LONG).show();
                                 assignVal();
 
                             } else {

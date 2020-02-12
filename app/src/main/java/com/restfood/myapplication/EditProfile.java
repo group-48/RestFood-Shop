@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Source;
 
 
 import java.util.HashMap;
@@ -90,9 +91,10 @@ public class EditProfile extends AppCompatActivity {
 
     private void getShopData()
     {
+        Source sou=Source.CACHE;
         db.collection("shop")
                 .document(new Auth().getUId())
-                .get()
+                .get(sou)
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {

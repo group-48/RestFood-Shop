@@ -3,11 +3,15 @@ package com.restfood.myapplication;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -29,8 +33,10 @@ import java.util.Map;
 
 
 public class Add_FoodItem extends AppCompatActivity {
+    public static final int PICK_IMAGE = 1;
     FirebaseFirestore db=FirebaseFirestore.getInstance();
     private int price;      //this is to use for database
+
 
     //creating variables
     //this is for food
@@ -48,6 +54,10 @@ public class Add_FoodItem extends AppCompatActivity {
 
     private TextInputEditText des_text;
     private TextInputLayout des_layout;
+
+    //for image
+    private ImageView img;
+    private Uri mImageUri;
 
     ///this data for firestore
     String uid;     //this is given by firestore & shop_id
@@ -97,6 +107,11 @@ public class Add_FoodItem extends AppCompatActivity {
 
         des_text=findViewById(R.id.food_des_text);
         des_layout=findViewById(R.id.food_des_layout);
+
+
+        img=findViewById(R.id.food_image);
+
+
 
         //this call when food field change
         //for every change
@@ -280,10 +295,9 @@ public class Add_FoodItem extends AppCompatActivity {
 //    }
 
     //this create a new doc for a cat
-    private void addCat(String name)
-    {
-        Map<String,Object> cat=new HashMap<>();
-        cat.put("name",name);
+    private void addCat(String name) {
+        Map<String, Object> cat = new HashMap<>();
+        cat.put("name", name);
 
         db.collection("shop")
                 .document(this.uid)
@@ -293,17 +307,17 @@ public class Add_FoodItem extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                        Toast.makeText(getApplicationContext(),"New Category added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "New Category added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
 
                     }
                 })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                //Log.w(TAG, "Error adding document", e);
-                                Toast.makeText(getApplicationContext(),"Error adding doc", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //Log.w(TAG, "Error adding document", e);
+                        Toast.makeText(getApplicationContext(), "Error adding doc", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
 
@@ -369,6 +383,9 @@ public class Add_FoodItem extends AppCompatActivity {
         }
 
 
+
+
+
     //this method creates dialog box
     //to conform message after sucess full add
     //need to complete this
@@ -377,5 +394,22 @@ public class Add_FoodItem extends AppCompatActivity {
         addfoodDialog.show(getSupportFragmentManager(), "example dialog");
     }
 
+    public void openFileChooser(View view) {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE);
+    }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE && resultCode == RESULT_OK
+                && data != null && data.getData() != null) {
+            mImageUri = data.getData();
+
+            img.setImageURI(mImageUri);
+        }
+    }
 }
