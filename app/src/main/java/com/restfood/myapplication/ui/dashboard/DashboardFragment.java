@@ -25,6 +25,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.restfood.myapplication.Auth;
 import com.restfood.myapplication.FoodData;
+import com.restfood.myapplication.InventryBottomSheetDialog;
 import com.restfood.myapplication.OrderData;
 import com.restfood.myapplication.R;
 import com.restfood.myapplication.ui.home.FoodAvailableAdapter;
@@ -79,35 +80,51 @@ public class DashboardFragment extends Fragment {
         rAdapter.setOnItemClickListener(new OrderAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-
+                InventryBottomSheetDialog bottomsheet=new InventryBottomSheetDialog();
+                bottomsheet.show(getFragmentManager(),"Thisis");
             }
 
             @Override
             public void onDone(int position) {
-                updateDone(position);
+                updateStatus(position,"Done");
+            }
+
+            @Override
+            public void onPrepare(int position) {
+                updateStatus(position,"Preparing");
+                orderList.get(position).setStatus("Preparing");
+
+            }
+
+            @Override
+            public void onReady(int position) {
+                updateStatus(position,"Ready");
+                orderList.get(position).setStatus("Ready");
+
             }
 
             @Override
             public void onSwitchClick(int position, boolean click) {
 
             }
+
         });
 
         Toast.makeText(getContext(),"Updated", Toast.LENGTH_LONG).show();
     }
 
 
-    private void updateDone(int pos)
+    private void updateStatus(int pos, final String status)
     {
         db.collection("orders")
                 .document(docIdList.get(pos))
-                .update("Status","Done")
+                .update("Status",status)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("This done", "DocumentSnapshot successfully updated!");
                         //Toast.makeText(getActivity().getApplicationContext(),foodList.get(position).getFoodName()+":Updated",Toast.LENGTH_LONG).show();
-                        Toast.makeText(getActivity().getApplicationContext(),"Done",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(),status+"...",Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

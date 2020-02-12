@@ -28,6 +28,8 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
     public interface OnItemClickListener {
         void onItemClick(int position);
         void onDone(int position);
+        void onPrepare(int position);
+        void onReady(int position);
 
         void onSwitchClick(int position,boolean click);
     }
@@ -44,7 +46,9 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
         public TextView foodnameTextView;
         public TextView totalTextView;
         public TextView doneTextView;
-        //public TextView priceTextView;
+        public TextView prepareTextView;
+        public TextView readyTextView;
+        public TextView statusTextView;
 
 
         public OrderViewHolder(@NonNull View itemView,final com.restfood.myapplication.ui.dashboard.OrderAdapter.OnItemClickListener listener) {
@@ -52,6 +56,10 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
             foodnameTextView=itemView.findViewById(R.id.order_food_item);
             totalTextView=itemView.findViewById(R.id.total);
             doneTextView=itemView.findViewById(R.id.done);
+            prepareTextView=itemView.findViewById(R.id.prepare);
+            readyTextView=itemView.findViewById(R.id.ready);
+            statusTextView=itemView.findViewById(R.id.is_paid);
+
 
 
             //catTextView=itemView.findViewById(R.id.catTextView);
@@ -80,6 +88,36 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
                         if(position!=RecyclerView.NO_POSITION)
                         {
                             listener.onDone(position);
+                        }
+                    }
+
+                }
+            });
+
+            prepareTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener!=null)
+                    {
+                        int position=getAdapterPosition();
+                        if(position!=RecyclerView.NO_POSITION)
+                        {
+                            listener.onPrepare(position);
+                        }
+                    }
+
+                }
+            });
+
+            readyTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener!=null)
+                    {
+                        int position=getAdapterPosition();
+                        if(position!=RecyclerView.NO_POSITION)
+                        {
+                            listener.onReady(position);
                         }
                     }
 
@@ -118,6 +156,9 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
 
         String tot="Price:"+currentdata.getTotal();
         holder.totalTextView.setText(tot);
+
+        String stat="Status:"+currentdata.getStatus();
+        holder.statusTextView.setText(stat);
 
 
         //Log.d("Available check",String.valueOf(currentdata.getIsAvailable()));
