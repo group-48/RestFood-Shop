@@ -15,8 +15,28 @@ public class OrderData {
     private int total;
     private String user;
 
+    private String tempName;
+    private String tempQty;
+
     //for food orderfoodata
-    private ArrayList<OrderFoodData> foodList;
+    //private ArrayList<OrderFoodData> foodList;
+
+
+    public String getTempName() {
+        return tempName;
+    }
+
+    public void setTempName(String tempName) {
+        this.tempName = tempName;
+    }
+
+    public String getTempQty() {
+        return tempQty;
+    }
+
+    public void setTempQty(String tempQty) {
+        this.tempQty = tempQty;
+    }
 
     public OrderData(boolean done, String notes, String orderId, String paymentMode, String paymentStatus, String status, int total, String user) {
         this.done = done;
@@ -95,17 +115,17 @@ public class OrderData {
         this.user = user;
     }
 
-    public ArrayList<OrderFoodData> getFoodNameList() {
-        return foodList;
-    }
-
-    public void setFoodNameList(ArrayList<OrderFoodData> foodNameList) {
-        this.foodList = foodNameList;
-    }
-
-    //this is to add food object to this
-    public void addFood(OrderFoodData obj)
-    {
-        this.foodList.add(obj);
-    }
+//    public ArrayList<OrderFoodData> getFoodNameList() {
+//        return foodList;
+//    }
+//
+//    public void setFoodNameList(ArrayList<OrderFoodData> foodNameList) {
+//        this.foodList = foodNameList;
+//    }
+//
+//    //this is to add food object to this
+//    public void addFood(OrderFoodData obj)
+//    {
+//        this.foodList.add(obj);
+//    }
 }

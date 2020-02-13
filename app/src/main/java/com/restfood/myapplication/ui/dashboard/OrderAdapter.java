@@ -156,8 +156,9 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
     public void onBindViewHolder(@NonNull com.restfood.myapplication.ui.dashboard.OrderAdapter.OrderViewHolder holder, int position) {
         OrderData currentdata=orderListX.get(position);
 
-        //holder.foodnameTextView.setText(getFood(currentdata.getFoodList(),currentdata.getQuanList()));
-        holder.foodnameTextView.setText(currentdata.getOrderId());
+        String name=currentdata.getTempName()+"\n"+currentdata.getTempQty();
+        holder.foodnameTextView.setText(name);
+
 
         String tot="Price:"+currentdata.getTotal();
         holder.totalTextView.setText(tot);

@@ -41,10 +41,10 @@ public class DashboardFragment extends Fragment {
     private RecyclerView.LayoutManager rLayoutManager;
 
     private DashboardViewModel dashboardViewModel;
-    private FirebaseFirestore db=FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    ArrayList<OrderData> orderList=new ArrayList<>();
-    ArrayList<String> docIdList=new ArrayList<>();
+    ArrayList<OrderData> orderList = new ArrayList<>();
+    ArrayList<String> docIdList = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -55,14 +55,13 @@ public class DashboardFragment extends Fragment {
         //this is pre process of ui or recyclerview
         rView = root.findViewById(R.id.order_recycler_view);
         rView.setHasFixedSize(true);
-        rLayoutManager=new LinearLayoutManager(getActivity());
+        rLayoutManager = new LinearLayoutManager(getActivity());
 
         //getOrder();
 
-        orderList.add(new OrderData(true,"Pizza","AA","gfnufng","gjfng","gbuyfg",522,"gjhbg"));
+        orderList.add(new OrderData(true, "Pizza", "AA", "gfnufng", "gjfng", "gbuyfg", 522, "gjhbg"));
 
         getOrder();
-
         postsetUi();
 
 
@@ -70,11 +69,9 @@ public class DashboardFragment extends Fragment {
     }
 
 
-
     //this is to set ui after the data base transaction
-    private void postsetUi()
-    {
-        rAdapter=new OrderAdapter(orderList);
+    private void postsetUi() {
+        rAdapter = new OrderAdapter(orderList);
         rView.setLayoutManager(rLayoutManager);
         rView.setAdapter(rAdapter);
 
@@ -85,27 +82,27 @@ public class DashboardFragment extends Fragment {
             //to get bottomsheet
             @Override
             public void onItemClick(int position) {
-                OrderBottomSheetDialog bottomsheet=new OrderBottomSheetDialog();
-                bottomsheet.show(getFragmentManager(),"Thisis");
+                OrderBottomSheetDialog bottomsheet = new OrderBottomSheetDialog();
+                bottomsheet.show(getFragmentManager(), "Thisis");
             }
 
             // update the three function
             @Override
             public void onDone(int position) {
-                updateStatus(position,"Done");
+                updateStatus(position, "Done");
                 updateUI();
             }
 
             @Override
             public void onPrepare(int position) {
-                updateStatus(position,"Preparing");
+                updateStatus(position, "Preparing");
                 orderList.get(position).setStatus("Preparing");
                 updateUI();
             }
 
             @Override
             public void onReady(int position) {
-                updateStatus(position,"Ready");
+                updateStatus(position, "Ready");
                 orderList.get(position).setStatus("Ready");
                 updateUI();
                 //set status to database remove from list
@@ -119,50 +116,45 @@ public class DashboardFragment extends Fragment {
 
         });
 
-        Toast.makeText(getContext(),"Updated", Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), "Updated", Toast.LENGTH_LONG).show();
     }
 
     //refresh the recyclerview
-    private void updateUI()
-    {
+    private void updateUI() {
         rAdapter.notifyDataSetChanged();
     }
-
 
 
     //this is to update the status of order
     //pos- position of object in list
     //status- what you update
-    private void updateStatus(int pos, final String status)
-    {
+    private void updateStatus(int pos, final String status) {
         db.collection("orders")
                 .document(docIdList.get(pos))
-                .update("Status",status)
+                .update("Status", status)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d("This done", "DocumentSnapshot successfully updated!");
                         //Toast.makeText(getActivity().getApplicationContext(),foodList.get(position).getFoodName()+":Updated",Toast.LENGTH_LONG).show();
-                        Toast.makeText(getActivity().getApplicationContext(),status+"...",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(), status + "...", Toast.LENGTH_LONG).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w("This error", "Error updating document", e);
-                        Toast.makeText(getActivity().getApplicationContext(),"Server issue",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "Server issue", Toast.LENGTH_LONG).show();
                     }
                 });
     }
 
 
-
     //get order document from database
     //&assinging to a array
-    private void getOrder()
-    {
+    private void getOrder() {
         db.collection("orders")
-                .whereEqualTo("Shop",new Auth().getUId())
+                .whereEqualTo("Shop", new Auth().getUId())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -173,21 +165,30 @@ public class DashboardFragment extends Fragment {
                             ArrayList<OrderData> list = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                Log.d("Doc Id Are:",document.getId());
+                                Log.d("Doc Id Are:", document.getId());
 
                                 //creating the OrderData object
-                                OrderData taskItem=new OrderData(Boolean.valueOf(document.get("Done").toString()),document.get("Notes").toString(),document.get("OrderId").toString(),document.get("PaymentMode").toString(),document.get("PaymentStatus").toString(),document.get("Status").toString(),Integer.valueOf(document.get("Total").toString()),document.get("User").toString());
+                                //OrderData taskItem = new OrderData(Boolean.valueOf(document.get("Done").toString()), document.get("Notes").toString(), document.get("OrderId").toString(), document.get("PaymentMode").toString(), document.get("PaymentStatus").toString(), document.get("Status").toString(), Integer.valueOf(document.get("Total").toString()), document.get("User").toString());
+                                try
+                                {
+                                    OrderData taskItem=new OrderData(Boolean.valueOf(document.get("Done").toString()), document.get("Notes").toString(), document.get("OrderId").toString(), document.get("PaymentMode").toString(), document.get("PaymentStatus").toString(), document.get("Status").toString(), Integer.valueOf(document.get("Total").toString()), document.get("User").toString());
+                                    taskItem.setTempName(document.get("Food_Names").toString());
+                                    taskItem.setTempQty(document.get("Qty_List").toString());
+                                    orderList.add(taskItem);
+                                }
+                                catch (Exception e)
+                                {
+                                    Toast.makeText(getContext(),e.toString(),Toast.LENGTH_LONG).show();
+                                }
 
-                                //assigning food detales to that
 
-                                orderList.add(taskItem);
+
                                 docIdList.add(document.getId());
 
                                 //Toast.makeText(getContext(),.((List<String>) document.get("Food_Names")).get(0),Toast.LENGTH_LONG).show();
                             }
 
                             //Collections.copy(orderList,list);
-                            updateFood();
                             postsetUi();
 
                         } else {
@@ -201,96 +202,13 @@ public class DashboardFragment extends Fragment {
 
     }
 
-    //this is to get food data from database to
-    private void updateFood()
-    {
-        int i;
-
-        for(i=0;i<orderList.size();i++)
-        {
-            final int finalI = i;
-            db.collection("orders")
-                    .document(orderList.get(finalI).getOrderId())
-                    .collection("foods")
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                //this is temp list to get from database
-                                OrderData objOrder=orderList.get(finalI);
-                                ArrayList<OrderFoodData> list=new ArrayList<>();
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-
-                                    Log.d("Doc Id Are:",document.getId());
-//                                    try{
-                                        OrderFoodData obj=new OrderFoodData(document.get("foodId").toString(),document.get("image").toString(),document.get("name").toString(),Integer.parseInt(document.get("price").toString()),Integer.parseInt(document.get("qty").toString()),document.get("shopId").toString());
-//                                    }
-//                                    catch (Exception e)
-//                                    {
-//                                        Log.d("this is done nhe",document.getId());
-//
-//                                    }
-                                    list.add(obj);
-
-                                    //Toast.makeText(getContext(),document.getData().toString(),Toast.LENGTH_LONG).show();
-                                }
-                                objOrder.setFoodNameList(list);
-                                orderList.set(finalI,objOrder);
-                                Toast.makeText(getContext(),String.valueOf(orderList.get(finalI).getFoodNameList().size()),Toast.LENGTH_LONG).show();
-
-                                //Collections.copy(orderList,list);
-                                //postsetUi();
-
-                            } else {
-                                //postsetUi();
-                                //  Toast.makeText(getApplicationContext(),"No Foods",Toast.LENGTH_LONG).show();
-                                //                            Log.d(TAG, "Error getting documents: ", task.getException());
-
-                            }
-                        }
-                    });
-        }
-    }
-
-    //this is to
-    private OrderData getFood(final OrderData obj, String orderId)
-    {
-        db.collection("orders")
-                .document(orderId)
-                .collection("foods")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            //this is temp list to get from database
-
-                            ArrayList<OrderData> list = new ArrayList<>();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("Doc Id Are:",document.getId());
-
-                                OrderFoodData objx=document.toObject(OrderFoodData.class);
-                                //obj.addFood(objx);
-
-
-                                //Toast.makeText(getContext(),.((List<String>) document.get("Food_Names")).get(0),Toast.LENGTH_LONG).show();
-                            }
-
-
-                        } else {
-
-
-                        }
-                    }
-                });
-        Toast.makeText(getContext(),obj.getFoodNameList().toString(),Toast.LENGTH_LONG).show();
 
 
 
-        return obj;
 
-    }
+
+
+
 
 
 
