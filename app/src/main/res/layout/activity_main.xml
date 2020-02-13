@@ -73,6 +73,17 @@
             android:textAllCaps="false"
             android:textColor="#cdd8f1" />
 
+        <Button
+            android:id="@+id/google_signin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonContinue"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/buttonstyle1"
+            android:text="google sign in">
+
+        </Button>
+
     </RelativeLayout>
 
 </RelativeLayout>
