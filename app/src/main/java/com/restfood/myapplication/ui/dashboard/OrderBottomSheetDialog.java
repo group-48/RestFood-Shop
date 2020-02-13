@@ -13,11 +13,7 @@ import androidx.annotation.Nullable;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
-    private TextView increaseTextView;
-    private TextView decreaseTextView;
 
-    private EditText itemEditText;
-    private EditText qtyEditText;
 
 
     @Nullable

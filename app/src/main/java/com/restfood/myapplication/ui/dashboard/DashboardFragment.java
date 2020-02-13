@@ -26,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.restfood.myapplication.Auth;
 import com.restfood.myapplication.FoodData;
 import com.restfood.myapplication.InventryBottomSheetDialog;
+import com.restfood.myapplication.OrderBottomSheetDialog;
 import com.restfood.myapplication.OrderData;
 import com.restfood.myapplication.R;
 import com.restfood.myapplication.ui.home.FoodAvailableAdapter;
@@ -58,9 +59,8 @@ public class DashboardFragment extends Fragment {
 
         //getOrder();
 
-        orderList.add(new OrderData(true,"Pizza","AA",100,"BB"));
-        orderList.add(new OrderData(true,"Pizza","AA",100,"BB"));
-        orderList.add(new OrderData(true,"Pizza","AA",100,"BB"));
+        orderList.add(new OrderData(true,"Pizza","AA","gfnufng","gjfng","gbuyfg",522,"gjhbg"));
+
         getOrder();
 
         postsetUi();
@@ -80,7 +80,7 @@ public class DashboardFragment extends Fragment {
         rAdapter.setOnItemClickListener(new OrderAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                InventryBottomSheetDialog bottomsheet=new InventryBottomSheetDialog();
+                OrderBottomSheetDialog bottomsheet=new OrderBottomSheetDialog();
                 bottomsheet.show(getFragmentManager(),"Thisis");
             }
 
@@ -153,12 +153,15 @@ public class DashboardFragment extends Fragment {
 
                                 Log.d("Doc Id Are:",document.getId());
 
-                                OrderData taskItem=new OrderData(Boolean.valueOf(document.getData().get("Done").toString()),document.getData().get("Shop").toString(),document.getData().get("Status").toString(),Integer.valueOf(document.getData().get("Total").toString()),document.getData().get("User").toString(),(List<String>)document.getData().get("Food_Name"),(List<String>)document.getData().get("Qty_List"));
-                                //
+                                //creating the OrderData object
+                                OrderData taskItem=new OrderData(Boolean.valueOf(document.get("Done").toString()),document.get("Notes").toString(),document.get("OrderId").toString(),document.get("PaymentMode").toString(),document.get("PaymentStatus").toString(),document.get("Status").toString(),Integer.valueOf(document.get("Total").toString()),document.get("User").toString());
+
+                                //assigning food detales to that
+
                                 orderList.add(taskItem);
                                 docIdList.add(document.getId());
 
-                                //Toast.makeText(getContext(),taskItem.getFoodList().get(0),Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getContext(),.((List<String>) document.get("Food_Names")).get(0),Toast.LENGTH_LONG).show();
                             }
 
                             //Collections.copy(orderList,list);
@@ -173,7 +176,50 @@ public class DashboardFragment extends Fragment {
                     }
                 });
 
+    }
 
+
+    private void updateFood()
+    {
+
+    }
+
+    //this is to
+    private OrderData getFood(final OrderData obj, String orderId)
+    {
+        db.collection("orders")
+                .document(orderId)
+                .collection("foods")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            //this is temp list to get from database
+
+                            ArrayList<OrderData> list = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("Doc Id Are:",document.getId());
+
+                                OrderFoodData objx=document.toObject(OrderFoodData.class);
+                                //obj.addFood(objx);
+
+
+                                //Toast.makeText(getContext(),.((List<String>) document.get("Food_Names")).get(0),Toast.LENGTH_LONG).show();
+                            }
+
+
+                        } else {
+
+
+                        }
+                    }
+                });
+        Toast.makeText(getContext(),obj.getFoodNameList().toString(),Toast.LENGTH_LONG).show();
+
+
+
+        return obj;
 
     }
 

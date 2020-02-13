@@ -1,87 +1,111 @@
 package com.restfood.myapplication;
 
-import java.util.List;
+import com.restfood.myapplication.ui.dashboard.OrderFoodData;
+
+import java.util.ArrayList;
+
 
 public class OrderData {
-    boolean Done;
-    String Shop;  //this is for shop id
-    String Status;
-    int Total;
-    String User;      //id of user
-    List<String> Food_Names;
-    List<String> Qty_List;
+    private boolean done;
+    private String notes;
+    private String orderId;
+    private String paymentMode;
+    private String paymentStatus;
+    private String status;
+    private int total;
+    private String user;
 
-    public OrderData(boolean done, String shop, String status, int total, String user) {
-        Done = done;
-        Shop = shop;
-        Status = status;
-        Total = total;
-        User = user;
+    //for food orderfoodata
+    private ArrayList<OrderFoodData> foodList;
+
+    public OrderData(boolean done, String notes, String orderId, String paymentMode, String paymentStatus, String status, int total, String user) {
+        this.done = done;
+        this.notes = notes;
+        this.orderId = orderId;
+        this.paymentMode = paymentMode;
+        this.paymentStatus = paymentStatus;
+        this.status = status;
+        this.total = total;
+        this.user = user;
     }
 
-    public OrderData(boolean done, String shop, String status, int total, String user, List<String> foodList, List<String> quanList) {
-        Done = done;
-        Shop = shop;
-        Status = status;
-        Total = total;
-        User = user;
-        this.Food_Names = foodList;
-        this.Qty_List = quanList;
-    }
+    //seeter and getter
 
     public boolean isDone() {
-        return Done;
+        return done;
     }
 
     public void setDone(boolean done) {
-        Done = done;
+        this.done = done;
     }
 
-    public String getShop() {
-        return Shop;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setShop(String shop) {
-        Shop = shop;
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getPaymentMode() {
+        return paymentMode;
+    }
+
+    public void setPaymentMode(String paymentMode) {
+        this.paymentMode = paymentMode;
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 
     public int getTotal() {
-        return Total;
+        return total;
     }
 
     public void setTotal(int total) {
-        Total = total;
+        this.total = total;
     }
 
     public String getUser() {
-        return User;
+        return user;
     }
 
     public void setUser(String user) {
-        User = user;
+        this.user = user;
     }
 
-    public List<String> getFood_Names() {
-        return Food_Names;
+    public ArrayList<OrderFoodData> getFoodNameList() {
+        return foodList;
     }
 
-    public void setFood_Names(List<String> food_Names) {
-        Food_Names = food_Names;
+    public void setFoodNameList(ArrayList<OrderFoodData> foodNameList) {
+        this.foodList = foodNameList;
     }
 
-    public List<String> getQty_List() {
-        return Qty_List;
-    }
-
-    public void setQty_List(List<String> qty_List) {
-        Qty_List = qty_List;
+    //this is to add food object to this
+    public void addFood(OrderFoodData obj)
+    {
+        this.foodList.add(obj);
     }
 }

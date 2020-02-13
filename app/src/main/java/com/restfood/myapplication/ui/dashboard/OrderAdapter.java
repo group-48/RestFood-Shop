@@ -152,7 +152,7 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
         OrderData currentdata=orderListX.get(position);
 
         //holder.foodnameTextView.setText(getFood(currentdata.getFoodList(),currentdata.getQuanList()));
-        holder.foodnameTextView.setText(currentdata.getShop());
+        holder.foodnameTextView.setText(currentdata.getOrderId());
 
         String tot="Price:"+currentdata.getTotal();
         holder.totalTextView.setText(tot);
