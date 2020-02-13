@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.restfood.myapplication.OrderBottomSheetDialog;
 
 public class Inventry extends AppCompatActivity {
     FloatingActionButton buttonAdd;
@@ -24,7 +25,7 @@ public class Inventry extends AppCompatActivity {
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                InventryBottomSheetDialog bottomsheet=new InventryBottomSheetDialog();
+                OrderBottomSheetDialog bottomsheet=new OrderBottomSheetDialog();
                 bottomsheet.show(getSupportFragmentManager(),"Hi this is ");
             }
         });
