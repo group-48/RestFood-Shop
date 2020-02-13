@@ -53,6 +53,8 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
 
         public OrderViewHolder(@NonNull View itemView,final com.restfood.myapplication.ui.dashboard.OrderAdapter.OnItemClickListener listener) {
             super(itemView);
+
+            //assigning ui values to variables
             foodnameTextView=itemView.findViewById(R.id.order_food_item);
             totalTextView=itemView.findViewById(R.id.total);
             doneTextView=itemView.findViewById(R.id.done);
@@ -79,6 +81,9 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
                 }
             });
 
+
+            //three updating the food state
+            //this gives position to fragment
             doneTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

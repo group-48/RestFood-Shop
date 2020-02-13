@@ -70,6 +70,8 @@ public class DashboardFragment extends Fragment {
     }
 
 
+
+    //this is to set ui after the data base transaction
     private void postsetUi()
     {
         rAdapter=new OrderAdapter(orderList);
@@ -77,29 +79,36 @@ public class DashboardFragment extends Fragment {
         rView.setAdapter(rAdapter);
 
         //this part for real time update
+        //to handle in recyclerview
         rAdapter.setOnItemClickListener(new OrderAdapter.OnItemClickListener() {
+            //click a card
+            //to get bottomsheet
             @Override
             public void onItemClick(int position) {
                 OrderBottomSheetDialog bottomsheet=new OrderBottomSheetDialog();
                 bottomsheet.show(getFragmentManager(),"Thisis");
             }
 
+            // update the three function
             @Override
             public void onDone(int position) {
                 updateStatus(position,"Done");
+                updateUI();
             }
 
             @Override
             public void onPrepare(int position) {
                 updateStatus(position,"Preparing");
                 orderList.get(position).setStatus("Preparing");
-
+                updateUI();
             }
 
             @Override
             public void onReady(int position) {
                 updateStatus(position,"Ready");
                 orderList.get(position).setStatus("Ready");
+                updateUI();
+                //set status to database remove from list
 
             }
 
@@ -113,7 +122,17 @@ public class DashboardFragment extends Fragment {
         Toast.makeText(getContext(),"Updated", Toast.LENGTH_LONG).show();
     }
 
+    //refresh the recyclerview
+    private void updateUI()
+    {
+        rAdapter.notifyDataSetChanged();
+    }
 
+
+
+    //this is to update the status of order
+    //pos- position of object in list
+    //status- what you update
     private void updateStatus(int pos, final String status)
     {
         db.collection("orders")
@@ -137,6 +156,9 @@ public class DashboardFragment extends Fragment {
     }
 
 
+
+    //get order document from database
+    //&assinging to a array
     private void getOrder()
     {
         db.collection("orders")
