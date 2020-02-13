@@ -49,6 +49,7 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
         public TextView prepareTextView;
         public TextView readyTextView;
         public TextView statusTextView;
+        public TextView orderTitleTextView;
 
 
         public OrderViewHolder(@NonNull View itemView,final com.restfood.myapplication.ui.dashboard.OrderAdapter.OnItemClickListener listener) {
@@ -61,6 +62,7 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
             prepareTextView=itemView.findViewById(R.id.prepare);
             readyTextView=itemView.findViewById(R.id.ready);
             statusTextView=itemView.findViewById(R.id.is_paid);
+            orderTitleTextView=itemView.findViewById(R.id.order_title);
 
 
 
@@ -155,6 +157,10 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
     @Override
     public void onBindViewHolder(@NonNull com.restfood.myapplication.ui.dashboard.OrderAdapter.OrderViewHolder holder, int position) {
         OrderData currentdata=orderListX.get(position);
+
+        //this is to set order title
+        String title="Order No:"+"\n"+currentdata.getOrderId();
+        holder.orderTitleTextView.setText(title);
 
         String name=currentdata.getTempName()+"\n"+currentdata.getTempQty();
         holder.foodnameTextView.setText(name);

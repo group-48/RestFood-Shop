@@ -16,13 +16,13 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/order_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/button_blue"
             android:gravity="center"
             android:text="Order"
-            android:textSize="@dimen/padding30"
+            android:textSize="@dimen/text20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/textView2">
+            app:layout_constraintTop_toBottomOf="@+id/order_title">
 
 
             <TextView
@@ -71,6 +71,8 @@
 
             <TextView
                 android:id="@+id/prepare"
+                android:textStyle="bold"
+                android:textSize="@dimen/text20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -80,6 +82,8 @@
 
             </TextView>
             <TextView
+                android:textStyle="bold"
+                android:textSize="@dimen/text20"
                 android:id="@+id/ready"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,6 +94,8 @@
 
             </TextView>
             <TextView
+                android:textStyle="bold"
+                android:textSize="@dimen/text20"
                 android:id="@+id/done"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

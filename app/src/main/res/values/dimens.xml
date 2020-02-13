@@ -9,4 +9,6 @@
     <dimen name="padding15">15dp</dimen>
     <dimen name="textfieldhight">55dp</dimen>
     <dimen name="car_radius5">5dp</dimen>
+    <dimen name="text20">20dp</dimen>
+    <dimen name="text25">25dp</dimen>
 </resources>

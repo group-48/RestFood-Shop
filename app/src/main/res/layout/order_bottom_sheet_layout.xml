@@ -4,13 +4,153 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Ready">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    </TextView>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:textSize="@dimen/padding30"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ready">
+
+            </TextView>
+            <TextView
+                android:textSize="@dimen/padding30"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ready">
+
+            </TextView>
+            <TextView
+                android:textSize="@dimen/padding30"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ready">
+
+            </TextView>
+            <TextView
+                android:textSize="@dimen/padding30"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ready">
+
+            </TextView>
+
+
+            <TextView
+                android:textSize="@dimen/padding30"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ready">
+
+            </TextView>
+            <TextView
+                android:textSize="@dimen/padding30"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ready">
+
+            </TextView>
+            <TextView
+                android:textSize="@dimen/padding30"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ready">
+
+            </TextView>
+            <TextView
+                android:textSize="@dimen/padding30"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ready">
+
+            </TextView>
+            <TextView
+                android:textSize="@dimen/padding30"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ready">
+
+            </TextView>
+            <TextView
+                android:textSize="@dimen/padding30"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ready">
+
+            </TextView>
+            <TextView
+                android:textSize="@dimen/padding30"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ready">
+
+            </TextView>
+            <TextView
+                android:textSize="@dimen/padding30"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ready">
+
+            </TextView><TextView
+            android:textSize="@dimen/padding30"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Ready">
+
+        </TextView>
+            <TextView
+                android:textSize="@dimen/padding30"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ready">
+
+            </TextView>
+            <TextView
+                android:textSize="@dimen/padding30"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ready">
+
+            </TextView>
+            <TextView
+                android:textSize="@dimen/padding30"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Ready">
+
+            </TextView>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
 
 
 </LinearLayout>
