@@ -187,6 +187,7 @@ public class DashboardFragment extends Fragment {
                             }
 
                             //Collections.copy(orderList,list);
+                            updateFood();
                             postsetUi();
 
                         } else {
@@ -200,10 +201,56 @@ public class DashboardFragment extends Fragment {
 
     }
 
-
+    //this is to get food data from database to
     private void updateFood()
     {
+        int i;
 
+        for(i=0;i<orderList.size();i++)
+        {
+            final int finalI = i;
+            db.collection("orders")
+                    .document(orderList.get(finalI).getOrderId())
+                    .collection("foods")
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful()) {
+                                //this is temp list to get from database
+                                OrderData objOrder=orderList.get(finalI);
+                                ArrayList<OrderFoodData> list=new ArrayList<>();
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                    Log.d("Doc Id Are:",document.getId());
+//                                    try{
+                                        OrderFoodData obj=new OrderFoodData(document.get("foodId").toString(),document.get("image").toString(),document.get("name").toString(),Integer.parseInt(document.get("price").toString()),Integer.parseInt(document.get("qty").toString()),document.get("shopId").toString());
+//                                    }
+//                                    catch (Exception e)
+//                                    {
+//                                        Log.d("this is done nhe",document.getId());
+//
+//                                    }
+                                    list.add(obj);
+
+                                    //Toast.makeText(getContext(),document.getData().toString(),Toast.LENGTH_LONG).show();
+                                }
+                                objOrder.setFoodNameList(list);
+                                orderList.set(finalI,objOrder);
+                                Toast.makeText(getContext(),String.valueOf(orderList.get(finalI).getFoodNameList().size()),Toast.LENGTH_LONG).show();
+
+                                //Collections.copy(orderList,list);
+                                //postsetUi();
+
+                            } else {
+                                //postsetUi();
+                                //  Toast.makeText(getApplicationContext(),"No Foods",Toast.LENGTH_LONG).show();
+                                //                            Log.d(TAG, "Error getting documents: ", task.getException());
+
+                            }
+                        }
+                    });
+        }
     }
 
     //this is to
