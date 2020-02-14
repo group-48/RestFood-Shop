@@ -90,7 +90,10 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onDone(int position) {
                 updateStatus(position, "Done");
+                orderList.get(position).setStatus("Done");
+                orderList.remove(position);
                 updateUI();
+                Toast.makeText(getActivity().getApplicationContext(), "Order Removed", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -137,7 +140,7 @@ public class DashboardFragment extends Fragment {
                     public void onSuccess(Void aVoid) {
                         Log.d("This done", "DocumentSnapshot successfully updated!");
                         //Toast.makeText(getActivity().getApplicationContext(),foodList.get(position).getFoodName()+":Updated",Toast.LENGTH_LONG).show();
-                        Toast.makeText(getActivity().getApplicationContext(), status + "...", Toast.LENGTH_LONG).show();
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -153,15 +156,62 @@ public class DashboardFragment extends Fragment {
     //get order document from database
     //&assinging to a array
     private void getOrder() {
+        orderList.clear();
         db.collection("orders")
                 .whereEqualTo("Shop", new Auth().getUId())
+                .whereEqualTo("Status","Pending")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             //this is temp list to get from database
-                            orderList.clear();
+                            //orderList.clear();
+                            ArrayList<OrderData> list = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                Log.d("Doc Id Are:", document.getId());
+
+                                //creating the OrderData object
+                                //OrderData taskItem = new OrderData(Boolean.valueOf(document.get("Done").toString()), document.get("Notes").toString(), document.get("OrderId").toString(), document.get("PaymentMode").toString(), document.get("PaymentStatus").toString(), document.get("Status").toString(), Integer.valueOf(document.get("Total").toString()), document.get("User").toString());
+                                try
+                                {
+                                    OrderData taskItem=new OrderData(Boolean.valueOf(document.get("Done").toString()), document.get("Notes").toString(), document.get("OrderId").toString(), document.get("PaymentMode").toString(), document.get("PaymentStatus").toString(), document.get("Status").toString(), Integer.valueOf(document.get("Total").toString()), document.get("User").toString());
+                                    taskItem.setTempName(document.get("Food_Names").toString().substring(1,document.get("Food_Names").toString().length()-1));
+                                    taskItem.setTempQty(document.get("Qty_List").toString().substring(1,document.get("Qty_List").toString().length()-1));
+                                    orderList.add(taskItem);
+                                }
+                                catch (Exception e)
+                                {
+                                    Toast.makeText(getContext(),e.toString(),Toast.LENGTH_LONG).show();
+                                }
+
+                                docIdList.add(document.getId());
+
+                                //Toast.makeText(getContext(),.((List<String>) document.get("Food_Names")).get(0),Toast.LENGTH_LONG).show();
+                            }
+
+                            //Collections.copy(orderList,list);
+                            postsetUi();
+
+                        } else {
+                            postsetUi();
+
+
+                        }
+                    }
+                });
+
+        db.collection("orders")
+                .whereEqualTo("Shop", new Auth().getUId())
+                .whereEqualTo("Status","Preparing")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            //this is temp list to get from database
+                            //orderList.clear();
                             ArrayList<OrderData> list = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
@@ -193,23 +243,60 @@ public class DashboardFragment extends Fragment {
 
                         } else {
                             postsetUi();
-                            //  Toast.makeText(getApplicationContext(),"No Foods",Toast.LENGTH_LONG).show();
-                            //                            Log.d(TAG, "Error getting documents: ", task.getException());
+
+
+                        }
+                    }
+                });
+
+        db.collection("orders")
+                .whereEqualTo("Shop", new Auth().getUId())
+                .whereEqualTo("Status","Ready")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            //this is temp list to get from database
+                            //orderList.clear();
+                            ArrayList<OrderData> list = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                Log.d("Doc Id Are:", document.getId());
+
+                                //creating the OrderData object
+                                //OrderData taskItem = new OrderData(Boolean.valueOf(document.get("Done").toString()), document.get("Notes").toString(), document.get("OrderId").toString(), document.get("PaymentMode").toString(), document.get("PaymentStatus").toString(), document.get("Status").toString(), Integer.valueOf(document.get("Total").toString()), document.get("User").toString());
+                                try
+                                {
+                                    OrderData taskItem=new OrderData(Boolean.valueOf(document.get("Done").toString()), document.get("Notes").toString(), document.get("OrderId").toString(), document.get("PaymentMode").toString(), document.get("PaymentStatus").toString(), document.get("Status").toString(), Integer.valueOf(document.get("Total").toString()), document.get("User").toString());
+                                    taskItem.setTempName(document.get("Food_Names").toString().substring(1,document.get("Food_Names").toString().length()-1));
+                                    taskItem.setTempQty(document.get("Qty_List").toString().substring(1,document.get("Qty_List").toString().length()-1));
+                                    orderList.add(taskItem);
+                                }
+                                catch (Exception e)
+                                {
+                                    Toast.makeText(getContext(),e.toString(),Toast.LENGTH_LONG).show();
+                                }
+
+
+
+                                docIdList.add(document.getId());
+
+                                //Toast.makeText(getContext(),.((List<String>) document.get("Food_Names")).get(0),Toast.LENGTH_LONG).show();
+                            }
+
+                            //Collections.copy(orderList,list);
+                            postsetUi();
+
+                        } else {
+                            postsetUi();
+
 
                         }
                     }
                 });
 
     }
-
-
-
-
-
-
-
-
-
 
 
 }
