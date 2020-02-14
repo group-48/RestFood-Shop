@@ -122,16 +122,18 @@
 
                 </View>
                 <Button
+                    android:id="@+id/order_payment_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/payment"
-                    android:background="@drawable/buttonstyle2"
-                    android:textColor="@color/button_blue">
+                    android:background="@drawable/paid_button"
+                    android:textColor="@color/white">
 
                 </Button>
             </LinearLayout>
 
             <Button
+                android:id="@+id/cancel_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/padding10"

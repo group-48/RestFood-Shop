@@ -1,10 +1,12 @@
 package com.restfood.myapplication.ui.dashboard;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,12 +15,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.restfood.myapplication.OrderData;
 import com.restfood.myapplication.R;
+
+import static com.restfood.myapplication.R.drawable.buttonstyle2;
+import static com.restfood.myapplication.R.drawable.cancelbutton;
 
 public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
     TextView tom;
@@ -32,6 +39,8 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
     private TextView totalTextView;
     private TextView paymentMethodTextView;
     private TextView paymentStatusTextView;
+    private Button paymetButton;
+    private Button cancelButton;
 
 
     @Nullable
@@ -43,6 +52,8 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
         totalTextView=v.findViewById(R.id.order_total);
         paymentMethodTextView=v.findViewById(R.id.order_payment_method);
         paymentStatusTextView=v.findViewById(R.id.order_payment_status);
+        paymetButton=v.findViewById(R.id.order_payment_button);
+        cancelButton=v.findViewById(R.id.cancel_order);
 
         getOrder(docId);
 
@@ -53,11 +64,86 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
     }
 
     //set the ui after the db transaction
+    @SuppressLint({"ResourceAsColor", "SetTextI18n"})
     private void setUi()
     {
         totalTextView.setText(String.valueOf(orederObj.getTotal()));
         paymentStatusTextView.setText(orederObj.getPaymentStatus());
         paymentMethodTextView.setText(orederObj.getPaymentMode());
+
+
+        //this is to butoon
+        paymetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //paymetButton.setText("Paid");
+                if(orederObj.getPaymentStatus()=="Paid")
+                {
+                    Toast.makeText(getActivity(),"Already Paid",Toast.LENGTH_LONG).show();
+
+                }
+                else
+                {
+                    updatePayment(orederObj.getOrderId(),"Paid");
+                }
+
+
+            }
+        });
+
+
+        //button to handle cancel part
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cancelOrder(orederObj.getOrderId(),"Cancel");
+            }
+        });
+    }
+
+
+    //this is to set the payment status
+    private void updatePayment(String docId, final String payment) {
+        db.collection("orders")
+                .document(docId)
+                .update("PaymentStatus",payment)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("This done", "DocumentSnapshot successfully updated!");
+                        //Toast.makeText(getActivity().getApplicationContext(),foodList.get(position).getFoodName()+":Updated",Toast.LENGTH_LONG).show();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("This error", "Error updating document", e);
+                        Toast.makeText(getActivity().getApplicationContext(), "Server issue", Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
+    //this is to set the payment status
+    private void cancelOrder(String docId, final String cancel) {
+        db.collection("orders")
+                .document(docId)
+                .update("Status",cancel)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("This done", "DocumentSnapshot successfully updated!");
+                        //Toast.makeText(getActivity().getApplicationContext(),foodList.get(position).getFoodName()+":Updated",Toast.LENGTH_LONG).show();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("This error", "Error updating document", e);
+                        Toast.makeText(getActivity().getApplicationContext(), "Server issue", Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
 
