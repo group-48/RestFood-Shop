@@ -12,4 +12,7 @@
     <dimen name="text20">20dp</dimen>
     <dimen name="text25">25dp</dimen>
     <dimen name="padding10">10dp</dimen>
+    <dimen name="padding20">20sp</dimen>
+    <dimen name="text17">17sp</dimen>
+    <dimen name="text22">22sp</dimen>
 </resources>

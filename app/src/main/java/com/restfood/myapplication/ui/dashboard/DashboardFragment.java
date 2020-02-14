@@ -26,7 +26,6 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.restfood.myapplication.Auth;
 import com.restfood.myapplication.FoodData;
 import com.restfood.myapplication.InventryBottomSheetDialog;
-import com.restfood.myapplication.OrderBottomSheetDialog;
 import com.restfood.myapplication.OrderData;
 import com.restfood.myapplication.R;
 import com.restfood.myapplication.ui.home.FoodAvailableAdapter;
@@ -83,7 +82,7 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 OrderBottomSheetDialog bottomsheet = new OrderBottomSheetDialog();
-                bottomsheet.show(getFragmentManager(), "Thisis");
+                bottomsheet.show(getFragmentManager(),docIdList.get(position) );
             }
 
             // update the three function
