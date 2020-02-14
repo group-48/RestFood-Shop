@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.restfood.myapplication.OrderData;
 import com.restfood.myapplication.R;
 
+import static com.restfood.myapplication.R.drawable.buttonstyle1;
 import static com.restfood.myapplication.R.drawable.buttonstyle2;
 import static com.restfood.myapplication.R.drawable.cancelbutton;
 
@@ -42,6 +42,13 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
     private Button paymetButton;
     private Button cancelButton;
 
+    //button to handleorer
+    private Button preparingButton;
+    private Button readyButton;
+    private Button doneButton;
+
+    private TextView orderIdTextView;
+
 
     @Nullable
     @Override
@@ -54,6 +61,14 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
         paymentStatusTextView=v.findViewById(R.id.order_payment_status);
         paymetButton=v.findViewById(R.id.order_payment_button);
         cancelButton=v.findViewById(R.id.cancel_order);
+
+        //order handling
+        preparingButton=v.findViewById(R.id.button_preparing);
+        readyButton=v.findViewById(R.id.button_ready);
+        doneButton=v.findViewById(R.id.button_done);
+
+        orderIdTextView=v.findViewById(R.id.order_title);
+
 
         getOrder(docId);
 
@@ -71,13 +86,65 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
         paymentStatusTextView.setText(orederObj.getPaymentStatus());
         paymentMethodTextView.setText(orederObj.getPaymentMode());
 
+        String title=orederObj.getOrderId();
+        orderIdTextView.setText(title);
+
+
+        //Toast.makeText(getContext(),orederObj.getStatus(),Toast.LENGTH_LONG).show();
+        String status=orederObj.getStatus();
+        Toast.makeText(getContext(),status,Toast.LENGTH_LONG).show();
+        if(status.equals("Preparing"))
+        {
+            //setting button color
+            readyButton.setBackground(getResources().getDrawable(buttonstyle2));
+            preparingButton.setBackground(getResources().getDrawable(buttonstyle1));
+            doneButton.setBackground(getResources().getDrawable(buttonstyle2));
+
+            preparingButton.setTextColor(R.color.white);
+
+
+        }
+        else if(status.equals("Ready"))
+        {
+            //ui change part
+            readyButton.setBackground(getResources().getDrawable(buttonstyle1));
+            preparingButton.setBackground(getResources().getDrawable(buttonstyle1));
+            doneButton.setBackground(getResources().getDrawable(buttonstyle2));
+
+            readyButton.setTextColor(R.color.white);
+            preparingButton.setTextColor(R.color.white);
+
+            //db part
+
+
+        }
+        else if(status.equals("Done"))
+        {
+            //ui change part
+            readyButton.setBackground(getResources().getDrawable(buttonstyle1));
+            preparingButton.setBackground(getResources().getDrawable(buttonstyle1));
+            doneButton.setBackground(getResources().getDrawable(buttonstyle1));
+
+            readyButton.setTextColor(R.color.white);
+            preparingButton.setTextColor(R.color.white);
+            doneButton.setTextColor(R.color.white);
+
+
+
+        }
+
+        if(orederObj.getPaymentStatus().equals("Paid"))
+        {
+            paymetButton.setText("Paid");   //this check and update
+        }
+
 
         //this is to butoon
         paymetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //paymetButton.setText("Paid");
-                if(orederObj.getPaymentStatus()=="Paid")
+                if(orederObj.getPaymentStatus().equals("Paid"))
                 {
                     Toast.makeText(getActivity(),"Already Paid",Toast.LENGTH_LONG).show();
 
@@ -85,6 +152,7 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
                 else
                 {
                     updatePayment(orederObj.getOrderId(),"Paid");
+                    paymetButton.setText("Paid");   //this check and update
                 }
 
 
@@ -99,6 +167,86 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
                 cancelOrder(orederObj.getOrderId(),"Cancel");
             }
         });
+
+
+        ///oder handling part
+
+        preparingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                readyButton.setBackground(getResources().getDrawable(buttonstyle2));
+                preparingButton.setBackground(getResources().getDrawable(buttonstyle1));
+                doneButton.setBackground(getResources().getDrawable(buttonstyle2));
+
+                preparingButton.setTextColor(R.color.white);
+
+                updateStatus(orederObj.getOrderId(),"Preparing");
+
+
+            }
+        });
+
+
+        readyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                readyButton.setBackground(getResources().getDrawable(buttonstyle1));
+                preparingButton.setBackground(getResources().getDrawable(buttonstyle1));
+                doneButton.setBackground(getResources().getDrawable(buttonstyle2));
+
+                readyButton.setTextColor(R.color.white);
+                preparingButton.setTextColor(R.color.white);
+
+                updateStatus(orederObj.getOrderId(),"Ready");
+
+
+            }
+        });
+
+
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                readyButton.setBackground(getResources().getDrawable(buttonstyle1));
+                preparingButton.setBackground(getResources().getDrawable(buttonstyle1));
+                doneButton.setBackground(getResources().getDrawable(buttonstyle1));
+
+                readyButton.setTextColor(R.color.white);
+                preparingButton.setTextColor(R.color.white);
+                doneButton.setTextColor(R.color.white);
+
+                updateStatus(orederObj.getOrderId(),"Done");
+
+            }
+        });
+
+
+
+
+    }
+
+
+    //status- what you update
+    private void updateStatus(String docId, final String status) {
+        db.collection("orders")
+                .document(docId)
+                .update("Status", status)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("This done", "DocumentSnapshot successfully updated!");
+                        //Toast.makeText(getActivity().getApplicationContext(),foodList.get(position).getFoodName()+":Updated",Toast.LENGTH_LONG).show();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("This error", "Error updating document", e);
+                        Toast.makeText(getActivity().getApplicationContext(), "Server issue", Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
 

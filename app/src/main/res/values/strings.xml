@@ -73,6 +73,8 @@
     <string name="status_paid">Status:Paid</string>
     <string name="order">Order</string>
     <string name="payment">Payment</string>
+    <string name="preparing">Preparing</string>
+    <string name="orderId">OrderId</string>
 
 
 </resources>

@@ -15,6 +15,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <TextView
+                android:layout_margin="@dimen/padding5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/button_blue"
+                android:layout_gravity="center"
+                android:text="@string/orderId"
+                android:textSize="@dimen/text22"
+                android:textStyle="bold"
+                />
 
             <TextView
                 android:layout_margin="@dimen/padding5"
@@ -29,7 +39,7 @@
                 />
 
             <LinearLayout
-                android:layout_margin="@dimen/padding5"
+                android:layout_margin="@dimen/padding10"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -128,8 +138,52 @@
                     android:text="@string/payment"
                     android:background="@drawable/paid_button"
                     android:textColor="@color/white">
-
                 </Button>
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="@dimen/padding5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/padding15">
+
+                <Button
+                    android:id="@+id/button_preparing"
+                    android:layout_margin="@dimen/padding5"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/preparing"
+                    android:background="@drawable/buttonstyle2"
+                    android:textColor="@color/button_blue">
+                </Button>
+
+                <Button
+                    android:id="@+id/button_ready"
+                    android:layout_margin="@dimen/padding5"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Ready"
+                    android:background="@drawable/buttonstyle2"
+                    android:textColor="@color/button_blue">
+                </Button>
+
+                <Button
+                    android:id="@+id/button_done"
+                    android:layout_weight="1"
+                    android:layout_margin="@dimen/padding5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Done"
+                    android:background="@drawable/buttonstyle2"
+                    android:textColor="@color/button_blue">
+                </Button>
+
+
+
+
             </LinearLayout>
 
             <Button
