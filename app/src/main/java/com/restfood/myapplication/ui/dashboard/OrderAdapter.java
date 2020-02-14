@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.restfood.myapplication.OrderData;
 import com.restfood.myapplication.R;
 
+import org.w3c.dom.ls.LSInput;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +52,7 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
         public TextView prepareTextView;
         public TextView readyTextView;
         public TextView statusTextView;
+        public TextView paidTextView;
         public TextView orderTitleTextView;
 
 
@@ -61,7 +65,8 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
             doneTextView=itemView.findViewById(R.id.done);
             prepareTextView=itemView.findViewById(R.id.prepare);
             readyTextView=itemView.findViewById(R.id.ready);
-            statusTextView=itemView.findViewById(R.id.is_paid);
+            paidTextView=itemView.findViewById(R.id.is_paid);
+            statusTextView=itemView.findViewById(R.id.food_status);
             orderTitleTextView=itemView.findViewById(R.id.order_title);
 
 
@@ -162,15 +167,31 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
         String title="Order No:"+"\n"+currentdata.getOrderId();
         holder.orderTitleTextView.setText(title);
 
+
         String name=currentdata.getTempName()+"\n"+currentdata.getTempQty();
         holder.foodnameTextView.setText(name);
 
 
-        String tot="Price:"+currentdata.getTotal();
+        //this is function is to display the food name and qty
+//        ArrayList<String> fName= (ArrayList<String>) currentdata.convertFoodName();
+//        ArrayList<String> fQty= (ArrayList<String>) currentdata.convertFoodQty();
+//        String[] fName=currentdata.convertFoodName();
+//        String[] fQty=currentdata.convertFoodQty();
+
+//        for (int i=0;i<fName.size();i++)
+//        {
+//            name=fName.get(i)+"\t"+":"+fQty.get(i)+"\n";
+//        }
+
+
+        String tot="Price    :"+currentdata.getTotal();
         holder.totalTextView.setText(tot);
 
-        String stat="Status:"+currentdata.getStatus();
+        String stat="Status  :"+currentdata.getStatus();
         holder.statusTextView.setText(stat);
+
+        String paid="Payment :"+currentdata.getPaymentMode();
+        holder.paidTextView.setText(paid);
 
 
         //Log.d("Available check",String.valueOf(currentdata.getIsAvailable()));

@@ -2,7 +2,10 @@ package com.restfood.myapplication;
 
 import com.restfood.myapplication.ui.dashboard.OrderFoodData;
 
+import org.w3c.dom.ls.LSInput;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -28,33 +31,25 @@ public class OrderData {
 
 
     //this is to convert string to list
-    public List<String> convertFoodName()
+    public String convertFoodName()
     {
-        List<String> foodName=new ArrayList<>();      //this is to assign
+        //List<String> foodName=new ArrayList<String>();
         String temp;
-        //temp=tempName.substring(1,)
-//        int len=tempName.length();      //this is length of string
-//        int i;      //this is to run a loop
-//        char temp;      //get char and assign to this variable
-//
-//        //this is to get the index
-//        int start,end;
-//
-//        //this loop travase all the string
-//        for (i=0;i<len;i++)
-//        {
-//            temp=tempName.charAt(i);
-//
-//            if (i==len-1)
-//            {
-//
-//            }
-//
-//
-//        }
+        temp=tempName;
+        //String[] str = temp.split(",");
+       // foodName = Arrays.asList(str);
+        return temp;
+    }
 
+    public List<String> convertFoodQty()
+    {
+        List<String> foodQty=new ArrayList<String>();
+        String temp;
+        temp=tempQty;
+        String[] str = temp.split(",");
+        foodQty=Arrays.asList(str);
+        return foodQty;
 
-        return foodName;
     }
 
 
