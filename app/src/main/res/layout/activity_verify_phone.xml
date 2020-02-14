@@ -81,5 +81,5 @@
             android:textColor="#cdd8f1" />
 
     </RelativeLayout>
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 </RelativeLayout>
