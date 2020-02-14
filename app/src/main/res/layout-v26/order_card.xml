@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/button_blue"
             android:gravity="center"
-            android:text="@string/order"
+            android:text="Order"
             android:textSize="@dimen/text20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/padding5"
-                android:text="@string/status_paid"
+                android:text="Status:Paid"
                 android:textColor="@color/button_blue">
 
             </TextView>
@@ -90,8 +90,7 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="@string/prepare"
-                tools:ignore="SpUsage">
+                android:text="@string/prepare">
 
             </TextView>
             <TextView
@@ -103,8 +102,7 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="@string/Ready"
-                tools:ignore="SpUsage">
+                android:text="@string/Ready">
 
             </TextView>
             <TextView
@@ -116,8 +114,7 @@
                 android:layout_weight="1"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="@string/done"
-                tools:ignore="SpUsage">
+                android:text="@string/done">
 
             </TextView>
 
