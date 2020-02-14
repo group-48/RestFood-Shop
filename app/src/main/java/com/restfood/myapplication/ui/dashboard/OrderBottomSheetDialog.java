@@ -101,6 +101,8 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
             doneButton.setBackground(getResources().getDrawable(buttonstyle2));
 
             preparingButton.setTextColor(R.color.white);
+            preparingButton.setTextColor(R.color.button_blue);
+            doneButton.setTextColor(R.color.button_blue);
 
 
         }
@@ -113,6 +115,7 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
 
             readyButton.setTextColor(R.color.white);
             preparingButton.setTextColor(R.color.white);
+            doneButton.setTextColor(R.color.button_blue);
 
             //db part
 
@@ -180,6 +183,8 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
                 doneButton.setBackground(getResources().getDrawable(buttonstyle2));
 
                 preparingButton.setTextColor(R.color.white);
+                preparingButton.setTextColor(R.color.button_blue);
+                doneButton.setTextColor(R.color.button_blue);
 
                 updateStatus(orederObj.getOrderId(),"Preparing");
 
@@ -197,6 +202,7 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
 
                 readyButton.setTextColor(R.color.white);
                 preparingButton.setTextColor(R.color.white);
+                doneButton.setTextColor(R.color.button_blue);
 
                 updateStatus(orederObj.getOrderId(),"Ready");
 
