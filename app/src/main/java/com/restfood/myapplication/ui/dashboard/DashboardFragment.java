@@ -172,7 +172,7 @@ public class DashboardFragment extends Fragment {
                                 try
                                 {
                                     OrderData taskItem=new OrderData(Boolean.valueOf(document.get("Done").toString()), document.get("Notes").toString(), document.get("OrderId").toString(), document.get("PaymentMode").toString(), document.get("PaymentStatus").toString(), document.get("Status").toString(), Integer.valueOf(document.get("Total").toString()), document.get("User").toString());
-                                    taskItem.setTempName(document.get("Food_Names").toString());
+                                    taskItem.setTempName(document.get("Food_Names").toString().substring(1,document.get("Food_Names").toString().length()-1));
                                     taskItem.setTempQty(document.get("Qty_List").toString());
                                     orderList.add(taskItem);
                                 }

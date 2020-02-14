@@ -3,6 +3,7 @@ package com.restfood.myapplication;
 import com.restfood.myapplication.ui.dashboard.OrderFoodData;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class OrderData {
@@ -15,11 +16,46 @@ public class OrderData {
     private int total;
     private String user;
 
+
+    //this is to retreve data as a string
     private String tempName;
     private String tempQty;
 
+
+
     //for food orderfoodata
     //private ArrayList<OrderFoodData> foodList;
+
+
+    //this is to convert string to list
+    public List<String> convertFoodName()
+    {
+        List<String> foodName=new ArrayList<>();      //this is to assign
+        String temp;
+        //temp=tempName.substring(1,)
+//        int len=tempName.length();      //this is length of string
+//        int i;      //this is to run a loop
+//        char temp;      //get char and assign to this variable
+//
+//        //this is to get the index
+//        int start,end;
+//
+//        //this loop travase all the string
+//        for (i=0;i<len;i++)
+//        {
+//            temp=tempName.charAt(i);
+//
+//            if (i==len-1)
+//            {
+//
+//            }
+//
+//
+//        }
+
+
+        return foodName;
+    }
 
 
     public String getTempName() {
