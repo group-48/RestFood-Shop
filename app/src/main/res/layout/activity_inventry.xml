@@ -6,16 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".Inventry">
 
-    <ListView
-        android:id="@+id/invent_listview"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/inventory_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="fill_parent"
+        android:padding="4dp"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 
-    </ListView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingbutton_invent"
+        android:src="@drawable/ic_add_black_24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
