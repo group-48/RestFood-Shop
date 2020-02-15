@@ -84,6 +84,11 @@ public class Inventry extends AppCompatActivity {
     }
 
 
+
+
+
+
+
     private void postUi()
     {
         //assigning values
