@@ -168,7 +168,7 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
         holder.orderTitleTextView.setText(title);
 
 
-        String name=currentdata.getTempName()+"\n"+currentdata.getTempQty();
+        String name=currentdata.convertFoodName().toString()+currentdata.convertFoodQty().toString();
         holder.foodnameTextView.setText(name);
 
 

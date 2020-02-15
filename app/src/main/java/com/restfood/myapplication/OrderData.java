@@ -31,24 +31,33 @@ public class OrderData {
 
 
     //this is to convert string to list
-    public String convertFoodName()
+    public List<String> convertFoodName()
     {
         //List<String> foodName=new ArrayList<String>();
         String temp;
         temp=tempName;
-        //String[] str = temp.split(",");
-       // foodName = Arrays.asList(str);
-        return temp;
+        String[] arrOfStr = temp.split(",");
+        List<String> myStringList = new ArrayList<String>(arrOfStr.length);
+        for (String s:arrOfStr) {
+            myStringList.add( s );
+        }
+        return myStringList;
     }
 
+
+    //this is to make as list
     public List<String> convertFoodQty()
     {
-        List<String> foodQty=new ArrayList<String>();
+
         String temp;
         temp=tempQty;
-        String[] str = temp.split(",");
-        foodQty=Arrays.asList(str);
-        return foodQty;
+        String[] arrOfStr = temp.split(",");
+        List<String> myStringList = new ArrayList<String>(arrOfStr.length);
+        for (String s:arrOfStr) {
+            myStringList.add( s );
+        }
+        return myStringList;
+
 
     }
 
