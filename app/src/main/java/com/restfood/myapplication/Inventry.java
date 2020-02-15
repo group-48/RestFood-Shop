@@ -15,14 +15,23 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.restfood.myapplication.ui.home.FoodAvailableAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Inventry extends AppCompatActivity {
+
+    //recycler view part
+    private RecyclerView rView;
+    private InventoryAdapter rAdapter;
+    private RecyclerView.LayoutManager rLayoutManager;
+
+
+
+
     FloatingActionButton buttonAdd;
-    RecyclerView itemRecyclerView;
     ArrayList<InventryData> itemList;
     ArrayList<String> docIdList;
     private String uId;
@@ -39,10 +48,18 @@ public class Inventry extends AppCompatActivity {
         docIdList=new ArrayList<>();
 
         buttonAdd=findViewById(R.id.floatingbutton_invent);
-        itemRecyclerView=findViewById(R.id.inventory_recycler_view);
+        rView=findViewById(R.id.inventory_recycler_view);
 
         onbegi();
         getDoc();
+
+//        itemList.add(new InventryData("Salt",10.0,20.0,30.0));
+//        itemList.add(new InventryData("Salt",10,20,30));
+//        itemList.add(new InventryData("Salt",10,20,30));
+//        itemList.add(new InventryData("Salt",10,20,30));
+
+
+        postUi();
 
 
 
@@ -53,6 +70,24 @@ public class Inventry extends AppCompatActivity {
                 bottomsheet.show(getSupportFragmentManager(),"Hi this is ");
             }
         });
+    }
+
+
+    private void postUi()
+    {
+        //assigning values
+        rAdapter=new InventoryAdapter(itemList);
+        rView.setLayoutManager(rLayoutManager);
+        rView.setAdapter(rAdapter);
+
+        rAdapter.setOnItemClickListener(new InventoryAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+        });
+
+
     }
 
 

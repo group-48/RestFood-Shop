@@ -29,7 +29,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<com.restfood.myapplic
     public interface OnItemClickListener {
         void onItemClick(int position);
 
-        void onSwitchClick(int position,boolean click);
+
     }
 
     public void setOnItemClickListener(com.restfood.myapplication.InventoryAdapter.OnItemClickListener listener) {
@@ -43,12 +43,12 @@ public class InventoryAdapter extends RecyclerView.Adapter<com.restfood.myapplic
         ///create view for single unit
         public TextView nameTextView;
         //public TextView priceTextView;
-        public Switch switchAvailable;
+        public TextView qtyTextView;
 
         public InventoryViewHolder(@NonNull View itemView,final com.restfood.myapplication.InventoryAdapter.OnItemClickListener listener) {
             super(itemView);
-            nameTextView=itemView.findViewById(R.id.foodNameTextViewAvail);
-            switchAvailable=itemView.findViewById(R.id.switch_available);
+            nameTextView=itemView.findViewById(R.id.name_card);
+            qtyTextView=itemView.findViewById(R.id.qty_card);
             //catTextView=itemView.findViewById(R.id.catTextView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -66,20 +66,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<com.restfood.myapplic
                 }
             });
 
-            switchAvailable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if(listener!=null)
-                    {
-                        int position=getAdapterPosition();
-                        if(position!=RecyclerView.NO_POSITION)
-                        {
-                            listener.onSwitchClick(position,b);
-                        }
-                    }
 
-                }
-            });
         }
     }
 
@@ -106,8 +93,8 @@ public class InventoryAdapter extends RecyclerView.Adapter<com.restfood.myapplic
     public void onBindViewHolder(@NonNull com.restfood.myapplication.InventoryAdapter.InventoryViewHolder holder, int position) {
         InventryData currentdata=itemListX.get(position);
 
-//        holder.nameTextView.setText(currentdata.getFoodName());
-//        holder.switchAvailable.setChecked(currentdata.getIsAvailable());
+        holder.nameTextView.setText(currentdata.getName());
+        holder.qtyTextView.setText(String.valueOf(currentdata.getMinQty()));
 //
 //        Log.d("Available check",String.valueOf(currentdata.getIsAvailable()));
 
