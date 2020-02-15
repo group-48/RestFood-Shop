@@ -94,7 +94,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<com.restfood.myapplic
         InventryData currentdata=itemListX.get(position);
 
         holder.nameTextView.setText(currentdata.getName());
-        holder.qtyTextView.setText(String.valueOf(currentdata.getMinQty()));
+        holder.qtyTextView.setText(String.valueOf(currentdata.getQuantity()));
 //
 //        Log.d("Available check",String.valueOf(currentdata.getIsAvailable()));
 

@@ -18,6 +18,12 @@ public class InventryData {
         this.quantity = quantity;
     }
 
+    public InventryData(double quantity, double price, double minQty) {
+        this.quantity = quantity;
+        this.price = price;
+        this.minQty = minQty;
+    }
+
     public String getName() {
         return name;
     }

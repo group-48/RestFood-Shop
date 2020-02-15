@@ -59,16 +59,17 @@ public class Inventry extends AppCompatActivity {
         rView.setHasFixedSize(true);
         rLayoutManager=new LinearLayoutManager(getApplicationContext());
 
-        itemList.add(new InventryData("Salt",10.0,20.0,30.0));
-        itemList.add(new InventryData("Salt",10,20,30));
-        itemList.add(new InventryData("Salt",10,20,30));
-        itemList.add(new InventryData("Salt",10,20,30));
+//        itemList.add(new InventryData("Salt",10.0,20.0,30.0));
+//        itemList.add(new InventryData("Salt",10,20,30));
+//        itemList.add(new InventryData("Salt",10,20,30));
+//        itemList.add(new InventryData("Salt",10,20,30));
 
         getDoc();
 
-
-
         postUi();
+
+
+
 
 
 
@@ -120,8 +121,13 @@ public class Inventry extends AppCompatActivity {
                                     Log.d("Doc Id Are:",document.getId());
                                     try
                                     {
-                                        InventryData taskItem = document.toObject(InventryData.class);
+                                        double price=Double.valueOf(document.get("price").toString());
+                                        double minQty=Double.valueOf(document.get("minQty").toString());
+                                        double quantity=Double.valueOf(document.get("quantity").toString());
+
+                                        InventryData taskItem = new InventryData(document.get("name").toString(),quantity,price,minQty);
                                         list.add(taskItem);
+                                        itemList.add(taskItem);
                                     }
                                     catch (Exception e)
                                     {
@@ -132,11 +138,13 @@ public class Inventry extends AppCompatActivity {
                                     //foodList.add(new FoodData("Sausage Pizza","Pizza",500,2,30));
 
                                 }
-                                Collections.copy(itemList,list);
-                                //postsetUi();
+                                //Collections.copy(itemList,list);
+                                postUi();
+                                //Toast.makeText(getApplicationContext(),String.valueOf(itemList.size()),Toast.LENGTH_LONG).show();
+
 
                             } else {
-                                //postsetUi();
+                                //postUi();
                                 //  Toast.makeText(getApplicationContext(),"No Foods",Toast.LENGTH_LONG).show();
                                 //                            Log.d(TAG, "Error getting documents: ", task.getException());
 
