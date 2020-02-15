@@ -181,6 +181,19 @@
             </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
 
 
+            <TextView
+                android:id="@+id/note"
+                android:text="Note:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/padding10"
+                android:textStyle="italic"
+                android:textSize="@dimen/text17"
+                android:textColor="@color/black">
+
+            </TextView>
+
+
 
             <LinearLayout
                 android:padding="@dimen/padding5"

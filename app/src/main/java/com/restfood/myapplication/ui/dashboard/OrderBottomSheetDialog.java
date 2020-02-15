@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Source;
 import com.restfood.myapplication.OrderData;
 import com.restfood.myapplication.R;
 
@@ -51,6 +52,7 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
 
     private TextView orderIdTextView;
     private TextView foodName;
+    private TextView noteTextView;
 
 
     @Nullable
@@ -72,6 +74,7 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
 
         orderIdTextView=v.findViewById(R.id.order_title);
         foodName=v.findViewById(R.id.food_list);
+        noteTextView=v.findViewById(R.id.note);
 
 
         getOrder(docId);
@@ -246,6 +249,20 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
         foodName.setText(name);
 
 
+        String note="Note:";
+        //this part is to set the note
+        if(orederObj.getNotes()!=null)
+        {
+            note=note+orederObj.getNotes();
+            noteTextView.setText(note);
+        }
+        else
+        {
+            note=note+"Empty";
+            noteTextView.setText(note);
+        }
+
+
 
 
     }
@@ -325,11 +342,14 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
     //real time update
     private void getOrder(String id)
     {
+        //this is to cache the data
+        Source sou=Source.CACHE;
+
         try
         {
             db.collection("orders")
                     .document(id)
-                    .get()
+                    .get(sou)
                     .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {

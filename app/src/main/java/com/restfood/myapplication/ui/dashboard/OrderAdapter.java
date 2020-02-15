@@ -46,14 +46,14 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
     public static class OrderViewHolder extends RecyclerView.ViewHolder
     {
         ///create view for single unit
-        public TextView foodnameTextView;
-        public TextView totalTextView;
-        public TextView doneTextView;
-        public TextView prepareTextView;
-        public TextView readyTextView;
-        public TextView statusTextView;
-        public TextView paidTextView;
-        public TextView orderTitleTextView;
+        private TextView foodnameTextView;
+        private TextView totalTextView;
+        private TextView doneTextView;
+        private TextView prepareTextView;
+        private TextView readyTextView;
+        private TextView statusTextView;
+        private TextView paidTextView;
+        private TextView orderTitleTextView;
 
 
         public OrderViewHolder(@NonNull View itemView,final com.restfood.myapplication.ui.dashboard.OrderAdapter.OnItemClickListener listener) {
@@ -217,6 +217,7 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
             }
         }
 
+        
         return va;
     }
 
