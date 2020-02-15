@@ -40,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         myauth=FirebaseAuth.getInstance();
-        myuser=myauth.getCurrentUser();
+        myuser=myauth.getCurrentUser();     //user's id
 
         editTextMobile = findViewById(R.id.editTextMobile);
        // Toast.makeText(getApplicationContext(),myuser.getUid(),Toast.LENGTH_LONG);
 
 
-
+        //is user null
         if(myuser!=null)
         {
             Intent intent2 = new Intent(MainActivity.this, main_bottom_navigation.class);
@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
         googleButton=findViewById(R.id.google_signin);
 
+
+        //google sign in
         googleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                Toast.makeText(getApplicationContext(),user.toString(),Toast.LENGTH_LONG).show();
-//                Intent intent2 = new Intent(MainActivity.this, main_bottom_navigation.class);
-//                startActivity(intent2);
+                //Toast.makeText(getApplicationContext(),user.toString(),Toast.LENGTH_LONG).show();
+                Intent intent2 = new Intent(MainActivity.this, main_bottom_navigation.class);
+                startActivity(intent2);
 
                 // ...
             } else {

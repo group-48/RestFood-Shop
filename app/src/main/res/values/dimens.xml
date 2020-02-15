@@ -15,4 +15,5 @@
     <dimen name="padding20">20sp</dimen>
     <dimen name="text17">17sp</dimen>
     <dimen name="text22">22sp</dimen>
+    <dimen name="lay100">100dp</dimen>
 </resources>

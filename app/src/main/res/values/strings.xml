@@ -71,8 +71,10 @@
     <string name="twitter_consumer_key" translatable="false">YOUR_CONSUMER_KEY</string>
     <string name="twitter_consumer_secret" translatable="false">YOUR_CONSUMER_SECRET</string>
     <string name="status_paid">Status:Paid</string>
-    <string name="status_paid">Status:Paid</string>
     <string name="order">Order</string>
+    <string name="preparing">Preparing</string>
+    <string name="payment">Payment</string>
+    <string name="may_i_ask_your_phone_number">May I ask your phone number?</string>
 
 
 </resources>
