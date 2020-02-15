@@ -16,29 +16,23 @@
 
         tools:layout_editor_absoluteY="151dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/food_name_layout"
+        <TextView
+            android:id="@+id/item_name"
+            android:textStyle="bold"
+            android:text="@string/Item_name"
             android:layout_width="match_parent"
-            android:layout_height="67dp"
-            android:layout_marginBottom="@dimen/padding5"
-            app:boxBackgroundMode="outline"
-            app:boxCornerRadiusBottomEnd="@dimen/car_radius5"
-            app:boxCornerRadiusBottomStart="@dimen/car_radius5"
-            app:boxCornerRadiusTopEnd="@dimen/car_radius5"
-            app:boxCornerRadiusTopStart="@dimen/car_radius5"
-            app:counterEnabled="true">
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text20"
+            android:paddingHorizontal="@dimen/padding15"
+            android:gravity="center">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/food_name_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/food_name" />
-        </com.google.android.material.textfield.TextInputLayout>
+        </TextView>
+
 
 
         <com.google.android.material.textfield.TextInputLayout
 
-            android:id="@+id/food_price_layout"
+            android:id="@+id/item_Price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/padding5"
@@ -50,7 +44,7 @@
             app:boxCornerRadiusTopStart="@dimen/car_radius5">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/food_price_text"
+                android:id="@+id/item_price_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number" />
@@ -59,11 +53,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
 
-            android:id="@+id/food_price_category"
+            android:id="@+id/item_Quantity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/padding5"
-            android:hint="@string/food_cat"
+            android:hint="@string/quantity"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="@dimen/car_radius5"
             app:boxCornerRadiusBottomStart="@dimen/car_radius5"
@@ -71,18 +65,22 @@
             app:boxCornerRadiusTopStart="@dimen/car_radius5">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/food_cat_text"
+                android:id="@+id/item_qty_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="@string/quantity"
+
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
 
-            android:id="@+id/food_des_layout"
+            android:id="@+id/item_min_qty"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/padding5"
-            android:hint="Description"
+            android:hint="@string/minquantity"
             app:boxBackgroundMode="outline"
             app:boxCornerRadiusBottomEnd="@dimen/car_radius5"
             app:boxCornerRadiusBottomStart="@dimen/car_radius5"
@@ -90,113 +88,21 @@
             app:boxCornerRadiusTopStart="@dimen/car_radius5">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/food_des_text"
+                android:id="@+id/item_min_qty_text"
                 android:layout_width="match_parent"
+                android:inputType="number"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <TextView
-            android:id="@+id/textView_duration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:text="@string/duration"
-            android:textSize="20sp" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/padding5"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/min_pre_time_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/min_time"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomEnd="@dimen/car_radius5"
-                app:boxCornerRadiusBottomStart="@dimen/car_radius5"
-                app:boxCornerRadiusTopEnd="@dimen/car_radius5"
-                app:boxCornerRadiusTopStart="@dimen/car_radius5"
-
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/min_pre_time_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/textView_to"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="3dp"
-                android:text="@string/to" />
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/max_pre_time_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/max_time"
-                app:boxBackgroundMode="outline"
-                app:boxCornerRadiusBottomEnd="@dimen/car_radius5"
-                app:boxCornerRadiusBottomStart="@dimen/car_radius5"
-                app:boxCornerRadiusTopEnd="@dimen/car_radius5"
-                app:boxCornerRadiusTopStart="@dimen/car_radius5">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/max_pre_time_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number" />
-
-            </com.google.android.material.textfield.TextInputLayout>
 
 
-        </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/food_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:text="@string/food_type"
-            android:textSize="20sp" />
-
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipChildren="true"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radioButton_veg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:onClick="onRadioButtonClicked"
-                android:text="@string/radio_veg" />
-
-            <RadioButton
-                android:id="@+id/radioButton_non_veg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="onRadioButtonClicked"
-                android:text="@string/radio_non_veg" />
-
-
-        </RadioGroup>
 
 
     </LinearLayout>
@@ -228,7 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/button_blue"
-            android:onClick="deleteFood"
+            android:onClick="deleteItem"
             android:layout_margin="@dimen/padding5"
             android:text="@string/delete" />
     </LinearLayout>
