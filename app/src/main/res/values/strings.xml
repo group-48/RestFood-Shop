@@ -30,7 +30,6 @@
     <string name="food_cat">Category</string>
 
 
-
     <!--    string for fragment notification-->
     <string name="view_food">View Food List</string>
     <string name="add_food">Add Food</string>

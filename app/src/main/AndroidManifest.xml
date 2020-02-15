@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailInventory"></activity>
+        <activity android:name=".MinInventory"></activity>
+        <activity android:name=".DetailInventory" />
         <activity android:name=".Summary" />
         <activity android:name=".Inventry" />
         <activity android:name=".Qr" />
