@@ -23,6 +23,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.restfood.myapplication.OrderData;
 import com.restfood.myapplication.R;
 
+import java.util.List;
+
 import static com.restfood.myapplication.R.drawable.buttonstyle1;
 import static com.restfood.myapplication.R.drawable.buttonstyle2;
 import static com.restfood.myapplication.R.drawable.cancelbutton;
@@ -42,12 +44,13 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
     private Button paymetButton;
     private Button cancelButton;
 
-    //button to handleorer
+    //button to handle order
     private Button preparingButton;
     private Button readyButton;
     private Button doneButton;
 
     private TextView orderIdTextView;
+    private TextView foodName;
 
 
     @Nullable
@@ -68,6 +71,7 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
         doneButton=v.findViewById(R.id.button_done);
 
         orderIdTextView=v.findViewById(R.id.order_title);
+        foodName=v.findViewById(R.id.food_list);
 
 
         getOrder(docId);
@@ -226,6 +230,20 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
 
             }
         });
+
+
+        //this is to set the food list of order
+        List<String> fName=orederObj.convertFoodName();
+        List<String> fQty=orederObj.convertFoodQty();
+
+        String name="Order List:\n";
+        int i;
+        for (i=0;i<fName.size();i++)
+        {
+            name=name+"\t"+fName.get(i)+"\t:"+fQty.get(i);
+        }
+
+        foodName.setText(name);
 
 
 

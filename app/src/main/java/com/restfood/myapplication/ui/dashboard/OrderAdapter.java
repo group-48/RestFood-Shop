@@ -167,21 +167,25 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
         String title="Order No:"+"\n"+currentdata.getOrderId();
         holder.orderTitleTextView.setText(title);
 
-
-        String name=currentdata.convertFoodName().toString()+currentdata.convertFoodQty().toString();
-        holder.foodnameTextView.setText(name);
+        String name;
+//        String name=currentdata.convertFoodName().toString()+currentdata.convertFoodQty().toString();
+//        holder.foodnameTextView.setText(name);
 
 
         //this is function is to display the food name and qty
-//        ArrayList<String> fName= (ArrayList<String>) currentdata.convertFoodName();
-//        ArrayList<String> fQty= (ArrayList<String>) currentdata.convertFoodQty();
-//        String[] fName=currentdata.convertFoodName();
-//        String[] fQty=currentdata.convertFoodQty();
+        List<String> fName=currentdata.convertFoodName();
+        List<String> fQty=currentdata.convertFoodQty();
 
-//        for (int i=0;i<fName.size();i++)
-//        {
-//            name=fName.get(i)+"\t"+":"+fQty.get(i)+"\n";
-//        }
+        name="Order List:\n";
+        int i;
+        for (i=0;i<fName.size();i++)
+        {
+            name=name+"\t"+fName.get(i)+"\t:"+fQty.get(i);
+        }
+
+        holder.foodnameTextView.setText(name);
+
+
 
 
         String tot="Price    :"+currentdata.getTotal();
