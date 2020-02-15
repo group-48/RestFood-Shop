@@ -2,6 +2,7 @@ package com.restfood.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -48,15 +49,23 @@ public class Inventry extends AppCompatActivity {
         docIdList=new ArrayList<>();
 
         buttonAdd=findViewById(R.id.floatingbutton_invent);
-        rView=findViewById(R.id.inventory_recycler_view);
+
 
         onbegi();
+
+
+        //this is pre process of ui or recyclerview
+        rView=findViewById(R.id.inventory_recycler_view);
+        rView.setHasFixedSize(true);
+        rLayoutManager=new LinearLayoutManager(getApplicationContext());
+
+        itemList.add(new InventryData("Salt",10.0,20.0,30.0));
+        itemList.add(new InventryData("Salt",10,20,30));
+        itemList.add(new InventryData("Salt",10,20,30));
+        itemList.add(new InventryData("Salt",10,20,30));
+
         getDoc();
 
-//        itemList.add(new InventryData("Salt",10.0,20.0,30.0));
-//        itemList.add(new InventryData("Salt",10,20,30));
-//        itemList.add(new InventryData("Salt",10,20,30));
-//        itemList.add(new InventryData("Salt",10,20,30));
 
 
         postUi();

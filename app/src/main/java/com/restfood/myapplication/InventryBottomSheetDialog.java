@@ -213,7 +213,7 @@ public class InventryBottomSheetDialog extends BottomSheetDialogFragment {
 
         if(item.trim().length()!=0 && qty.trim().length()!=0)
         {
-            InventryData obj=new InventryData(itemEditText.getText().toString().trim(),Float.valueOf(qtyEditText.getText().toString()));
+            InventryData obj=new InventryData(itemEditText.getText().toString().trim(),Double.valueOf(qtyEditText.getText().toString()));
 
             db.collection("shop")
                     .document(new Auth().getUId())
