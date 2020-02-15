@@ -18,9 +18,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Source;
+import com.restfood.myapplication.Auth;
 import com.restfood.myapplication.OrderData;
 import com.restfood.myapplication.R;
 
@@ -230,6 +232,8 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
                 doneButton.setTextColor(R.color.white);
 
                 updateStatus(orederObj.getOrderId(),"Done");
+                orederObj.setStatus("Done");    //setting to object
+                storeHistory(orederObj);        //this is calling the function
 
             }
         });
@@ -243,7 +247,7 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
         int i;
         for (i=0;i<fName.size();i++)
         {
-            name=name+"\t"+fName.get(i)+"\t:"+fQty.get(i);
+            name=name+"\t"+fName.get(i)+"\t:"+fQty.get(i)+"\n";
         }
 
         foodName.setText(name);
@@ -333,6 +337,37 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
                         Toast.makeText(getActivity().getApplicationContext(), "Server issue", Toast.LENGTH_LONG).show();
                     }
                 });
+    }
+
+    //this is to store data to shop path
+    private void storeHistory(OrderData obj)
+    {
+
+
+        db.collection("shop")
+                .document(new Auth().getUId())
+                .collection("orders")
+                .add(obj)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        //Toast.makeText(getContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+                        //orderList.remove(position);
+
+
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //Log.w(TAG, "Error adding document", e);
+                        //Toast.makeText(getContext(),"Erroe adding doc", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
     }
 
 

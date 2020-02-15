@@ -180,7 +180,7 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
         int i;
         for (i=0;i<fName.size();i++)
         {
-            name=name+"\t"+fName.get(i)+"\t:"+fQty.get(i);
+            name=name+"\t"+fName.get(i)+"\t:"+fQty.get(i)+"\n";
         }
 
         holder.foodnameTextView.setText(name);

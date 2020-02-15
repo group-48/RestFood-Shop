@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -31,8 +32,11 @@ import com.restfood.myapplication.R;
 import com.restfood.myapplication.ui.home.FoodAvailableAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class DashboardFragment extends Fragment {
     private RecyclerView rView;
@@ -90,9 +94,9 @@ public class DashboardFragment extends Fragment {
             public void onDone(int position) {
                 updateStatus(position, "Done");
                 orderList.get(position).setStatus("Done");
-                orderList.remove(position);
-                updateUI();
-                Toast.makeText(getActivity().getApplicationContext(), "Order Removed", Toast.LENGTH_LONG).show();
+                storeHistory(orderList.get(position),position);
+
+                //Toast.makeText(getActivity().getApplicationContext(), "Order Removed", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -121,6 +125,37 @@ public class DashboardFragment extends Fragment {
         Toast.makeText(getContext(), "Updated", Toast.LENGTH_LONG).show();
     }
 
+    //this is to store data to shop path
+    private void storeHistory(OrderData obj, final int position)
+    {
+
+
+        db.collection("shop")
+                .document(new Auth().getUId())
+                .collection("orders")
+                .add(obj)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        //Toast.makeText(getContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+                        orderList.remove(position);
+                        updateUI();
+
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //Log.w(TAG, "Error adding document", e);
+                        //Toast.makeText(getContext(),"Erroe adding doc", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+    }
+
     //refresh the recyclerview
     private void updateUI() {
         rAdapter.notifyDataSetChanged();
@@ -131,6 +166,7 @@ public class DashboardFragment extends Fragment {
     //pos- position of object in list
     //status- what you update
     private void updateStatus(int pos, final String status) {
+
         db.collection("orders")
                 .document(docIdList.get(pos))
                 .update("Status", status)
