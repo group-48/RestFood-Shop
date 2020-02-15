@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -93,6 +94,11 @@ public class Inventry extends AppCompatActivity {
         rAdapter.setOnItemClickListener(new InventoryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                Intent inta=new Intent(Inventry.this,DetailInventory.class);
+//                //inta.putExtra("Demo",obj.getFoodName());
+                inta.putExtra("DocId",docIdList.get(position));
+                startActivity(inta);
+
 
             }
         });
