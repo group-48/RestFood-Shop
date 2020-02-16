@@ -27,7 +27,7 @@ public class MinInventory extends AppCompatActivity {
 
     //recycler view part
     private RecyclerView rView;
-    private InventoryAdapter rAdapter;
+   // private InventoryAdapter rAdapter;
     private RecyclerView.LayoutManager rLayoutManager;
 
 
@@ -79,9 +79,9 @@ public class MinInventory extends AppCompatActivity {
     private void postUi()
     {
         //assigning values
-        rAdapter=new InventoryAdapter(itemList);
-        rView.setLayoutManager(rLayoutManager);
-        rView.setAdapter(rAdapter);
+//        rAdapter=new InventoryAdapter(itemList);
+//        rView.setLayoutManager(rLayoutManager);
+//        rView.setAdapter(rAdapter);
 
 
 
