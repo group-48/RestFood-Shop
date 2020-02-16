@@ -1,5 +1,6 @@
 package com.restfood.myapplication.ui.dashboard;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -31,6 +33,8 @@ import com.restfood.myapplication.OrderData;
 import com.restfood.myapplication.R;
 import com.restfood.myapplication.ui.home.FoodAvailableAdapter;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -90,6 +94,7 @@ public class DashboardFragment extends Fragment {
             }
 
             // update the three function
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onDone(int position) {
                 updateStatus(position, "Done");
@@ -126,13 +131,31 @@ public class DashboardFragment extends Fragment {
     }
 
     //this is to store data to shop path
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void storeHistory(OrderData obj, final int position)
     {
+        LocalDate currentdate = LocalDate.now();
+        Month currentMonth = currentdate.getMonth();
+        int currentYear = currentdate.getYear();
 
 
-        db.collection("shop")
+
+        //this part is to store order
+        final String yea=String.valueOf(currentYear);
+        final String mon=currentMonth.toString();
+        final String day=String.valueOf(currentdate.getDayOfMonth());
+        final String dat=yea+"-"+mon+"-"+day;
+
+
+        //String dat=String.valueOf(year)+"/"+String.valueOf(month);
+        //Toast.makeText(getContext(),"DocumentSnapshot added with ID: " + dat, Toast.LENGTH_SHORT).show();
+
+
+        Task<DocumentReference> documentReferenceTask = db.collection("shop")
                 .document(new Auth().getUId())
                 .collection("orders")
+                .document(new Auth().getUId())
+                .collection(dat)
                 .add(obj)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
@@ -247,7 +270,6 @@ public class DashboardFragment extends Fragment {
                         if (task.isSuccessful()) {
                             //this is temp list to get from database
                             //orderList.clear();
-                            ArrayList<OrderData> list = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 Log.d("Doc Id Are:", document.getId());

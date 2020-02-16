@@ -29,6 +29,7 @@ import com.restfood.myapplication.Inventry;
 import com.restfood.myapplication.MainActivity;
 import com.restfood.myapplication.Qr;
 import com.restfood.myapplication.R;
+import com.restfood.myapplication.Summary;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -104,7 +105,9 @@ public class NotificationsFragment extends Fragment {
         buttonSummery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"This is not developed yet",Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(),"This is not developed yet",Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(getActivity(), Summary.class);
+                startActivity(intent);
             }
         });
 

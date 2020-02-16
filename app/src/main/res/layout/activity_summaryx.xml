@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="@dimen/padding10"
+    android:layout_height="match_parent"
+    tools:context=".Summary">
+
+
+    android:layout_height="match_parent">
+    <com.google.android.material.card.MaterialCardView
+        app:cardBackgroundColor="@color/green"
+        app:cardCornerRadius="@dimen/padding15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/padding30"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/today_income"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:textSize="@dimen/text40"
+                android:layout_marginBottom="@dimen/padding10"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/daily_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs.1000"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:textSize="@dimen/text40"
+                android:textStyle="bold">
+
+            </TextView>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</LinearLayout>

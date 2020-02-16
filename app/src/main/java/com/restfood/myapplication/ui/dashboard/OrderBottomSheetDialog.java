@@ -1,6 +1,7 @@
 package com.restfood.myapplication.ui.dashboard;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,6 +28,8 @@ import com.restfood.myapplication.Auth;
 import com.restfood.myapplication.OrderData;
 import com.restfood.myapplication.R;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
 
 import static com.restfood.myapplication.R.drawable.buttonstyle1;
@@ -221,6 +225,7 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
 
 
         doneButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 readyButton.setBackground(getResources().getDrawable(buttonstyle1));
@@ -340,13 +345,29 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
     }
 
     //this is to store data to shop path
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void storeHistory(OrderData obj)
     {
+        LocalDate currentdate = LocalDate.now();
+        Month currentMonth = currentdate.getMonth();
+        int currentYear = currentdate.getYear();
+
+//        Date date=new Date();
+//        int month=date.getMonth();
+//        int year=date.getYear();
+
+        //this part is to store order
+        final String yea=String.valueOf(currentYear);
+        final String mon=currentMonth.toString();
+        final String day=String.valueOf(currentdate.getDayOfMonth());
+        final String dat=yea+"-"+mon+"-"+day;
 
 
         db.collection("shop")
                 .document(new Auth().getUId())
                 .collection("orders")
+                .document(new Auth().getUId())
+                .collection(dat)
                 .add(obj)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
