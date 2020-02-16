@@ -23,7 +23,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Inventry extends AppCompatActivity {
+public class
+Inventry extends AppCompatActivity {
 
     //recycler view part
     private RecyclerView rView;

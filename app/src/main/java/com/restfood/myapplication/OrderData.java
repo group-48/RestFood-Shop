@@ -21,7 +21,7 @@ OrderData {
     private String user;
 
 
-    //this is to retreve data as a string
+    //this is to retrieve data as a string
     private String tempName;
     private String tempQty;
 
@@ -159,17 +159,18 @@ OrderData {
         this.user = user;
     }
 
-//    public ArrayList<OrderFoodData> getFoodNameList() {
-//        return foodList;
-//    }
-//
-//    public void setFoodNameList(ArrayList<OrderFoodData> foodNameList) {
-//        this.foodList = foodNameList;
-//    }
-//
-//    //this is to add food object to this
-//    public void addFood(OrderFoodData obj)
-//    {
-//        this.foodList.add(obj);
-//    }
+    /*  public ArrayList<OrderFoodData> getFoodNameList() {
+          return foodList;
+    }
+
+    public void setFoodNameList(ArrayList<OrderFoodData> foodNameList) {
+        this.foodList = foodNameList;
+    }
+
+    //this is to add food object to this
+    public void addFood(OrderFoodData obj)
+    {
+        this.foodList.add(obj);
+            }
+     */
 }

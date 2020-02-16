@@ -30,7 +30,7 @@ public class VerifyPhone extends AppCompatActivity {
     //It is the verification id that will be sent to the user
     private String mVerificationId;
 
-    //The edittext to input the code
+    //The edit text to input the code
     private EditText editTextCode;
 
     //firebase auth object
@@ -46,7 +46,7 @@ public class VerifyPhone extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         editTextCode = findViewById(R.id.editTextCode);
 
-//        System.out.println(mAuth.getUid());
+        //  System.out.println(mAuth.getUid());
 
         //getting mobile number from the previous activity
         //and sending the verification code to the number

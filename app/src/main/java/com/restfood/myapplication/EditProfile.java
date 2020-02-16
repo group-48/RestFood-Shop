@@ -146,37 +146,36 @@ public class EditProfile extends AppCompatActivity {
         shop_type_text.setText(shopProfile.get("shopType").toString());
     }
 
+     private boolean valEmail(){
+         String email=shop_email_text.getText().toString();
 
-    private boolean valEmail()
-    {
-        String email=shop_email_text.getText().toString();
+         if(email==null)
+         {
+             return true;
+         }
+         else
+         {
+             boolean check=false;
+             for(int i=0;i<email.length();i++)
+             {
+                 if(email.charAt(i)=='@')
+                 {
+                     check=true;
+                 }
+             }
 
-        if(email==null)
-        {
-            return true;
-        }
-        else
-        {
-            boolean check=false;
-            for(int i=0;i<email.length();i++)
-            {
-                if(email.charAt(i)=='@')
-                {
-                    check=true;
-                }
-            }
+             if(check==true)
+             {
+                 return true;
+             }
+             else
+             {
+                 shop_email_layout.setError("No @ in your email");
+                 return false;
+             }
+         }
+     }
 
-            if(check==true)
-            {
-                return true;
-            }
-            else
-            {
-                shop_email_layout.setError("No @ in your email");
-                return false;
-            }
-        }
-    }
 
     private boolean valShoptype()
     {

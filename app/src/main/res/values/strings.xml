@@ -64,7 +64,7 @@
     <string name="prepare">Prepare</string>
     <string name="Ready">Ready</string>
     <string name="Done">Done</string>
-
+    <string name="menu_refresh">menu_refresh</string>
 
     <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
     <string name="facebook_application_id" translatable="false">YOUR_APP_ID</string>
