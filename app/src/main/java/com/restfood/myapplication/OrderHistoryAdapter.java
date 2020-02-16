@@ -152,7 +152,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<com.restfood.myapp
     @Override
     public com.restfood.myapplication.OrderHistoryAdapter.OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.order_card, parent, false);
+        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.order_history_card, parent, false);
         com.restfood.myapplication.OrderHistoryAdapter.OrderViewHolder vi = new com.restfood.myapplication.OrderHistoryAdapter.OrderViewHolder(v,mListener);
         return vi;
     }

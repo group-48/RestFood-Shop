@@ -53,6 +53,7 @@ public class Summary extends AppCompatActivity {
         setTitle("Summary");
 
 
+
         orderList.add(new OrderData(true, "Pizza", "AA", "gfnufng", "gjfng", "gbuyfg", 522, "gjhbg"));
 
         getTotal();
