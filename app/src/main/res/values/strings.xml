@@ -80,6 +80,9 @@
     <string name="quantity">Quantity</string>
     <string name="minquantity">MinQuantity</string>
     <string name="today_income">Today Income</string>
+    <string name="left"><![CDATA[<]]></string>
+    <string name="date">Date</string>
+    <string name="right"><![CDATA[>]]></string>
 
 
 </resources>

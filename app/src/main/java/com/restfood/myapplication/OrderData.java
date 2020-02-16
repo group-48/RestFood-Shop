@@ -25,9 +25,17 @@ OrderData {
     private String tempName;
     private String tempQty;
 
+    public OrderData() {
+        this.done=true;
+        this.notes=null;
+        this.orderId=null;
+        this.paymentMode=null;
+        this.paymentStatus=null;
+        this.status=null;
+        this.total=0;
+        this.user=null;
 
-
-
+    }
 
     //for food orderfoodata
     //private ArrayList<OrderFoodData> foodList;
