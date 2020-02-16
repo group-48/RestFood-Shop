@@ -31,37 +31,15 @@ public class Summary extends AppCompatActivity {
 
     ArrayList<OrderData> orderList = new ArrayList<>();
     ArrayList<String> docIdList = new ArrayList<>();
+    ArrayList<Integer> totalList=new ArrayList<>();
 
     //ui components
     private TextView dailyTotalTextView;
 
-    ArrayList<DataPoint> list=new ArrayList<>();
 
-    DataPoint[] dataPointArray;
+    DataPoint[] dataPointArray;     //this is to assign values
 
-//    private DataPoint[] dataPointArray=new DataPoint[]{
-//            new DataPoint(0, 1),
-//            new DataPoint(1, 5),
-//            new DataPoint(2, 3),
-//            new DataPoint(3, 2),
-//            new DataPoint(4, 6),
-////            new DataPoint(5,50),
-////            new DataPoint(6,200),
-////            new DataPoint(7,300),
-////            new DataPoint(8,50),
-////            new DataPoint(9,60)
-//    };
 
-//    new DataPoint(0, 1),
-//            new DataPoint(1, 5),
-//            new DataPoint(2, 3),
-//            new DataPoint(3, 2),
-//            new DataPoint(4, 6),
-//            new DataPoint(5,50),
-//            new DataPoint(6,200),
-//            new DataPoint(7,300),
-//            new DataPoint(8,50),
-//            new DataPoint(9,60)
 
 
 
@@ -71,46 +49,9 @@ public class Summary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summaryx);
         dailyTotalTextView=findViewById(R.id.daily_total);
-        list.add(new DataPoint(1,20));
-        list.add(new DataPoint(2,80));
-        list.add(new DataPoint(3,100));
-        list.add(new DataPoint(4,50));
-
-        dataPointArray=new DataPoint[4];
 
 
         orderList.add(new OrderData(true, "Pizza", "AA", "gfnufng", "gjfng", "gbuyfg", 522, "gjhbg"));
-
-        try
-        {
-            this.dataPointArray[0]=new DataPoint(1,20);
-            this.dataPointArray[1]=new DataPoint(2,40);
-            this.dataPointArray[2]=new DataPoint(3,60);
-            this.dataPointArray[3]=new DataPoint(4,50);
-
-            GraphView graph = (GraphView) findViewById(R.id.graph);
-            LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPointArray);
-            series.setBackgroundColor(R.color.button_blue);
-            series.setDataPointsRadius(2);
-            graph.addSeries(series);
-
-
-
-        }
-
-
-        catch (Exception e)
-        {
-            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
-        }
-
-
-
-
-
-
-
-
 
         getTotal();
 
@@ -151,6 +92,8 @@ public class Summary extends AppCompatActivity {
                                 Log.d("Doc Id Are:", document.getId());
 
                                 try {
+                                    int temp=Integer.parseInt(document.get("total").toString());
+                                    totalList.add(temp);
                                     total=total+Integer.parseInt(document.get("total").toString());
                                 } catch (Exception e) {
                                     Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_LONG).show();
@@ -158,6 +101,7 @@ public class Summary extends AppCompatActivity {
                                 //Toast.makeText(getContext(),.((List<String>) document.get("Food_Names")).get(0),Toast.LENGTH_LONG).show();
                             }
                              setTotal(total);       //this call to private method
+                             setGraph();
 
                         } else {
                             Toast.makeText(getApplicationContext(),"Error in getting data",Toast.LENGTH_LONG).show();
@@ -180,6 +124,39 @@ public class Summary extends AppCompatActivity {
 
     }
 
+    //this is to set the graph
+    private void setGraph()
+    {
+        dataPointArray=new DataPoint[totalList.size()];
+
+        int i;
+        for(i=0;i<totalList.size();i++)
+        {
+            dataPointArray[i]=new DataPoint(i+1,totalList.get(i));
+        }
+
+        try
+        {
+
+            GraphView graph = (GraphView) findViewById(R.id.graph);
+            LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPointArray);
+            series.setBackgroundColor(R.color.button_blue);
+            series.setDataPointsRadius(2);
+            graph.addSeries(series);
+
+        }
+
+
+        catch (Exception e)
+        {
+            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+
+
+    //this is to start a new activity
     public void clickHistory(View view)
     {
         Intent inta=new Intent(getApplicationContext(),OrderHistory.class);
