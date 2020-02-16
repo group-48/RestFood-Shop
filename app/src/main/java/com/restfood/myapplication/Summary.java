@@ -50,6 +50,7 @@ public class Summary extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summaryx);
         dailyTotalTextView=findViewById(R.id.daily_total);
+        setTitle("Summary");
 
 
         orderList.add(new OrderData(true, "Pizza", "AA", "gfnufng", "gjfng", "gbuyfg", 522, "gjhbg"));

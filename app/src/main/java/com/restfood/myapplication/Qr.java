@@ -31,6 +31,7 @@ public class Qr extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr);
+        setTitle("QR");
         qrImage=findViewById(R.id.qr_image);
 
         shopId=new Auth().getUId();

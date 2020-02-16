@@ -106,6 +106,9 @@ public class HomeFragment extends Fragment {
     }
 
 
+
+
+
     private void updateAvailable(final int position, final boolean click)
     {
         //to use in query

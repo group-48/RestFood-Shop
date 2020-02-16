@@ -186,7 +186,6 @@ public class Statistics extends AppCompatActivity {
 
         try
         {
-
             GraphView graph = (GraphView) findViewById(R.id.graph);
             LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPointArray);
             series.setBackgroundColor(R.color.button_blue);

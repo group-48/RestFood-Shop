@@ -61,6 +61,8 @@ public class EditProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
+        setTitle("Profile");
+
         //initial all objects
         shop_name_text= findViewById(R.id.shopname_edit_text);
         text_phone_number=findViewById(R.id.edit_profile_phone_number_text);

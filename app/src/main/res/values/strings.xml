@@ -33,7 +33,7 @@
     <!--    string for fragment notification-->
     <string name="view_food">View Food List</string>
     <string name="add_food">Add Food</string>
-    <string name="summery">Summery</string>
+    <string name="summery">Summary</string>
     <string name="qr">QR</string>
     <string name="signout">Sign-Out</string>
     <string name="invent">Inventry</string>

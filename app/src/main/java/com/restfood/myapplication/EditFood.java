@@ -52,6 +52,8 @@ public class EditFood extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_food);
 
+        setTitle("Edit Food");
+
         //to get doc Id from previeus activity
         Intent inta=getIntent();
         docId=inta.getStringExtra("DocId");

@@ -58,12 +58,13 @@
             android:layout_height="200dp"
             android:onClick="clickStat"
             android:clickable="true">
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/padding30"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                >
                 <TextView
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/statistics"
@@ -75,7 +76,7 @@
 
                 </TextView>
 
-            </LinearLayout>
+            </RelativeLayout>
 
         </com.google.android.material.card.MaterialCardView>
 

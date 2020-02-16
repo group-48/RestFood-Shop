@@ -47,6 +47,8 @@ Inventry extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventry);
 
+        setTitle("Inventory");
+
         itemList=new ArrayList<>();
         docIdList=new ArrayList<>();
 

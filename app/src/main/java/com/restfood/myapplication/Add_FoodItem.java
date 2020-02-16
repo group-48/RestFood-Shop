@@ -74,6 +74,7 @@ public class Add_FoodItem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_add__food_item);
+        setTitle("Add Food Item");
 
 //        try
 //        {

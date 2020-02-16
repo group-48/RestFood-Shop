@@ -44,6 +44,8 @@ public class EditFoodList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_food_list);
+        setTitle("Food List");
+
 
         //this set to next activity
 
