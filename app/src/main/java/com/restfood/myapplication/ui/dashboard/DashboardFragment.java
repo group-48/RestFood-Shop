@@ -179,7 +179,7 @@ public class DashboardFragment extends Fragment {
 
     }
 
-    //refresh the recyclerview
+    //refresh the recycler view
     private void updateUI() {
         rAdapter.notifyDataSetChanged();
     }

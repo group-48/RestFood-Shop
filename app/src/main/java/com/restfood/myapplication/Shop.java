@@ -33,33 +33,31 @@ public String getShopName()
 {
     return shopName;
 }
-//
-//public void  setShopId(String Id) {
-//    shopId = Id;
-//}
-
-
-public void setShopType(String type){
-    shopType =type;
+/*
+    public void  setShopId(String Id) {
+    shopId = Id;
+}*/
+     public void setShopType(String type){
+       shopType =type;
   }
- public String getShopType(){
-    return shopType;
+     public String getShopType(){
+        return shopType;
  }
 // public String getShopId()
 // {
 //     return shopId;
 // }
 
- public void setAddress(String add)
- {
+     public void setAddress(String add)
+      {
      shopAddress=add;
- }
+      }
 
- public String getShopAddress()
- {
+    public String getShopAddress()
+     {
      return shopAddress;
- }
- public void setShopEmail(String email){
+     }
+    public void setShopEmail(String email){
     shopEmail =email;
     }
     public String getShopemail(){

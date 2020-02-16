@@ -12,9 +12,6 @@ public class NotificationsViewModel extends ViewModel {
         mText = new MutableLiveData<>();
         mText.setValue("Burger King");
     }
-
-
-
     public LiveData<String> getText() {
         return mText;
     }
