@@ -132,6 +132,29 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
+        String clickx=String.valueOf(click);
+
+        db.collection("shop")
+                .document(uId)
+                .collection("FoodList")
+                .document(docId)
+                .update("available",clickx)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("This done", "DocumentSnapshot successfully updated!");
+                        foodList.get(position).setIsAvailable(click);
+                        //Toast.makeText(getActivity().getApplicationContext(),foodList.get(position).getFoodName()+":Updated",Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("This error", "Error updating document", e);
+                        Toast.makeText(getActivity().getApplicationContext(),foodList.get(position).getFoodName()+":Fail Update",Toast.LENGTH_LONG).show();
+                    }
+                });
+
     }
 
 
