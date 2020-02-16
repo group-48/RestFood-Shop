@@ -20,6 +20,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.restfood.myapplication.ui.notifications.Statistics;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -37,7 +38,7 @@ public class Summary extends AppCompatActivity {
     private TextView dailyTotalTextView;
 
 
-    DataPoint[] dataPointArray;     //this is to assign values
+
 
 
 
@@ -61,7 +62,6 @@ public class Summary extends AppCompatActivity {
     //this is to get total from db
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void getTotal() {
-        orderList.clear();
 
         LocalDate currentDate = LocalDate.now();
         Month currentMonth = currentDate.getMonth();
@@ -101,7 +101,7 @@ public class Summary extends AppCompatActivity {
                                 //Toast.makeText(getContext(),.((List<String>) document.get("Food_Names")).get(0),Toast.LENGTH_LONG).show();
                             }
                              setTotal(total);       //this call to private method
-                             setGraph();
+                            // setGraph();
 
                         } else {
                             Toast.makeText(getApplicationContext(),"Error in getting data",Toast.LENGTH_LONG).show();
@@ -124,35 +124,7 @@ public class Summary extends AppCompatActivity {
 
     }
 
-    //this is to set the graph
-    private void setGraph()
-    {
-        dataPointArray=new DataPoint[totalList.size()];
 
-        int i;
-        for(i=0;i<totalList.size();i++)
-        {
-            dataPointArray[i]=new DataPoint(i+1,totalList.get(i));
-        }
-
-        try
-        {
-
-            GraphView graph = (GraphView) findViewById(R.id.graph);
-            LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPointArray);
-            series.setBackgroundColor(R.color.button_blue);
-            series.setDataPointsRadius(2);
-            graph.addSeries(series);
-
-        }
-
-
-        catch (Exception e)
-        {
-            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
-        }
-
-    }
 
 
 
@@ -160,6 +132,15 @@ public class Summary extends AppCompatActivity {
     public void clickHistory(View view)
     {
         Intent inta=new Intent(getApplicationContext(),OrderHistory.class);
+//                //inta.putExtra("Demo",obj.getFoodName());
+        //inta.putExtra("DocId",docIdList.get(position));
+        startActivity(inta);
+
+    }
+
+    public void clickStat(View view)
+    {
+        Intent inta=new Intent(getApplicationContext(), Statistics.class);
 //                //inta.putExtra("Demo",obj.getFoodName());
         //inta.putExtra("DocId",docIdList.get(position));
         startActivity(inta);

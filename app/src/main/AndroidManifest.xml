@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".OrderHistory"></activity>
+        <activity android:name=".ui.notifications.Statistics"></activity>
+        <activity android:name=".OrderHistory" />
         <activity android:name=".MinInventory" />
         <activity android:name=".DetailInventory" />
         <activity android:name=".Summary" />
