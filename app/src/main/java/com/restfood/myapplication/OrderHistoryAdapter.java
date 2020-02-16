@@ -29,12 +29,12 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<com.restfood.myapp
     private com.restfood.myapplication.OrderHistoryAdapter.OnItemClickListener mListener;
 
     public interface OnItemClickListener {
-//        void onItemClick(int position);
-//        void onDone(int position);
-//        void onPrepare(int position);
-//        void onReady(int position);
-//
-//        void onSwitchClick(int position,boolean click);
+        void onItemClick(int position);
+        void onDone(int position);
+        void onPrepare(int position);
+        void onReady(int position);
+
+        void onSwitchClick(int position,boolean click);
     }
 
     public void setOnItemClickListener(com.restfood.myapplication.OrderHistoryAdapter.OnItemClickListener listener) {
@@ -73,20 +73,20 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<com.restfood.myapp
 
             //catTextView=itemView.findViewById(R.id.catTextView);
 
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    if(listener!=null)
-//                    {
-//                        int position=getAdapterPosition();
-//                        if(position!=RecyclerView.NO_POSITION)
-//                        {
-//                            listener.onItemClick(position);
-//                        }
-//                    }
-//
-//                }
-//            });
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(listener!=null)
+                    {
+                        int position=getAdapterPosition();
+                        if(position!=RecyclerView.NO_POSITION)
+                        {
+                            listener.onItemClick(position);
+                        }
+                    }
+
+                }
+            });
 
 
             //three updating the food state
@@ -152,7 +152,7 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<com.restfood.myapp
     @Override
     public com.restfood.myapplication.OrderHistoryAdapter.OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.order_history_card, parent, false);
+        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.order_card, parent, false);
         com.restfood.myapplication.OrderHistoryAdapter.OrderViewHolder vi = new com.restfood.myapplication.OrderHistoryAdapter.OrderViewHolder(v,mListener);
         return vi;
     }
@@ -202,6 +202,24 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<com.restfood.myapp
 
     }
 
+    private String getFood(List<String> name,List<String> qty)
+    {
+
+        String va="Hi";
+        va =name.get(0);
+        if(name.size()>1)
+        {
+            int i;
+            for(i=1;i<name.size();i++)
+            {
+                //va=va+name.get(i)+qty.get(i);
+
+            }
+        }
+
+
+        return va;
+    }
 
 
     //this returnig number of elements in this list

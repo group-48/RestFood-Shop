@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +69,20 @@ public class OrderHistory extends AppCompatActivity {
 
         setCurrentDate();
 
+        afterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                after();
+            }
+        });
+
+        beforeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                before();
+            }
+        });
+
     }
 
     private void postUi()
@@ -96,6 +111,34 @@ public class OrderHistory extends AppCompatActivity {
         getOrderHistory(dat);
 
         dateButton.setText(dat);
+    }
+
+    private void after()
+    {
+        this.currentDay=this.currentDay+1;
+
+        //this part is to store order
+        final String yea=String.valueOf(currentYear);
+        final String mon=currentMonth.toString();
+        final String day=String.valueOf(currentDay);
+        final String dat=yea+"-"+mon+"-"+day;
+        getOrderHistory(dat);
+
+        dateButton.setText(dat);
+    }
+
+    private void before()
+    {
+        this.currentDay=this.currentDay-1;
+
+        //this part is to store order
+        final String yea=String.valueOf(currentYear);
+        final String mon=currentMonth.toString();
+        final String day=String.valueOf(currentDay);
+        final String dat=yea+"-"+mon+"-"+day;
+        getOrderHistory(dat);
+
+        dateButton.setText(dat);
 
     }
 
@@ -114,7 +157,6 @@ public class OrderHistory extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             //this is temp list to get from database
                             //orderList.clear();
-                            ArrayList<OrderData> list = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 Log.d("Doc Id Are:", document.getId());
@@ -137,7 +179,6 @@ public class OrderHistory extends AppCompatActivity {
                                 }
 
                                 docIdList.add(document.getId());
-
 
                             }
                             //Toast.makeText(getApplicationContext(),orderList.size(),Toast.LENGTH_LONG).show();

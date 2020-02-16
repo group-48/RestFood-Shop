@@ -83,6 +83,7 @@
     <string name="left"><![CDATA[<]]></string>
     <string name="date">Date</string>
     <string name="right"><![CDATA[>]]></string>
+    <string name="statistics">Statistics</string>
 
 
 </resources>
