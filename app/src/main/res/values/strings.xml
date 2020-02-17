@@ -84,13 +84,13 @@
     <string name="right"><![CDATA[>]]></string>
     <string name="statistics">Statistics</string>
     <string name="inventory">Inventory</string>
-    <string name="reservation">Reservation</string>
     <string name="checkin">Check In</string>
     <string name="accept">Accept</string>
     <string name="time">Time</string>
     <string name="no_of_guest">No of Guest</string>
     <string name="status">Status</string>
     <string name="date">Date</string>
+    <string name="reservation">Reservation</string>
 
 
 </resources>

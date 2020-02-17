@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/button_blue"
             android:gravity="center"
-            android:text="@string/order"
+            android:text="@string/reservation"
             android:textSize="@dimen/text20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,16 +34,9 @@
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/res_title">
 
-            <view
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                >
-
-            </view>
-
 
             <TextView
-                android:id="@+id/date"
+                android:id="@+id/date_res"
                 android:text="@string/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -53,7 +46,7 @@
             </TextView>
 
             <TextView
-                android:id="@+id/time"
+                android:id="@+id/time_res"
                 android:text="@string/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -76,7 +69,7 @@
             </TextView>
 
             <TextView
-                android:id="@+id/status"
+                android:id="@+id/status_res"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/padding5"
@@ -97,11 +90,10 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
             <TextView
-                android:id="@+id/accept"
+                android:id="@+id/prepare"
                 android:textStyle="bold"
                 android:textSize="@dimen/text20"
                 android:layout_width="wrap_content"
-                android:textColor="@color/button_blue"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:clickable="true"
@@ -113,7 +105,7 @@
             <TextView
                 android:textStyle="bold"
                 android:textSize="@dimen/text20"
-                android:id="@+id/cancel"
+                android:id="@+id/ready"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -127,7 +119,7 @@
             <TextView
                 android:textStyle="bold"
                 android:textSize="@dimen/text20"
-                android:id="@+id/check_in"
+                android:id="@+id/done"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"

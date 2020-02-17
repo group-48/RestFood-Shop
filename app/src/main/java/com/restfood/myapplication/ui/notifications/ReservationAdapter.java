@@ -14,6 +14,8 @@ import com.restfood.myapplication.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.StatementEvent;
+
 
 ///this class is to assign value and create a componentx
 public class ReservationAdapter extends RecyclerView.Adapter<com.restfood.myapplication.ui.notifications.ReservationAdapter.ReservationViewHolder> {
@@ -27,11 +29,10 @@ public class ReservationAdapter extends RecyclerView.Adapter<com.restfood.myappl
 
     public interface OnItemClickListener {
         void onItemClick(int position);
-        void onDone(int position);
-        void onPrepare(int position);
-        void onReady(int position);
+        void onAccept(int position);
+        void onCancel(int position);
+        void onCheckIn(int position);
 
-        void onSwitchClick(int position,boolean click);
     }
 
     public void setOnItemClickListener(com.restfood.myapplication.ui.notifications.ReservationAdapter.OnItemClickListener listener) {
@@ -43,29 +44,31 @@ public class ReservationAdapter extends RecyclerView.Adapter<com.restfood.myappl
     public static class ReservationViewHolder extends RecyclerView.ViewHolder
     {
         ///create view for single unit
-        private TextView foodnameTextView;
-        private TextView totalTextView;
-        private TextView doneTextView;
-        private TextView prepareTextView;
-        private TextView readyTextView;
+        private TextView reservationTextView;
+        private TextView dateTextView;
+        private TextView timeTextView;
+        private TextView guestTextView;
         private TextView statusTextView;
-        private TextView paidTextView;
-        private TextView orderTitleTextView;
+
+        //this is to handle reservation
+        private TextView acceptTextView;
+        private TextView cancelTextView;
+        private TextView checkinTextView;
 
 
         public ReservationViewHolder(@NonNull View itemView,final com.restfood.myapplication.ui.notifications.ReservationAdapter.OnItemClickListener listener) {
             super(itemView);
 
             //assigning ui values to variables
-            foodnameTextView=itemView.findViewById(R.id.order_food_item);
-            totalTextView=itemView.findViewById(R.id.total);
-            doneTextView=itemView.findViewById(R.id.done);
-            prepareTextView=itemView.findViewById(R.id.prepare);
-            readyTextView=itemView.findViewById(R.id.ready);
-            paidTextView=itemView.findViewById(R.id.is_paid);
-            statusTextView=itemView.findViewById(R.id.food_status);
-            orderTitleTextView=itemView.findViewById(R.id.order_title);
+            reservationTextView=itemView.findViewById(R.id.res_title);
+            dateTextView=itemView.findViewById(R.id.date_res);
+            timeTextView=itemView.findViewById(R.id.time_res);
+            guestTextView=itemView.findViewById(R.id.no_guest);
+            statusTextView=itemView.findViewById(R.id.status_res);
 
+            acceptTextView=itemView.findViewById(R.id.prepare);
+            cancelTextView=itemView.findViewById(R.id.ready);
+            checkinTextView=itemView.findViewById(R.id.done);
 
 
             //catTextView=itemView.findViewById(R.id.catTextView);
@@ -88,7 +91,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<com.restfood.myappl
 
             //three updating the food state
             //this gives position to fragment
-            doneTextView.setOnClickListener(new View.OnClickListener() {
+            acceptTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(listener!=null)
@@ -96,14 +99,14 @@ public class ReservationAdapter extends RecyclerView.Adapter<com.restfood.myappl
                         int position=getAdapterPosition();
                         if(position!=RecyclerView.NO_POSITION)
                         {
-                            listener.onDone(position);
+                            listener.onAccept(position);
                         }
                     }
 
                 }
             });
 
-            prepareTextView.setOnClickListener(new View.OnClickListener() {
+            cancelTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(listener!=null)
@@ -111,14 +114,14 @@ public class ReservationAdapter extends RecyclerView.Adapter<com.restfood.myappl
                         int position=getAdapterPosition();
                         if(position!=RecyclerView.NO_POSITION)
                         {
-                            listener.onPrepare(position);
+                            listener.onCancel(position);
                         }
                     }
 
                 }
             });
 
-            readyTextView.setOnClickListener(new View.OnClickListener() {
+            checkinTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(listener!=null)
@@ -126,7 +129,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<com.restfood.myappl
                         int position=getAdapterPosition();
                         if(position!=RecyclerView.NO_POSITION)
                         {
-                            listener.onReady(position);
+                            listener.onCheckIn(position);
                         }
                     }
 
@@ -159,8 +162,25 @@ public class ReservationAdapter extends RecyclerView.Adapter<com.restfood.myappl
     @Override
     public void onBindViewHolder(@NonNull com.restfood.myapplication.ui.notifications.ReservationAdapter.ReservationViewHolder holder, int position) {
         //ReservationData currentdata=list.get(position);
+        QueryDocumentSnapshot obj=list.get(position);
 
+        String temp;
+        temp=obj.get("date").toString();
+        String date="Date:"+temp;
 
+        holder.dateTextView.setText(date);
+
+        temp=obj.get("time").toString();
+        String time="Time:"+temp;
+        holder.timeTextView.setText(time);
+
+        temp=obj.get("guestno").toString();
+        String gNo="No of Guest:"+temp;
+        holder.guestTextView.setText(gNo);
+
+        temp=obj.get("status").toString();
+        String status="Status:"+temp;
+        holder.statusTextView.setText(status);
 
 
         //Log.d("Available check",String.valueOf(currentdata.getIsAvailable()));
