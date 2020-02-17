@@ -14,9 +14,6 @@ import com.restfood.myapplication.R;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.sql.StatementEvent;
-
-
 ///this class is to assign value and create a componentx
 public class ReservationAdapter extends RecyclerView.Adapter<com.restfood.myapplication.ui.notifications.ReservationAdapter.ReservationViewHolder> {
 
@@ -100,6 +97,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<com.restfood.myappl
                         if(position!=RecyclerView.NO_POSITION)
                         {
                             listener.onAccept(position);
+
                         }
                     }
 
@@ -181,6 +179,10 @@ public class ReservationAdapter extends RecyclerView.Adapter<com.restfood.myappl
         temp=obj.get("status").toString();
         String status="Status:"+temp;
         holder.statusTextView.setText(status);
+
+        temp=obj.get("bookingId").toString();
+        String book="Reservation Id\n"+temp;
+        holder.reservationTextView.setText(book);
 
 
         //Log.d("Available check",String.valueOf(currentdata.getIsAvailable()));

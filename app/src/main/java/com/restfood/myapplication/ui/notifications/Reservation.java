@@ -10,6 +10,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -54,6 +56,68 @@ public class Reservation extends AppCompatActivity {
         rView.setLayoutManager(rLayoutManager);
         rView.setAdapter(rAdapter);
 
+        rAdapter.setOnItemClickListener(new ReservationAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+
+            @Override
+            public void onAccept(int position) {
+                updateStatus(position,"Accepted");
+            }
+
+            @Override
+            public void onCancel(int position) {
+                updateStatus(position,"Cancel");
+
+
+            }
+
+            @Override
+            public void onCheckIn(int position) {
+                updateStatus(position,"checkIn");
+            }
+        });
+
+
+
+    }
+
+    //refresh the recycler view
+    private void updateUI() {
+        rAdapter.notifyDataSetChanged();
+    }
+
+
+    //this is to update the status of order
+    //pos- position of object in list
+    //status- what you update
+    private void updateStatus(final int pos, final String status) {
+
+        db.collection("reserve")
+                .document(list.get(pos).getId())
+                .update("status", status)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("This done", "DocumentSnapshot successfully updated!");
+                        //Toast.makeText(getActivity().getApplicationContext(),foodList.get(position).getFoodName()+":Updated",Toast.LENGTH_LONG).show();
+                        if(!status.equals("Accepted"))
+                        {
+                            list.remove(pos);
+                        }
+                        updateUI();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("This error", "Error updating document", e);
+                        Toast.makeText(getApplicationContext(), "Server issue", Toast.LENGTH_LONG).show();
+                    }
+                });
     }
 
 

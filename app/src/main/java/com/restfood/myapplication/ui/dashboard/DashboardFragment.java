@@ -163,6 +163,7 @@ public class DashboardFragment extends Fragment {
                         //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                         //Toast.makeText(getContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
                         orderList.remove(position);
+                        docIdList.remove(position);
                         updateUI();
 
 
