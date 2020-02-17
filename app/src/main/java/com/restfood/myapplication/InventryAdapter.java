@@ -10,7 +10,7 @@ import java.util.ArrayList;
 class InventryAdapter extends RecyclerView.Adapter<com.restfood.myapplication.InventryAdapter.InventryViewHolder> {
 
     ///use this list to show in list view
-    private ArrayList<InventryData> itemListX;
+    public ArrayList<InventryData> itemListX;
 
     //private OnItemClickListener mListener;
     private OnItemClickListener mListener;
@@ -80,7 +80,8 @@ class InventryAdapter extends RecyclerView.Adapter<com.restfood.myapplication.In
     //getting position of list and setting all values to that
     @Override
     public void onBindViewHolder(@NonNull com.restfood.myapplication.InventryAdapter.InventryViewHolder holder, int position) {
-        InventryData currentdata=itemListX.get(position);
+        InventryData currentdata;
+        currentdata = itemListX.get(position);
 
         holder.nameTextView.setText(currentdata.getName());
         holder.qtyTextView.setText(String.valueOf(currentdata.getQuantity()));
