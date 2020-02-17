@@ -15,31 +15,39 @@
         app:layout_constraintTop_toTopOf="parent"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:id="@+id/titleinv"
-            android:padding="@dimen/padding5"
+        <RelativeLayout
+            android:padding="3dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:layout_margin="4dp">
+
             <TextView
                 android:id="@+id/name_card"
                 android:textStyle="bold"
-                android:textSize="@dimen/text22"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text20"
                 android:layout_width="wrap_content"
-                android:layout_weight="2"
                 android:layout_height="wrap_content"
-                android:text="@string/item" />
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="-1dp"
+                android:text="@string/dummy"
+                >
+
+            </TextView>
+
 
             <TextView
                 android:id="@+id/qty_card"
-                android:textStyle="bold"
-                android:textSize="@dimen/text22"
-                android:layout_weight="1"
+                android:textStyle="italic"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text20"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Qty" />
-        </LinearLayout>
+
+        </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/inventory_recycler_view"

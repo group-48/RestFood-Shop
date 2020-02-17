@@ -23,18 +23,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginTop="-1dp"
             android:text="@string/dummy"
-            android:textColor="@android:color/black">
+            >
 
         </TextView>
-
-
-
-
-        <View
-            android:id="@+id/divider2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
 
 
         <TextView
