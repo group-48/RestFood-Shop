@@ -1,5 +1,6 @@
 package com.restfood.myapplication;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,10 +79,17 @@ class InventryAdapter extends RecyclerView.Adapter<com.restfood.myapplication.In
 
 
     //getting position of list and setting all values to that
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull com.restfood.myapplication.InventryAdapter.InventryViewHolder holder, int position) {
         InventryData currentdata;
         currentdata = itemListX.get(position);
+
+        if(currentdata.getMinQty()>currentdata.getQuantity())
+        {
+            holder.nameTextView.setTextColor(R.color.red);
+            holder.qtyTextView.setTextColor(R.color.red);
+        }
 
         holder.nameTextView.setText(currentdata.getName());
         holder.qtyTextView.setText(String.valueOf(currentdata.getQuantity()));
