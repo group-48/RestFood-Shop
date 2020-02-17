@@ -52,7 +52,7 @@ public class InventryBottomSheetDialog extends BottomSheetDialogFragment {
         increaseTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addItem();
+                add();
             }
         });
 
@@ -73,30 +73,17 @@ public class InventryBottomSheetDialog extends BottomSheetDialogFragment {
         double qty;
         qty = Double.parseDouble(qtyEditText.getText().toString());
         double dbVal=getInventDoc(item);
-
         updateItem(item,qty);
 
+    }
 
 
-
-//            if(Double.compare(qty,dbVal)<0)
-//            {
-//                qty=dbVal-qty;
-//                updateItem(item,qty);
-//
-//            }
-//            else
-//            {
-//                Toast.makeText(getContext(),"Invalid Input", Toast.LENGTH_SHORT).show();
-//
-//
-//            }
-
-
-
-
-
-
+    private void add()
+    {
+        String item=itemEditText.getText().toString();
+        double qty;
+        qty = Double.parseDouble(qtyEditText.getText().toString());
+        getName(item,qty);
 
     }
 
@@ -119,8 +106,6 @@ public class InventryBottomSheetDialog extends BottomSheetDialogFragment {
 
                                 if(qty<=num)
                                 {
-
-
                                     double i=num-qty;
                                     updatex(document.getId(),i);
                                 }
@@ -188,6 +173,7 @@ public class InventryBottomSheetDialog extends BottomSheetDialogFragment {
                                 //Toast.makeText(getContext(), (CharSequence) document.getData(),Toast.LENGTH_LONG).show();
                                 num=document.getDouble("quantity");
 
+
                                 //Toast.makeText(getContext(), String.valueOf(num),Toast.LENGTH_LONG).show();
 
                             }
@@ -235,13 +221,47 @@ public class InventryBottomSheetDialog extends BottomSheetDialogFragment {
                             Toast.makeText(getContext(),"Error", Toast.LENGTH_SHORT).show();
                         }
                     });
-
-
         }
+    }
 
+    private void getName(final String item,final double val)
+    {
+
+        db.collection("shop")
+                .document(new Auth().getUId())
+                .collection("inventory")
+                .whereEqualTo("name",item)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                //Toast.makeText(getContext(), (CharSequence) document.getData(),Toast.LENGTH_LONG).show();
+                                num=document.getDouble("quantity");
+                                double total=num+val;
+
+                                updatex(document.getId(),total);
+
+
+                                //Toast.makeText(getContext(), String.valueOf(num),Toast.LENGTH_LONG).show();
+
+                            }
+                        } else {
+                            addItem();
+                            //Log.d(TAG, "Error getting documents: ", task.getException());
+                            //Toast.makeText(getContext(),"Incorrect Item name",Toast.LENGTH_LONG).show();
+
+                        }
+                    }
+                });
 
 
     }
+
+
+
 
 
     private void setTextField()
