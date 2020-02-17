@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding5"
+    android:layout_marginBottom="@dimen/padding5"
+    app:cardCornerRadius="@dimen/padding15"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:padding="@dimen/padding5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/res_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/button_blue"
+            android:gravity="center"
+            android:text="@string/order"
+            android:textSize="@dimen/text20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/res_title">
+
+            <view
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                >
+
+            </view>
+
+
+            <TextView
+                android:id="@+id/date"
+                android:text="@string/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/padding5"
+                android:textSize="@dimen/text15"
+                >
+            </TextView>
+
+            <TextView
+                android:id="@+id/time"
+                android:text="@string/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text15"
+                >
+
+            </TextView>
+
+
+
+            <TextView
+                android:id="@+id/no_guest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/padding5"
+                android:textSize="@dimen/text15"
+                android:text="@string/no_of_guest"
+               >
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/padding5"
+                android:text="@string/status"
+                android:textSize="@dimen/text15"
+                android:textColor="@color/button_blue">
+
+            </TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding15"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+            <TextView
+                android:id="@+id/accept"
+                android:textStyle="bold"
+                android:textSize="@dimen/text20"
+                android:layout_width="wrap_content"
+                android:textColor="@color/button_blue"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/accept"
+                tools:ignore="SpUsage">
+
+            </TextView>
+            <TextView
+                android:textStyle="bold"
+                android:textSize="@dimen/text20"
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:textColor="@color/button_blue"
+                android:text="@string/cancel"
+                tools:ignore="SpUsage">
+
+            </TextView>
+            <TextView
+                android:textStyle="bold"
+                android:textSize="@dimen/text20"
+                android:id="@+id/check_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/checkin"
+                tools:ignore="SpUsage">
+
+            </TextView>
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

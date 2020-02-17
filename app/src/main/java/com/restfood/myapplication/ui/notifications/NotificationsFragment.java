@@ -44,6 +44,7 @@ public class NotificationsFragment extends Fragment {
     private Button buttonSignout;
     private Button buttonQr;
     private Button buttonInventry;
+    private Button buttonReservation;
 
     private Button buttonViewFood;
     public TextView textview;
@@ -77,6 +78,8 @@ public class NotificationsFragment extends Fragment {
         buttonSignout=root.findViewById(R.id.button_signout);
         buttonQr=root.findViewById(R.id.button_qr);
         buttonInventry=root.findViewById(R.id.button_invent);
+        buttonReservation=root.findViewById(R.id.button_reservation);
+
 
         button_add_food.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +127,15 @@ public class NotificationsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent3=new Intent(getActivity(), Inventry.class);
+                startActivity(intent3);
+
+            }
+        });
+
+        buttonReservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent3=new Intent(getActivity(), Reservation.class);
                 startActivity(intent3);
 
             }

@@ -12,6 +12,7 @@ class InventryAdapter extends RecyclerView.Adapter<com.restfood.myapplication.In
 
     ///use this list to show in list view
     public ArrayList<InventryData> itemListX;
+    private ArrayList<InventryData> sortList;
 
     //private OnItemClickListener mListener;
     private OnItemClickListener mListener;
@@ -64,6 +65,7 @@ class InventryAdapter extends RecyclerView.Adapter<com.restfood.myapplication.In
     public InventryAdapter(ArrayList<InventryData> list)
     {
         itemListX=list;
+
     }
 
 
