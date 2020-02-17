@@ -4,18 +4,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 
+import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
-import android.widget.Toolbar;
-
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,6 +27,11 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.firestore.DocumentReference;
 
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
 
 
 import java.util.HashMap;
@@ -58,6 +64,8 @@ public class Add_FoodItem extends AppCompatActivity {
     //for image
     private ImageView img;
     private Uri mImageUri;
+    private StorageReference mStorageRef;
+    private StorageTask mUploadTask;
 
     ///this data for firestore
     String uid;     //this is given by firestore & shop_id
@@ -72,6 +80,8 @@ public class Add_FoodItem extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mStorageRef = FirebaseStorage.getInstance().getReference();
 
         setContentView(R.layout.activity_add__food_item);
         setTitle("Add Food Item");
@@ -336,6 +346,13 @@ public class Add_FoodItem extends AppCompatActivity {
                         //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                         Toast.makeText(getApplicationContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
 
+                        //here we call this function
+                    if (mUploadTask != null && mUploadTask.isInProgress()) {
+                        Toast.makeText(getApplicationContext(), "Upload in progress", Toast.LENGTH_SHORT).show();
+                    } else {
+                        uploadFile(documentReference.getId());
+                    }
+
 
                     }
                 })
@@ -412,5 +429,73 @@ public class Add_FoodItem extends AppCompatActivity {
 
             img.setImageURI(mImageUri);
         }
+    }
+
+
+    private String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
+    private void uploadFile(final String docId) {
+        if (mImageUri != null) {
+            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+                    + "." + getFileExtension(mImageUri));
+
+            mUploadTask = fileReference.putFile(mImageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+
+                            Toast.makeText(getApplicationContext(), taskSnapshot.getUploadSessionUri().toString(), Toast.LENGTH_LONG).show();
+                            setUrl(docId,taskSnapshot.getUploadSessionUri().toString());
+
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+//                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+//                            mProgressBar.setProgress((int) progress);
+                        }
+                    });
+        } else {
+            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void setUrl(String docId,String url)
+    {
+        db.collection("shop")
+                .document(new Auth().getUId())
+                .collection("FoodList")
+                .document(docId)
+                .update("image",url)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("This done", "DocumentSnapshot successfully updated!");
+                        finish();
+                        //Toast.makeText(getActivity().getApplicationContext(),foodList.get(position).getFoodName()+":Updated",Toast.LENGTH_LONG).show();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("This error", "Error updating document", e);
+                        //Toast.makeText(getApplicationContext(), "Server issue", Toast.LENGTH_LONG).show();
+                    }
+                });
+
     }
 }

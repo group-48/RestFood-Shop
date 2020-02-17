@@ -13,7 +13,6 @@ public class FoodData {
     private boolean isAvailable;
 
 
-
     //this is constructor part
     public FoodData()
     {
