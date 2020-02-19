@@ -13,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
@@ -26,6 +27,8 @@ public class EditFood extends AppCompatActivity {
     //this is doc number for
     String docId;
     FoodData foodObj;
+
+    private String image;
 
     private TextInputEditText food_name_edit_text;
     private TextInputLayout food_name_layout;
@@ -44,6 +47,8 @@ public class EditFood extends AppCompatActivity {
 
     private TextInputLayout des_layout;
     private TextInputEditText des_text;
+
+    private ImageView img;
 
     private Button cancelButton;
 
@@ -78,6 +83,8 @@ public class EditFood extends AppCompatActivity {
         max_duration_text=findViewById(R.id.max_pre_time_text);
         cat_text=findViewById(R.id.food_cat_text);
 
+        img=findViewById(R.id.food_image);
+
 
         des_text=findViewById(R.id.food_des_text);
         des_layout=findViewById(R.id.food_des_layout);
@@ -108,6 +115,13 @@ public class EditFood extends AppCompatActivity {
             cat_text.setText(foodObj.getCategory());
         }
 
+        if(foodObj.getImage()!=null)
+        {
+            Glide.with(getApplicationContext())
+                    .load(foodObj.getImage())
+                    .into(img);
+        }
+
             //this is for test
 //        food_name_edit_text.setText("test");
 //        food_price_edit_text.setText("test");
@@ -131,6 +145,7 @@ public class EditFood extends AppCompatActivity {
                         foodObj=documentSnapshot.toObject(FoodData.class);
                         assignValue();
                         Toast.makeText(getApplicationContext(),"current data updated",Toast.LENGTH_LONG).show();
+
                         //Log.d("This is test of int:",String.valueOf(foodObj));
                     }
 
@@ -252,7 +267,7 @@ public class EditFood extends AppCompatActivity {
 
     private void updateFood()
     {
-        FoodData food=new FoodData(food_name_edit_text.getText().toString(),cat_text.getText().toString(),convertToInt(food_price_edit_text.getText().toString()),convertToInt(min_duration_text.getText().toString()),convertToInt(max_duration_text.getText().toString()),foodObj.getIsVeg()  );
+        FoodData food=new FoodData(food_name_edit_text.getText().toString(),cat_text.getText().toString(),convertToInt(food_price_edit_text.getText().toString()),convertToInt(min_duration_text.getText().toString()),convertToInt(max_duration_text.getText().toString()),foodObj.getIsVeg(),foodObj.getIsAvailable(),des_text.getText().toString(),foodObj.getImage()  );
 
         db.collection("shop")
                 .document(new Auth().getUId())

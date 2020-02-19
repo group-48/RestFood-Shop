@@ -158,7 +158,7 @@ public class InventryBottomSheetDialog extends BottomSheetDialogFragment {
     {
         num=0.0;
 
-        Toast.makeText(getContext(), "So sadttt",Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(), "So sadttt",Toast.LENGTH_LONG).show();
         db.collection("shop")
                 .document(new Auth().getUId())
                 .collection("inventory")
@@ -180,11 +180,12 @@ public class InventryBottomSheetDialog extends BottomSheetDialogFragment {
                         } else {
                             //Log.d(TAG, "Error getting documents: ", task.getException());
                             Toast.makeText(getContext(),"Incorrect Item name",Toast.LENGTH_LONG).show();
+                            setTextField();
 
                         }
                     }
                 });
-        Toast.makeText(getContext(),String.valueOf(num),Toast.LENGTH_LONG).show();
+        //Toast.makeText(getContext(),String.valueOf(num),Toast.LENGTH_LONG).show();
         return num;
 
 
@@ -249,9 +250,9 @@ public class InventryBottomSheetDialog extends BottomSheetDialogFragment {
 
                             }
                         } else {
-                            addItem();
+                            //addItem();
                             //Log.d(TAG, "Error getting documents: ", task.getException());
-                            //Toast.makeText(getContext(),"Incorrect Item name",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),"Incorrect Item name",Toast.LENGTH_LONG).show();
 
                         }
                     }

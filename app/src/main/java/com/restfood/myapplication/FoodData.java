@@ -11,7 +11,7 @@ public class FoodData {
 
     //this true for test
     private boolean isAvailable;
-
+    private String image;
 
     //this is constructor part
     public FoodData()
@@ -40,7 +40,7 @@ public class FoodData {
         this.isVeg=bol;
     }
 
-    public FoodData(String foodname,String cat,int pri,int min,int max,boolean bol,boolean avail,String d)
+    public FoodData(String foodname,String cat,int pri,int min,int max,boolean bol,boolean avail,String d   )
     {
         foodName=foodname;
         category=cat;
@@ -50,6 +50,19 @@ public class FoodData {
         this.isVeg=bol;
         this.isAvailable=avail;
         this.description=d;
+    }
+
+    public FoodData(String foodname,String cat,int pri,int min,int max,boolean bol,boolean avail,String d,String img)
+    {
+        foodName=foodname;
+        category=cat;
+        price=pri;
+        minDuration=min;
+        maxDuration=max;
+        this.isVeg=bol;
+        this.isAvailable=avail;
+        this.description=d;
+        this.image=img;
     }
 
     public FoodData(String foodname,String cat,int pri,int min,int max,boolean bol,boolean avail)
@@ -63,6 +76,25 @@ public class FoodData {
         this.isAvailable=avail;
     }
 
+    public FoodData(String foodName, String category, int price, int minDuration, int maxDuration, boolean isVeg, String description, boolean isAvailable, String image) {
+        this.foodName = foodName;
+        this.category = category;
+        this.price = price;
+        this.minDuration = minDuration;
+        this.maxDuration = maxDuration;
+        this.isVeg = isVeg;
+        this.description = description;
+        this.isAvailable = isAvailable;
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     //setter
     public void setFoodName(String name)

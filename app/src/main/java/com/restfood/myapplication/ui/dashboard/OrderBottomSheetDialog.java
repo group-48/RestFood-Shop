@@ -180,7 +180,7 @@ public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cancelOrder(orederObj.getOrderId(),"Cancel");
+                cancelOrder(orederObj.getOrderId(),"Cancelled");
             }
         });
 

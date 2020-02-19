@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,6 +36,7 @@ Inventry extends AppCompatActivity {
 
 
     FloatingActionButton buttonAdd;
+    private Button addButton;
     ArrayList<InventryData> itemList;
     ArrayList<String> docIdList;
     private String uId;
@@ -51,6 +53,7 @@ Inventry extends AppCompatActivity {
         docIdList=new ArrayList<>();
 
         buttonAdd=findViewById(R.id.floatingbutton_invent);
+        addButton=findViewById(R.id.add_new_item);
 
 
         onbegi();
@@ -105,6 +108,16 @@ Inventry extends AppCompatActivity {
                 inta.putExtra("DocId",docIdList.get(position));
                 startActivity(inta);
 
+
+            }
+        });
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent inta=new Intent(Inventry.this,AddInventory.class);
+
+                startActivity(inta);
 
             }
         });

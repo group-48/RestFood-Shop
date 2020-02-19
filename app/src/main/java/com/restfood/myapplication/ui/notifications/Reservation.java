@@ -69,14 +69,14 @@ public class Reservation extends AppCompatActivity {
 
             @Override
             public void onCancel(int position) {
-                updateStatus(position,"Cancel");
+                updateStatus(position,"Cancelled");
 
 
             }
 
             @Override
             public void onCheckIn(int position) {
-                updateStatus(position,"checkIn");
+                updateStatus(position,"Completed");
             }
         });
 

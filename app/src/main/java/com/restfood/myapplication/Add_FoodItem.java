@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -344,7 +345,7 @@ public class Add_FoodItem extends AppCompatActivity {
         @Override
         public void onSuccess(DocumentReference documentReference) {
                         //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                        Toast.makeText(getApplicationContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"DocumentSnapshot added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
 
                         //here we call this function
                     if (mUploadTask != null && mUploadTask.isInProgress()) {
@@ -427,7 +428,10 @@ public class Add_FoodItem extends AppCompatActivity {
                 && data != null && data.getData() != null) {
             mImageUri = data.getData();
 
-            img.setImageURI(mImageUri);
+            //img.setImageURI(mImageUri);
+            Glide.with(getApplicationContext())
+                    .load(mImageUri)
+                    .into(img);
         }
     }
 
@@ -440,8 +444,10 @@ public class Add_FoodItem extends AppCompatActivity {
 
     private void uploadFile(final String docId) {
         if (mImageUri != null) {
-            StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
+            final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
+
+            final String ur=fileReference.getDownloadUrl().toString();
 
             mUploadTask = fileReference.putFile(mImageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -449,8 +455,9 @@ public class Add_FoodItem extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
 
-                            Toast.makeText(getApplicationContext(), taskSnapshot.getUploadSessionUri().toString(), Toast.LENGTH_LONG).show();
-                            setUrl(docId,taskSnapshot.getUploadSessionUri().toString());
+                            Toast.makeText(getApplicationContext(), "Food Updated", Toast.LENGTH_LONG).show();
+                            setUrl(docId,ur);
+                            finish();
 
 
                         }
