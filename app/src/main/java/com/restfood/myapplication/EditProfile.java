@@ -107,7 +107,7 @@ public class EditProfile extends AppCompatActivity {
 
                                 shopProfile=document.getData();
                                 //shop_name_text.setText(shopProfile.get("shopName").toString());
-                                Toast.makeText(getApplicationContext(),shopProfile.get("shopName").toString(),Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getApplicationContext(),shopProfile.get("shopName").toString(),Toast.LENGTH_LONG).show();
                                 assignVal();
 
                             } else {
@@ -151,7 +151,7 @@ public class EditProfile extends AppCompatActivity {
      private boolean valEmail(){
          String email=shop_email_text.getText().toString();
 
-         if(email==null)
+         if(email.length()==0)
          {
              return true;
          }
@@ -199,7 +199,7 @@ public class EditProfile extends AppCompatActivity {
     {
         String name=shop_name_text.getText().toString();
 
-        if(name==null)
+        if(name.length() == 0)
         {
             shop_name_layout.setError("Name is empty");
             return false;
@@ -221,7 +221,7 @@ public class EditProfile extends AppCompatActivity {
 
     public void onDone(View v)
     {
-        if(valEmail() || valShoptype() || valShopName() )
+        if(valEmail() && valShoptype() && valShopName() )
         {
             submit();
         }
@@ -274,6 +274,7 @@ public class EditProfile extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(getApplicationContext(),"Updated",Toast.LENGTH_LONG).show();
+                        finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
