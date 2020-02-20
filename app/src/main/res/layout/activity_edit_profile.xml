@@ -37,7 +37,7 @@
             app:boxCornerRadiusBottomStart="@dimen/car_radius5"
             app:boxCornerRadiusTopEnd="@dimen/car_radius5"
             app:boxCornerRadiusTopStart="@dimen/car_radius5"
-        >
+            >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/shopname_edit_text"
                 android:layout_width="match_parent"
@@ -138,7 +138,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
             <Button
                 android:layout_weight="1"
@@ -152,14 +152,14 @@
                 >
             </Button>
 
-                <Button
-                    android:id="@+id/edit_profile_cancel"
-                    android:layout_weight="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/buttonstyle2"
-                    android:text="@string/button_cancel"
-                    android:onClick="onCancel"                    >
+            <Button
+                android:id="@+id/edit_profile_cancel"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttonstyle2"
+                android:text="@string/button_cancel"
+                android:onClick="onCancel"                    >
 
 
 

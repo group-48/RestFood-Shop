@@ -70,7 +70,7 @@ public class EditProfile extends AppCompatActivity {
         shop_type_text=findViewById(R.id.type_of_shop_edit_text);
         shop_email_text=findViewById(R.id.email_edit_text);
 
-        shop_email_layout=findViewById(R.id.email_text_layout);
+       // shop_email_layout=findViewById(R.id.email_text_layout);
 
 
         onBegi();
@@ -107,7 +107,7 @@ public class EditProfile extends AppCompatActivity {
 
                                 shopProfile=document.getData();
                                 //shop_name_text.setText(shopProfile.get("shopName").toString());
-                                //Toast.makeText(getApplicationContext(),shopProfile.get("shopName").toString(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),shopProfile.get("shopName").toString(),Toast.LENGTH_LONG).show();
                                 assignVal();
 
                             } else {
@@ -123,7 +123,7 @@ public class EditProfile extends AppCompatActivity {
         //assigning values to ui
 //        if(shopObj.getShopName()!=null)
 //        {
-           // shop_name_text.setText(shopProfile.get("shopName").toString());
+        // shop_name_text.setText(shopProfile.get("shopName").toString());
 //        }
 //        if(shopObj.getShop_type()!=null)
 //        {
@@ -148,35 +148,35 @@ public class EditProfile extends AppCompatActivity {
         shop_type_text.setText(shopProfile.get("shopType").toString());
     }
 
-     private boolean valEmail(){
-         String email=shop_email_text.getText().toString();
+    private boolean valEmail(){
+        String email=shop_email_text.getText().toString();
 
-         if(email.length()==0)
-         {
-             return true;
-         }
-         else
-         {
-             boolean check=false;
-             for(int i=0;i<email.length();i++)
-             {
-                 if(email.charAt(i)=='@')
-                 {
-                     check=true;
-                 }
-             }
+        if(email==null)
+        {
+            return true;
+        }
+        else
+        {
+            boolean check=false;
+            for(int i=0;i<email.length();i++)
+            {
+                if(email.charAt(i)=='@')
+                {
+                    check=true;
+                }
+            }
 
-             if(check==true)
-             {
-                 return true;
-             }
-             else
-             {
-                 shop_email_layout.setError("No @ in your email");
-                 return false;
-             }
-         }
-     }
+            if(check==true)
+            {
+                return true;
+            }
+            else
+            {
+                shop_email_layout.setError("No @ in your email");
+                return false;
+            }
+        }
+    }
 
 
     private boolean valShoptype()
@@ -199,7 +199,7 @@ public class EditProfile extends AppCompatActivity {
     {
         String name=shop_name_text.getText().toString();
 
-        if(name.length() == 0)
+        if(name==null)
         {
             shop_name_layout.setError("Name is empty");
             return false;
@@ -221,7 +221,7 @@ public class EditProfile extends AppCompatActivity {
 
     public void onDone(View v)
     {
-        if(valEmail() && valShoptype() && valShopName() )
+        if(valEmail() || valShoptype() && valShopName() )
         {
             submit();
         }
@@ -274,7 +274,6 @@ public class EditProfile extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(getApplicationContext(),"Updated",Toast.LENGTH_LONG).show();
-                        finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

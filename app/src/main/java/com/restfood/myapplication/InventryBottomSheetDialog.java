@@ -260,11 +260,6 @@ public class InventryBottomSheetDialog extends BottomSheetDialogFragment {
 
 
     }
-
-
-
-
-
     private void setTextField()
     {
         itemEditText.getText().clear();
