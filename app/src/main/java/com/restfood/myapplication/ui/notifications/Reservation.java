@@ -5,14 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -65,11 +68,14 @@ public class Reservation extends AppCompatActivity {
             @Override
             public void onAccept(int position) {
                 updateStatus(position,"Accepted");
+                Toast.makeText(getApplicationContext(),"Reservation Accepted",Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onCancel(int position) {
                 updateStatus(position,"Cancelled");
+                Toast.makeText(getApplicationContext(),"Reservation Accepted",Toast.LENGTH_LONG).show();
+
 
 
             }
@@ -77,12 +83,14 @@ public class Reservation extends AppCompatActivity {
             @Override
             public void onCheckIn(int position) {
                 updateStatus(position,"Completed");
+                Toast.makeText(getApplicationContext(),"Check In",Toast.LENGTH_LONG).show();
+
             }
         });
 
-
-
     }
+
+
 
     //refresh the recycler view
     private void updateUI() {
@@ -190,16 +198,7 @@ public class Reservation extends AppCompatActivity {
                                 Log.d("Doc Id Are:", document.getId());
                                 try
                                 {
-//                                    ReservationData obj=new ReservationData();
-//                                    obj.setBookingId(document.getString("bookingId"));
-//                                    obj.setDate(document.getString("date"));
-//                                    obj.setGuestno(document.getString("guestno"));
-//                                    obj.setShopId(document.getString("shopId"));
-//                                    obj.setShopName(document.getString("shopName"));
-//                                    obj.setTime(document.getString("time"));
-//                                    obj.setStatus(document.getString("status"));
-//                                    obj.setUserId(document.getString("userId"));
-//                                    reservationList.add(obj);
+
                                     list.add(document);
                                 }
                                 catch (Exception e)

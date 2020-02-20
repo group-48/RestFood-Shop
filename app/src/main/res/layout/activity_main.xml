@@ -11,26 +11,19 @@
 
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="@color/colorPrimary"
+        android:layout_height="200dp"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
+            android:background="@drawable/ic_launcher_foreground"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             />
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_below="@id/relativeLayout"
-        android:layout_marginTop="-50dp"
-        />
 
     <com.google.android.material.transformation.TransformationChildCard
         android:id="@+id/card"
@@ -94,6 +87,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/lay100"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/button_blue"
+        android:background="@color/white"
+        android:elevation="@dimen/padding15"
         android:layout_below="@+id/card"
         android:text="google sign in">
 
