@@ -17,7 +17,7 @@
         <ImageView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:background="@drawable/ic_launcher_foreground"
+            android:background="@mipmap/ic_launcher_foreground"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             />

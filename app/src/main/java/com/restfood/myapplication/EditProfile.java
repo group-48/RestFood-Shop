@@ -70,7 +70,7 @@ public class EditProfile extends AppCompatActivity {
         shop_type_text=findViewById(R.id.type_of_shop_edit_text);
         shop_email_text=findViewById(R.id.email_edit_text);
 
-       // shop_email_layout=findViewById(R.id.email_text_layout);
+        shop_email_layout=findViewById(R.id.email_text_layout);
 
 
         onBegi();
@@ -221,7 +221,7 @@ public class EditProfile extends AppCompatActivity {
 
     public void onDone(View v)
     {
-        if(valEmail() || valShoptype() && valShopName() )
+        if(valEmail() && valShoptype() && valShopName() )
         {
             submit();
         }
