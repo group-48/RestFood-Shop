@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -36,11 +37,7 @@ import com.restfood.myapplication.ui.home.FoodAvailableAdapter;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
+
 
 public class DashboardFragment extends Fragment {
     private RecyclerView rView;
@@ -53,11 +50,14 @@ public class DashboardFragment extends Fragment {
     ArrayList<OrderData> orderList = new ArrayList<>();
     ArrayList<String> docIdList = new ArrayList<>();
 
+    View tempview;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
                 ViewModelProviders.of(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        tempview=root;
 
         //this is pre process of ui or recyclerview
         rView = root.findViewById(R.id.order_recycler_view);
@@ -66,7 +66,7 @@ public class DashboardFragment extends Fragment {
 
         //getOrder();
 
-        orderList.add(new OrderData(true, "Pizza", "AA", "gfnufng", "gjfng", "gbuyfg", 522, "gjhbg"));
+        //orderList.add(new OrderData(true, "Pizza", "AA", "gfnufng", "gjfng", "gbuyfg", 522, "gjhbg"));
 
         getOrder();
         postsetUi();
@@ -100,6 +100,7 @@ public class DashboardFragment extends Fragment {
                 updateStatus(position, "Done");
                 orderList.get(position).setStatus("Done");
                 storeHistory(orderList.get(position),position);
+                setSnack(tempview,"Done and removed from list");
 
                 //Toast.makeText(getActivity().getApplicationContext(), "Order Removed", Toast.LENGTH_LONG).show();
             }
@@ -109,6 +110,7 @@ public class DashboardFragment extends Fragment {
                 updateStatus(position, "Preparing");
                 orderList.get(position).setStatus("Preparing");
                 updateUI();
+                setSnack(tempview,"Preparing");
             }
 
             @Override
@@ -116,19 +118,37 @@ public class DashboardFragment extends Fragment {
                 updateStatus(position, "Ready");
                 orderList.get(position).setStatus("Ready");
                 updateUI();
+                setSnack(tempview,"Order Ready");
+
                 //set status to database remove from list
 
             }
 
-            @Override
-            public void onSwitchClick(int position, boolean click) {
 
-            }
 
         });
 
         Toast.makeText(getContext(), "Updated", Toast.LENGTH_LONG).show();
     }
+
+
+    //this is to set snack bar
+    private void setSnack(View view,String str)
+    {
+
+        Snackbar.make(view, str, Snackbar.LENGTH_LONG)
+                .setAction("CLOSE", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                })
+                .setActionTextColor(getResources().getColor(android.R.color.holo_blue_bright ))
+                .show();
+
+    }
+
+
 
     //this is to store data to shop path
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -226,7 +246,7 @@ public class DashboardFragment extends Fragment {
                         if (task.isSuccessful()) {
                             //this is temp list to get from database
                             //orderList.clear();
-                            ArrayList<OrderData> list = new ArrayList<>();
+
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
                                 Log.d("Doc Id Are:", document.getId());

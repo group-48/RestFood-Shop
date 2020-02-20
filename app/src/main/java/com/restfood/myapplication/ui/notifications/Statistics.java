@@ -190,6 +190,7 @@ public class Statistics extends AppCompatActivity {
             LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPointArray);
             series.setBackgroundColor(R.color.button_blue);
             series.setDataPointsRadius(2);
+            graph.removeAllSeries();
             graph.addSeries(series);
 
         }

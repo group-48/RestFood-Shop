@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.restfood.myapplication.OrderData;
 import com.restfood.myapplication.R;
 
-import org.w3c.dom.ls.LSInput;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +32,6 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
         void onPrepare(int position);
         void onReady(int position);
 
-        void onSwitchClick(int position,boolean click);
     }
 
     public void setOnItemClickListener(com.restfood.myapplication.ui.dashboard.OrderAdapter.OnItemClickListener listener) {
@@ -202,24 +199,7 @@ public class OrderAdapter extends RecyclerView.Adapter<com.restfood.myapplicatio
 
     }
 
-    private String getFood(List<String> name,List<String> qty)
-    {
 
-        String va="Hi";
-        va =name.get(0);
-        if(name.size()>1)
-        {
-            int i;
-            for(i=1;i<name.size();i++)
-            {
-                //va=va+name.get(i)+qty.get(i);
-
-            }
-        }
-
-        
-        return va;
-    }
 
 
     //this returnig number of elements in this list

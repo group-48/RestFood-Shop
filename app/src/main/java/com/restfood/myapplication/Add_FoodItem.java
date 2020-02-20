@@ -19,15 +19,19 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import com.google.firebase.firestore.DocumentReference;
 
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -35,7 +39,10 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -75,6 +82,9 @@ public class Add_FoodItem extends AppCompatActivity {
     boolean isVeg;
 
 
+    ArrayList<String> catList=new ArrayList<>();
+
+
 
 
 
@@ -87,19 +97,11 @@ public class Add_FoodItem extends AppCompatActivity {
         setContentView(R.layout.activity_add__food_item);
         setTitle("Add Food Item");
 
-//        try
-//        {
-//            getActionBar().setTitle("Add Food");
-//            setActionBar("");
-//
-//        }
-//        catch (Exception e)
-//        {
-//            Toast.makeText(getApplicationContext(),e.toString(),Toast.LENGTH_LONG).show();
-//        }
+
 
         //getting user id using auth class
         uid=new Auth().getUId();
+
 
 
         //assigning xml component to that
@@ -122,6 +124,8 @@ public class Add_FoodItem extends AppCompatActivity {
 
 
         img=findViewById(R.id.food_image);
+
+        getCat();       //this is requesting to get
 
 
 
@@ -271,65 +275,97 @@ public class Add_FoodItem extends AppCompatActivity {
         if(checkFoodName() & checkPrice() & checkDuration() & checkDescription())
         {
             addFood();
+            setCat(cat_text.getText().toString());
         }
 
     }
 
 
-    //this return if there is a cat like that before
-    //if there is cat already it return true
-//    private boolean checkCategory()
-//    {
-//
-//        db.collection("shop")
-//                .document(uid)
-//                .collection("Category")
-//                .whereEqualTo("name",cat_text.getText().toString())
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            cat_bol= task.getResult().isEmpty();
-//                        }
-//                        else
-//                        {
-//                            cat_bol=true;
-//
-//                        }
-//
-//                    }
-//                });
-//        Toast.makeText(getApplicationContext(), String.valueOf(cat_bol),Toast.LENGTH_LONG).show();
-//        return cat_bol;
-//
-//    }
+
 
     //this create a new doc for a cat
-    private void addCat(String name) {
-        Map<String, Object> cat = new HashMap<>();
-        cat.put("name", name);
+    private void getCat() {
+//        Map<String, Object> cat = new HashMap<>();
+//        cat.put("name", name);
 
         db.collection("shop")
-                .document(this.uid)
+                .document(new Auth().getUId())
                 .collection("Category")
-                .add(cat)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                        Toast.makeText(getApplicationContext(), "New Category added with ID: " + documentReference.getId(), Toast.LENGTH_SHORT).show();
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            //this is temp list to get from database
+                            List<FoodData> list = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d("this_id", document.getId() + " => " + document.getData());
 
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        //Log.w(TAG, "Error adding document", e);
-                        Toast.makeText(getApplicationContext(), "Error adding doc", Toast.LENGTH_SHORT).show();
+                                String cat=document.getString("Name");
+                                catList.add(cat);
+                            }
+
+                            //Toast.makeText(getApplicationContext(),String.valueOf(catList.size()),Toast.LENGTH_LONG).show();
+
+
+                        } else {
+
+
+                        }
                     }
                 });
+    }
+
+
+    private void setCat(String str)
+    {
+        boolean flag=false;
+
+        int i;
+        //this is to check if there is a cat already
+        for(i=0;i<catList.size();i++)
+        {
+            if(str.equals(catList.get(i)))
+            {
+                flag=true;
+
+            }
+        }
+
+        if(!flag)
+        {
+            Map<String, Object> cat = new HashMap<>();
+            cat.put("Name", str);
+
+            db.collection("shop")
+                    .document(new Auth().getUId())
+                    .collection("Category")
+                    .add(cat)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+
+
+
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            //Log.w(TAG, "Error adding document", e);
+                            Toast.makeText(getApplicationContext(),"Erroe adding doc", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+
+        }
+
+
+
+
+
+
     }
 
 

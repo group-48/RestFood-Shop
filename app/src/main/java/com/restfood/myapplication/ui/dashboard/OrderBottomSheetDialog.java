@@ -38,7 +38,7 @@ import static com.restfood.myapplication.R.drawable.buttonstyle2;
 import static com.restfood.myapplication.R.drawable.cancelbutton;
 
 public class OrderBottomSheetDialog extends BottomSheetDialogFragment {
-    TextView tom;
+
     String docId;  //getting the data passed by fragment4
 
     public FirebaseFirestore db = FirebaseFirestore.getInstance();
